@@ -1,0 +1,46 @@
+module academico {
+
+	struct Aluno {
+		long codigo;
+		string nome;
+	};
+
+	struct Disciplina{
+		long codigo;
+		string nome;
+	};
+
+	struct Turma {
+		long codigo;
+		string nome;
+		short ano;
+		short semestre;
+		Disciplina disciplina;
+	};
+
+	struct Matricula {
+		long codigo;
+		Aluno aluno;
+		Disciplina disciplina;
+	};
+
+	struct Ocorrencia {
+		string descricao;
+	};
+
+	typedef sequence<float> notasAlunos;
+	typedef sequence<notasAlunos> notasTurmas;
+	typedef sequence<Ocorrencia> ocorrencias;
+	typedef sequence<Matricula> matriculas;
+
+	enum SituacaoMatricula { pago, atrazado, a_pagar };
+
+  interface IAcademico {
+	  notasAlunos getNotasAlunoTurma(in Aluno aluno, in Turma turma);
+	  notasTurmas getNotasTurma(in Turma turma);
+	  ocorrencias getOcorrencias(in Aluno aluno);
+	  Matricula getMatricula(in Aluno aluno, in Disciplina disciplina);
+	  matriculas getMatriculas(in Aluno aluno);
+	  SituacaoMatricula matricular(in Aluno aluno);
+  };
+};
