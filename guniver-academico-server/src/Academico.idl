@@ -30,13 +30,8 @@ module academico {
 		float nota;
 	};
 
-	struct Ocorrencia {
-		string descricao;
-	};
-
 	typedef sequence<float> notasAlunos;
 	typedef sequence<notasAlunos> notasTurmas;
-	typedef sequence<Ocorrencia> ocorrencias;
 	typedef sequence<Matricula> matriculas;
 	typedef sequence<Disciplina> disciplinas;
 
@@ -44,9 +39,9 @@ module academico {
 
   interface IAcademico {
 	  notasAlunos getNotasAluno(in Aluno aluno, in Turma turma);
-	  ocorrencias getOcorrencias(in Aluno aluno);
 	  Matricula getMatricula(in Aluno aluno, in Disciplina disciplina);
 	  matriculas getMatriculas(in Aluno aluno);
+	  matriculas getMatriculasSemestre(in Aluno aluno, in short ano, in short semestre);
 	  boolean matricular(in Aluno aluno, in Turma turma, out string mensagemErro);
 	  boolean cadastrarTurma(in Turma turma, out string mensagemErro);
 	  boolean cadastrarDisciplina(in Disciplina disciplina, out string mensagemErro);
