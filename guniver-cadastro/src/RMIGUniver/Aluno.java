@@ -1,12 +1,14 @@
 package RMIGUniver;
 
-public class Aluno {
+import java.io.Serializable;
+
+public class Aluno implements Serializable {
 	private String nome;
 	private int codigo;
 
-	public Aluno(String nome, int codigo) {
-		this.nome = nome;
+	public Aluno(int codigo, String nome) {
 		this.codigo = codigo;
+		this.nome = nome;
 	}
 
 	public Aluno() {

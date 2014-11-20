@@ -23,14 +23,25 @@ public class AlunoServer extends UnicastRemoteObject implements AlunoRemote {
 	}
 
 	public Aluno BuscarAluno(int codigo) throws RemoteException {
-		return new Aluno("Gustavo", 20);
+		for (Aluno aluno : BancoDados.getIntancia().alunos) {
+			if (aluno.getCodigo() == codigo)
+				return aluno;
+		}
+		return null;
 	}
 
 	public List<Aluno> BuscarAlunos() throws RemoteException {
-		List<Aluno> alunos = new ArrayList<Aluno>();
-		alunos.add(new Aluno("Gustavo Sabel", 20));
-		alunos.add(new Aluno("William Leander Seefeld", 24));
-		alunos.add(new Aluno("Viviane :)", 28));
-		return alunos;
+		return BancoDados.getIntancia().alunos;
+	}
+
+	@Override
+	public void CadastrarAluno(Aluno aluno) throws RemoteException {
+		for (Aluno alunoBanco : BancoDados.getIntancia().alunos) {
+			if (alunoBanco.getCodigo() == aluno.getCodigo())
+				throw new RemoteException("Já existe o aluno "
+						+ alunoBanco.getNome() + " com o código "
+						+ alunoBanco.getCodigo());
+		}
+		BancoDados.getIntancia().alunos.add(aluno);
 	}
 }

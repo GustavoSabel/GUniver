@@ -9,6 +9,11 @@ public class AlunoClient {
 			AlunoRemote obj = (AlunoRemote) Naming.lookup("//" + args[0]
 					+ "/AlunoRemote");
 
+			Aluno alunoTeste = new Aluno(20, "Teste");
+			obj.CadastrarAluno(alunoTeste);
+			alunoTeste = new Aluno(40, "Teste 2");
+			obj.CadastrarAluno(alunoTeste);
+
 			System.out.println("obj.BuscarAluno(20)");
 			Aluno al = obj.BuscarAluno(20);
 			System.out.println("Aluno: " + al.getCodigo() + " - "
