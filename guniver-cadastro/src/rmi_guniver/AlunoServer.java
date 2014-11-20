@@ -1,8 +1,8 @@
-package RMIGUniver;
+package rmi_guniver;
+
 
 import java.rmi.*;
 import java.rmi.server.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AlunoServer extends UnicastRemoteObject implements AlunoRemote {

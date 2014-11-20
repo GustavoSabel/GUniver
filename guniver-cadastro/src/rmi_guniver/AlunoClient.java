@@ -1,4 +1,4 @@
-package RMIGUniver;
+package rmi_guniver;
 
 import java.rmi.Naming;
 import java.util.List;

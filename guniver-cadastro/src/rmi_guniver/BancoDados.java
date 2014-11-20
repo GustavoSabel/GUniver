@@ -1,4 +1,4 @@
-package RMIGUniver;
+package rmi_guniver;
 
 import java.util.ArrayList;
 import java.util.List;

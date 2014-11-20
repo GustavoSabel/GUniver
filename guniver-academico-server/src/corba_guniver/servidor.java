@@ -1,4 +1,4 @@
-package CorbaGUniver;
+package corba_guniver;
 
 import org.omg.CosNaming.*;
 import org.omg.CORBA.*;

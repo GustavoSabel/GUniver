@@ -1,4 +1,4 @@
-package CorbaGUniver;
+package corba_guniver;
 
 import java.util.ArrayList;
 import java.util.List;
