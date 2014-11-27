@@ -30,12 +30,19 @@ module academico {
 		float nota;
 	};
 
-	typedef sequence<float> notasAlunos;
-	typedef sequence<notasAlunos> notasTurmas;
-	typedef sequence<Matricula> matriculas;
-	typedef sequence<Disciplina> disciplinas;
+	struct Horario {
+		string horario;
+		string sala;
+	};
 
-	enum SituacaoMatricula { pago, atrazado, a_pagar };
+
+	typedef sequence<float> notasAlunos;
+	typedef sequence<Horario> horarios;
+	//typedef sequence<notasAlunos> notasTurmas;
+	typedef sequence<Matricula> matriculas;
+	//typedef sequence<Disciplina> disciplinas;
+
+	//enum SituacaoMatricula { pago, atrazado, a_pagar };
 
   interface IAcademico {
 	  notasAlunos getNotasAluno(in Aluno aluno, in Turma turma);
@@ -43,10 +50,11 @@ module academico {
 	  matriculas getMatriculas(in Aluno aluno);
 	  matriculas getMatriculasSemestre(in Aluno aluno, in short ano, in short semestre);
 	  boolean matricular(in Aluno aluno, in Turma turma, out string mensagemErro);
-	  boolean cadastrarTurma(in Turma turma, out string mensagemErro);
-	  boolean cadastrarDisciplina(in Disciplina disciplina, out string mensagemErro);
-	  boolean cadastrarProva(in Prova prova, out string mensagemErro);
-	  boolean getDisciplina(in long codigo, out Disciplina disciplina);
-	  disciplinas getDisciplinas();
+	  horarios getHorarios();
+	  //boolean cadastrarTurma(in Turma turma, out string mensagemErro);
+	  //boolean cadastrarDisciplina(in Disciplina disciplina, out string mensagemErro);
+	  //boolean cadastrarProva(in Prova prova, out string mensagemErro);
+	  //boolean getDisciplina(in long codigo, out Disciplina disciplina);
+	  //disciplinas getDisciplinas();
   };
 };

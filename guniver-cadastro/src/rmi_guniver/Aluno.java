@@ -3,30 +3,31 @@ package rmi_guniver;
 import java.io.Serializable;
 
 public class Aluno implements Serializable {
-	private String nome;
-	private int codigo;
 
-	public Aluno(int codigo, String nome) {
-		this.codigo = codigo;
-		this.nome = nome;
-	}
+    private String nome;
+    private int codigo;
 
-	public Aluno() {
-	}
+    public Aluno(int codigo, String nome) {
+	this.codigo = codigo;
+	this.nome = nome;
+    }
 
-	public int getCodigo() {
-		return codigo;
-	}
+    public Aluno() {
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public int getCodigo() {
+	return codigo;
+    }
 
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
+    public String getNome() {
+	return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setCodigo(int codigo) {
+	this.codigo = codigo;
+    }
+
+    public void setNome(String nome) {
+	this.nome = nome;
+    }
 }
