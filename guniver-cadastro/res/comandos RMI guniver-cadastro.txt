@@ -1,0 +1,12 @@
+cd <caminho_projeto>/bin
+set classpath=.
+"%JAVA_HOME%\bin\rmic" rmi_guniver.AlunoServer
+"%JAVA_HOME%\bin\rmic" rmi_guniver.CursoServer
+"%JAVA_HOME%\bin\rmic" rmi_guniver.DisciplinaServer
+"%JAVA_HOME%\bin\rmic" rmi_guniver.TurmaServer
+start "rmiregistry" "%JAVA_HOME%\bin\rmiregistry.exe"
+start "AlunoServer" java rmi_guniver.AlunoServer
+start "CursoServer" java rmi_guniver.CursoServer
+start "DisciplinaServer" java rmi_guniver.DisciplinaServer
+start "TurmaServer" java rmi_guniver.TurmaServer
+java rmi_guniver.AlunoClient localhost
