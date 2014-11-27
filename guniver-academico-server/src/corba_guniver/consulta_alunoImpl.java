@@ -27,7 +27,7 @@ class consulta_alunoImpl extends IAcademicoPOA {
 
 	Prova[] notas = new Prova[provasAluno.size()];
 	notas = provasAluno.toArray(notas);
-	
+
 	return notas;
     }
 
@@ -35,7 +35,7 @@ class consulta_alunoImpl extends IAcademicoPOA {
     public Matricula getMatricula(Aluno aluno, Disciplina disciplina) {
 
 	// Não pode retorna NULL se não encontrar a matricula
-	Matricula matriculaDisci = new Matricula(new Aluno(0, ""), new Turma(0, "", (short) 0, (short) 0,
+	Matricula matriculaDisci = new Matricula(new Aluno(0, ""), new Turma(0, (short) 0, (short) 0,
 		new Disciplina(0, "")));
 
 	for (Matricula matricula : BancoDados.getInstance().matriculas) {
@@ -51,15 +51,31 @@ class consulta_alunoImpl extends IAcademicoPOA {
     }
 
     @Override
-    public Matricula[] getMatriculas(Aluno aluno) {
-	Matricula[] mats = new Matricula[BancoDados.getInstance().matriculas.size()];
-	mats = BancoDados.getInstance().matriculas.toArray(mats);
-
-	alert("Chamado o método getMatriculas");
-	for (Matricula matricula : mats) {
-	    alert(" - Turma:" + matricula.turma.codigo);
+    public Matricula[] getMatriculasAluno(Aluno aluno) {
+	List<Matricula> matriculasAluno = new ArrayList<Matricula>();
+	for (Matricula matricula : BancoDados.getInstance().matriculas) {
+	    if (matricula.aluno.codigo == aluno.codigo) {
+		matriculasAluno.add(matricula);
+	    }
 	}
-	alert("");
+
+	Matricula[] mats = new Matricula[matriculasAluno.size()];
+	mats = matriculasAluno.toArray(mats);
+
+	return mats;
+    }
+
+    @Override
+    public Matricula[] getMatriculasTurma(Turma turma) {
+	List<Matricula> matriculasAluno = new ArrayList<Matricula>();
+	for (Matricula matricula : BancoDados.getInstance().matriculas) {
+	    if (matricula.turma.codigo == turma.codigo) {
+		matriculasAluno.add(matricula);
+	    }
+	}
+
+	Matricula[] mats = new Matricula[matriculasAluno.size()];
+	mats = matriculasAluno.toArray(mats);
 
 	return mats;
     }

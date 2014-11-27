@@ -12,7 +12,6 @@ module academico {
 
 	struct Turma {
 		long codigo;
-		string nome;
 		short ano;
 		short semestre;
 		Disciplina disciplina;
@@ -47,7 +46,8 @@ module academico {
   interface IAcademico {
 	  provas getNotasAluno(in Aluno aluno, in Turma turma);
 	  Matricula getMatricula(in Aluno aluno, in Disciplina disciplina);
-	  matriculas getMatriculas(in Aluno aluno);
+	  matriculas getMatriculasAluno(in Aluno aluno);
+	  matriculas getMatriculasTurma(in Turma turma);
 	  matriculas getMatriculasSemestre(in Aluno aluno, in short ano, in short semestre);
 	  boolean matricular(in Aluno aluno, in Turma turma, out string mensagemErro);
 	  horarios getHorarios();

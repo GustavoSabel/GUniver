@@ -38,8 +38,8 @@ public class BancoDados {
 		Disciplina disciplinaSD = new Disciplina(1, "Sistemas Distribuidos");
 		Disciplina disciplinaPS = new Disciplina(2, "Processo de Software");
 		Aluno alunoGustavo = new Aluno(1, "Gustavo Sabel");
-		Turma turmaA = new Turma(1, "A", (short) 2014, (short) 2, disciplinaSD);
-		Turma turmaB = new Turma(2, "B", (short) 2014, (short) 2, disciplinaPS);
+		Turma turmaA = new Turma(1, (short) 2014, (short) 2, disciplinaSD);
+		Turma turmaB = new Turma(2, (short) 2014, (short) 2, disciplinaPS);
 		matriculas.add(new Matricula(alunoGustavo, turmaA));
 		matriculas.add(new Matricula(alunoGustavo, turmaB));
 		//disciplinas.add(disciplinaSD);

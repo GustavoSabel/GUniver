@@ -60,9 +60,9 @@ public class AlunoClient {
 			
 			//TESTANDO TURMA
 			Turma turma = new Turma(1, disc, 2014, 2);
-			obj4.addTurma(turma);
-			obj4.addAluno(1, al);
-			obj4.addAluno(1, alunoTeste);
+			//obj4.addTurma(turma);
+			//obj4.addAluno(1, al);
+			//obj4.addAluno(1, alunoTeste);
 			for(Aluno aluno : obj4.BuscarAlunosTurma(1)){
 				System.out.println("Aluno: " + aluno.getCodigo() + " - " + aluno.getNome());
 			}

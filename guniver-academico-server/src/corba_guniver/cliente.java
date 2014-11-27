@@ -25,8 +25,8 @@ public class cliente {
 	    Aluno aluno = new Aluno(45, "Vivian");
 	    Disciplina discSD = new Disciplina(25, "Sistemas Distribuidos");
 	    Disciplina discPD = new Disciplina(75, "Processo de Software I");
-	    Turma turmaSD = new Turma(3, "Turma SD", (short) 2014, (short) 2, discSD);
-	    Turma turmaPD = new Turma(55, "Turma PD", (short) 2014, (short) 1, discPD);
+	    Turma turmaSD = new Turma(3, (short) 2014, (short) 2, discSD);
+	    Turma turmaPD = new Turma(55, (short) 2014, (short) 1, discPD);
 
 	    StringHolder mensagemErro = new StringHolder();
 	    /*

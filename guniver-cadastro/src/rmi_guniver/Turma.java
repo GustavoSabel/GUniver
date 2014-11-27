@@ -10,22 +10,22 @@ public class Turma implements Serializable {
 	private Disciplina disciplina;
 	private int ano;
 	private int semestre;
-	private List<Aluno> alunos;
+	//private List<Aluno> alunos;
 
 	public Turma(int codigo, Disciplina disciplina, int ano, int semestre) {
 		this.codigo = codigo;
 		this.disciplina = disciplina;
 		this.ano = ano;
 		this.semestre = semestre;
-		alunos = new ArrayList<Aluno>();
+		//alunos = new ArrayList<Aluno>();
 	}
 
-	public void addAluno(Aluno aluno) {
+	/*public void addAluno(Aluno aluno) {
 		if(!alunos.contains(aluno)){
 			alunos.add(aluno);
 		}
 	}
-
+*/
 	public int getCodigo() {
 		return codigo;
 	}
@@ -57,7 +57,7 @@ public class Turma implements Serializable {
 	public void setSemestre(int semestre) {
 		this.semestre = semestre;
 	}
-
+/*
 	public List<Aluno> getAlunos() {
 		return alunos;
 	}
@@ -65,5 +65,5 @@ public class Turma implements Serializable {
 	public void setAlunos(List<Aluno> alunos) {
 		this.alunos = alunos;
 	}
-
+*/
 }
