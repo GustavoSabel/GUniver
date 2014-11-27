@@ -36,8 +36,8 @@ module academico {
 	};
 
 
-	typedef sequence<float> notasAlunos;
 	typedef sequence<Horario> horarios;
+	typedef sequence<Prova> provas;
 	//typedef sequence<notasAlunos> notasTurmas;
 	typedef sequence<Matricula> matriculas;
 	//typedef sequence<Disciplina> disciplinas;
@@ -45,7 +45,7 @@ module academico {
 	//enum SituacaoMatricula { pago, atrazado, a_pagar };
 
   interface IAcademico {
-	  notasAlunos getNotasAluno(in Aluno aluno, in Turma turma);
+	  provas getNotasAluno(in Aluno aluno, in Turma turma);
 	  Matricula getMatricula(in Aluno aluno, in Disciplina disciplina);
 	  matriculas getMatriculas(in Aluno aluno);
 	  matriculas getMatriculasSemestre(in Aluno aluno, in short ano, in short semestre);
@@ -53,7 +53,7 @@ module academico {
 	  horarios getHorarios();
 	  //boolean cadastrarTurma(in Turma turma, out string mensagemErro);
 	  //boolean cadastrarDisciplina(in Disciplina disciplina, out string mensagemErro);
-	  //boolean cadastrarProva(in Prova prova, out string mensagemErro);
+	  boolean cadastrarProva(in Prova prova, out string mensagemErro);
 	  //boolean getDisciplina(in long codigo, out Disciplina disciplina);
 	  //disciplinas getDisciplinas();
   };

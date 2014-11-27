@@ -24,7 +24,7 @@ public class BancoDados {
 		//turmas = new ArrayList<>();
 		provas = new ArrayList<>();
 		matriculas = new ArrayList<>();
-		CargaInicial();
+		//CargaInicial();
 	}
 
 	public static BancoDados getInstance() {

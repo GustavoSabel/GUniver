@@ -14,7 +14,7 @@ import academico.Turma;
 class consulta_alunoImpl extends IAcademicoPOA {
 
     @Override
-    public float[] getNotasAluno(Aluno aluno, Turma turma) {
+    public Prova[] getNotasAluno(Aluno aluno, Turma turma) {
 
 	List<Prova> provasAluno = new ArrayList<>();
 	for (Prova prova : BancoDados.getInstance().provas) {
@@ -25,11 +25,9 @@ class consulta_alunoImpl extends IAcademicoPOA {
 	    }
 	}
 
-	float[] notas = new float[provasAluno.size()];
-
-	for (int i = 0; i < provasAluno.size(); i++) {
-	    notas[i] = provasAluno.get(i).nota;
-	}
+	Prova[] notas = new Prova[provasAluno.size()];
+	notas = provasAluno.toArray(notas);
+	
 	return notas;
     }
 
@@ -102,6 +100,13 @@ class consulta_alunoImpl extends IAcademicoPOA {
 	System.out.println(msg);
     }
 
+    @Override
+    public boolean cadastrarProva(Prova prova, StringHolder mensagemErro) {
+	BancoDados.getInstance().provas.add(prova);
+	mensagemErro.value = "";
+	return true;
+    }
+
     /*
     	@Override
     	public boolean cadastrarTurma(Turma turma, StringHolder mensagemErro) {
@@ -130,13 +135,6 @@ class consulta_alunoImpl extends IAcademicoPOA {
     			}
     		}
     		BancoDados.getInstance().disciplinas.add(disciplina);
-    		mensagemErro.value = "";
-    		return true;
-    	}
-
-    	@Override
-    	public boolean cadastrarProva(Prova prova, StringHolder mensagemErro) {
-    		BancoDados.getInstance().provas.add(prova);
     		mensagemErro.value = "";
     		return true;
     	}
