@@ -16,7 +16,7 @@ public class BancoDados {
 	turmas = new ArrayList<>();
 	disciplina = new ArrayList<>();
 	curso = new ArrayList<>();
-	// CargaInicial();
+	//CargaInicial();
     }
 
     public static BancoDados getIntancia() {

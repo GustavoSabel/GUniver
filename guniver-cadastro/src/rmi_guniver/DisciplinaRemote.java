@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface DisciplinaRemote extends Remote {
 	
-	public List<Disciplina> getDisciplinas(int codCurso) throws RemoteException;
-	public void addDisciplina(Disciplina disciplina) throws RemoteException;
-	public Disciplina getDisciplina(int codDisciplina) throws RemoteException;
+	public List<Disciplina> buscarDisciplinas(int codCurso) throws RemoteException;
+	public void cadastrarDisciplina(Disciplina disciplina) throws RemoteException;
+	public Disciplina buscarDisciplina(int codDisciplina) throws RemoteException;
 	
 
 }

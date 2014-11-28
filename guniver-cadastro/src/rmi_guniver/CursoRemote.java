@@ -7,7 +7,7 @@ import java.util.List;
 public interface CursoRemote extends Remote {
 	
 	public List<Curso> getCursos() throws RemoteException;
-	public void addCurso(Curso curso) throws RemoteException;
-	public Curso getCurso(int codCurso) throws RemoteException;
+	public void cadastrarCurso(Curso curso) throws RemoteException;
+	public Curso buscarCurso(int codCurso) throws RemoteException;
 
 }

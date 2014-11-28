@@ -33,7 +33,7 @@ public class servidor {
 	    NameComponent path[] = namecontextRef.to_name(name);
 	    namecontextRef.rebind(path, href);
 
-	    System.out.println("ACADEMICO");
+	    System.out.println("Módulo Academico - CORBA");
 	    System.out.println("Servidor aguardando requisicoes ....");
 
 	    // Aguarda chamadas dos clientes
