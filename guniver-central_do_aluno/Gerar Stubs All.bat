@@ -16,7 +16,13 @@ idlj -fall Academico.idl
 REM CENTRAL DO ALUNO
 cd %caminhoCentraAluno%
 set classpath=.
-apt webservice_guniver\CentralAluno.java
+apt br\furb\guniver\webservice_guniver\CentralAluno.java
+
+cd..
+cd bin
+start java br.furb.guniver.webservice_guniver.PublicaService
+
+wsimport -keep -p pacote.cliente http://localhost:8080/centralAluno?wsdl
 
 REM CADASTRO
 cd %caminhoCadastro%
