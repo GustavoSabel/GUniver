@@ -27,7 +27,7 @@ public class LateralMenu extends JPanel {
 
 	public LateralMenu(JPanel stage) {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		this.stage = stage;
+		setStage(stage);
 		setBackground(SystemColor.controlHighlight);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 75, 0 };
@@ -127,6 +127,15 @@ public class LateralMenu extends JPanel {
 
 	public JPanel getStage() {
 		return stage;
+	}
+
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		btnAluno.setEnabled(enabled);
+		btnCurso.setEnabled(enabled);
+		btnDisciplina.setEnabled(enabled);
+		btnTurma.setEnabled(enabled);
 	}
 
 }

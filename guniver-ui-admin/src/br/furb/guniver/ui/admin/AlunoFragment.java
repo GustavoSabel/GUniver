@@ -6,38 +6,56 @@ import javax.swing.JButton;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class AlunoFragment extends Fragment {
+	private JTable tableAlunos;
 	public AlunoFragment() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JButton btnNewButton = new JButton("New button");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 0;
-		add(btnNewButton, gbc_btnNewButton);
+		JScrollPane scrollPaneTable = new JScrollPane();
+		GridBagConstraints gbc_scrollPaneTable = new GridBagConstraints();
+		gbc_scrollPaneTable.insets = new Insets(5, 5, 5, 5);
+		gbc_scrollPaneTable.fill = GridBagConstraints.BOTH;
+		gbc_scrollPaneTable.gridx = 0;
+		gbc_scrollPaneTable.gridy = 0;
+		add(scrollPaneTable, gbc_scrollPaneTable);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton_1.gridx = 0;
-		gbc_btnNewButton_1.gridy = 1;
-		add(btnNewButton_1, gbc_btnNewButton_1);
+		tableAlunos = new JTable();
+		tableAlunos.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+			},
+			new String[] {
+				"C\u00F3digo", "Nome", "Usu\u00E1rio", "Senha"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Long.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		tableAlunos.getColumnModel().getColumn(1).setPreferredWidth(150);
+		tableAlunos.getColumnModel().getColumn(2).setPreferredWidth(100);
+		tableAlunos.getColumnModel().getColumn(3).setPreferredWidth(100);
+		scrollPaneTable.setViewportView(tableAlunos);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-		gbc_btnNewButton_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_2.gridx = 0;
-		gbc_btnNewButton_2.gridy = 2;
-		add(btnNewButton_2, gbc_btnNewButton_2);
+		JButton btnRemover = new JButton("Remover");
+		GridBagConstraints gbc_btnRemover = new GridBagConstraints();
+		gbc_btnRemover.anchor = GridBagConstraints.EAST;
+		gbc_btnRemover.insets = new Insets(0, 5, 5, 5);
+		gbc_btnRemover.gridx = 0;
+		gbc_btnRemover.gridy = 1;
+		add(btnRemover, gbc_btnRemover);
 	}
 
 }
