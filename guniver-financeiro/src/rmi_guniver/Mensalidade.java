@@ -7,7 +7,7 @@ public class Mensalidade implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int codito;
+    private int codigo;
     private String descricao;
     private double valor;
     private Date data;
@@ -22,12 +22,12 @@ public class Mensalidade implements Serializable {
 	this.situacao = situacao;
     }
 
-    public int getCodito() {
-	return codito;
+    public int getCodigo() {
+	return codigo;
     }
 
-    public void setCodito(int codito) {
-	this.codito = codito;
+    public void setCodigo(int codigo) {
+	this.codigo = codigo;
     }
 
     public String getDescricao() {

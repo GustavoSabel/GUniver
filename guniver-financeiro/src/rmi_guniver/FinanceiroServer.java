@@ -4,6 +4,8 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class FinanceiroServer extends UnicastRemoteObject implements
@@ -34,7 +36,7 @@ public class FinanceiroServer extends UnicastRemoteObject implements
 
 		for (Mensalidade mens : BancoDados.getIntancia().mensalidades) {
 			if (mens.getCodigoAluno() == mensalidade.getCodigoAluno()) {
-				if (mens.getCodito() == mensalidade.getCodito()) {
+				if (mens.getCodigo() == mensalidade.getCodigo()) {
 					mens.setSituacao(Situacao.pago);
 					return true;
 				}
@@ -59,6 +61,38 @@ public class FinanceiroServer extends UnicastRemoteObject implements
 
 		return pendentes;
 	}
+
+	@Override
+	public List<Mensalidade> consultarMensalidadePeriodo(
+			int codigoAluno, Date data) throws RemoteException {
+		List<Mensalidade> men = new ArrayList<>();
+		for (Mensalidade mensalidade : BancoDados.getIntancia().mensalidades) {
+			if (mensalidade.getCodigoAluno() == codigoAluno) {
+				int[] data1 = getData(data); //[0] = DIA | [1] = MES | [2] = ANO
+				int[] data2 = getData(mensalidade.getData());
+				if(data1[1] == data2[1] &&
+						data1[2] == data2[2]){
+					men.add(mensalidade);
+				}
+			}
+			
+		}
+		if(!men.isEmpty()){
+			return men;
+		}
+		return null;
+	}
+	
+	private int[] getData(Date data){
+		int[] ret = new int[3];
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(data);
+		ret[0] = cal.get(Calendar.DAY_OF_MONTH);
+		ret[1] = cal.get(Calendar.MONTH)+1;
+		ret[2] = cal.get(Calendar.YEAR);
+		return ret;
+	}
+	
 
 	@Override
 	public boolean CadastrarMensalidade(Mensalidade mensalidade)
