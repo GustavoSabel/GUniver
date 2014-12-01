@@ -18,6 +18,10 @@ public class FinanceiroServer extends UnicastRemoteObject implements
 		try {
 			FinanceiroServer obj = new FinanceiroServer();
 			Naming.rebind("//localhost/FinanceiroRemote", obj);
+			
+			System.out.println("Módulo Financeiro - RMI");
+			System.out.println("Servidor aguardando requisicoes ....");
+			    
 		} catch (Exception ex) {
 			System.out.println("Exception: " + ex.getMessage());
 		}

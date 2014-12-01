@@ -6,7 +6,7 @@ public class Client {
 
     public static void main(String[] args) {
 	try {
-	    /*System.out.println("");
+	    System.out.println("");
 	    System.out.println("Inicio de testes em ALUNO");
 	    TestarAluno(args[0]);
 	    System.out.println("");
@@ -15,7 +15,7 @@ public class Client {
 	    System.out.println("");
 	    System.out.println("Inicio de testes em DISCIPLINA");
 	    TestarDisciplina(args[0]);
-	    System.out.println("");*/
+	    System.out.println("");
 	    System.out.println("Inicio de testes em TURMA");
 	    TestarTurma(args[0]);
 	} catch (Exception ex) {

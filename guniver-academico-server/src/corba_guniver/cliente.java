@@ -7,7 +7,6 @@ import academico.Aluno;
 import academico.Disciplina;
 import academico.IAcademico;
 import academico.IAcademicoHelper;
-import academico.Matricula;
 import academico.Prova;
 import academico.Turma;
 
@@ -79,18 +78,18 @@ public class cliente {
 	    				throw new Exception(mensagemErro.value);
 	    			}
 	    */
-	    Prova[] notas = academico.getNotasAluno(aluno, turmaPD);
+	    Prova[] notas = academico.getNotasAluno(aluno.codigo, turmaPD.codigo);
 	    System.out.println("Notas do(a) aluno(a) " + aluno.nome);
 	    for (int i = 0; i < notas.length; i++) {
 		System.out.println(" - " + notas[i].nota);
 	    }
 
-	    Matricula[] matriculas = academico.getMatriculasSemestre(aluno, (short) 2014, (short) 1);
+	    /*Matricula[] matriculas = academico.getMatriculasSemestre(aluno.codigo, (short) 2014, (short) 1);
 	    System.out.println("O Aluno" + aluno.nome
 		    + " está matriculado nas seguintes disciplinas para o semestre 2014/1");
 	    for (int i = 0; i < matriculas.length; i++) {
 		System.out.println(" - " + matriculas[i].turma.disciplina.nome);
-	    }
+	    }*/
 
 	} catch (Exception e) {
 	    System.out.println("ERROR : " + e);

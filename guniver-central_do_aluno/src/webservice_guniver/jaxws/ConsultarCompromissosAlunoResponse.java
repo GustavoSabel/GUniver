@@ -14,14 +14,14 @@ import javax.xml.bind.annotation.XmlType;
 public class ConsultarCompromissosAlunoResponse {
 
     @XmlElement(name = "return", namespace = "")
-    private Collection<webservice_guniver.Compromisso> _return;
+    private Collection<webservice_guniver.model.Compromisso> _return;
 
     /**
      * 
      * @return
      *     returns Collection<Compromisso>
      */
-    public Collection<webservice_guniver.Compromisso> getReturn() {
+    public Collection<webservice_guniver.model.Compromisso> getReturn() {
         return this._return;
     }
 
@@ -30,7 +30,7 @@ public class ConsultarCompromissosAlunoResponse {
      * @param _return
      *     the value for the _return property
      */
-    public void setReturn(Collection<webservice_guniver.Compromisso> _return) {
+    public void setReturn(Collection<webservice_guniver.model.Compromisso> _return) {
         this._return = _return;
     }
 

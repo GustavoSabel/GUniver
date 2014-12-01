@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
+import webservice_guniver.model.Compromisso;
 
 public class BancoDados {
 

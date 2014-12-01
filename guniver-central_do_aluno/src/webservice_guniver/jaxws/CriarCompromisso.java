@@ -13,14 +13,14 @@ import javax.xml.bind.annotation.XmlType;
 public class CriarCompromisso {
 
     @XmlElement(name = "arg0", namespace = "")
-    private webservice_guniver.Compromisso arg0;
+    private webservice_guniver.model.Compromisso arg0;
 
     /**
      * 
      * @return
      *     returns Compromisso
      */
-    public webservice_guniver.Compromisso getArg0() {
+    public webservice_guniver.model.Compromisso getArg0() {
         return this.arg0;
     }
 
@@ -29,7 +29,7 @@ public class CriarCompromisso {
      * @param arg0
      *     the value for the arg0 property
      */
-    public void setArg0(webservice_guniver.Compromisso arg0) {
+    public void setArg0(webservice_guniver.model.Compromisso arg0) {
         this.arg0 = arg0;
     }
 

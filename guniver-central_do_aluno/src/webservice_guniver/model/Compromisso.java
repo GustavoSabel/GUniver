@@ -1,4 +1,4 @@
-package webservice_guniver;
+package webservice_guniver.model;
 
 import java.util.ArrayList;
 import java.util.Date;

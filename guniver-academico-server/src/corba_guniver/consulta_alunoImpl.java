@@ -14,14 +14,14 @@ import academico.Turma;
 class consulta_alunoImpl extends IAcademicoPOA {
 
     @Override
-    public Prova[] getNotasAluno(Aluno aluno, Turma turma) {
+    public Prova[] getNotasAluno(int codigoAluno, int codigoTurma) {
 
 	System.out.println("Executado getNotasAluno(Aluno aluno, Turma turma)");
 	
 	List<Prova> provasAluno = new ArrayList<>();
 	for (Prova prova : BancoDados.getInstance().provas) {
-	    if (prova.aluno.codigo == aluno.codigo) {
-		if (prova.turma.codigo == turma.codigo) {
+	    if (prova.aluno.codigo == codigoAluno) {
+		if (prova.turma.codigo == codigoTurma) {
 		    provasAluno.add(prova);
 		}
 	    }
@@ -34,7 +34,7 @@ class consulta_alunoImpl extends IAcademicoPOA {
     }
 
     @Override
-    public Matricula getMatricula(Aluno aluno, Disciplina disciplina) {
+    public Matricula getMatricula(int codigoAluno, int codigoDisciplina) {
 
 	System.out.println("Executado getMatricula(Aluno aluno, Disciplina disciplina)");
 	
@@ -43,8 +43,8 @@ class consulta_alunoImpl extends IAcademicoPOA {
 		new Disciplina(0, "")));
 
 	for (Matricula matricula : BancoDados.getInstance().matriculas) {
-	    if (matricula.aluno.codigo == aluno.codigo) {
-		if (matricula.turma.disciplina.codigo == disciplina.codigo) {
+	    if (matricula.aluno.codigo == codigoAluno) {
+		if (matricula.turma.disciplina.codigo == codigoDisciplina) {
 		    matriculaDisci = matricula;
 		    break;
 		}
@@ -55,12 +55,12 @@ class consulta_alunoImpl extends IAcademicoPOA {
     }
 
     @Override
-    public Matricula[] getMatriculasAluno(Aluno aluno) {
+    public Matricula[] getMatriculasAluno(int codigoAluno) {
 	System.out.println("getMatriculasAluno(Aluno aluno)");
 	
 	List<Matricula> matriculasAluno = new ArrayList<Matricula>();
 	for (Matricula matricula : BancoDados.getInstance().matriculas) {
-	    if (matricula.aluno.codigo == aluno.codigo) {
+	    if (matricula.aluno.codigo == codigoAluno) {
 		matriculasAluno.add(matricula);
 	    }
 	}
@@ -72,12 +72,12 @@ class consulta_alunoImpl extends IAcademicoPOA {
     }
 
     @Override
-    public Matricula[] getMatriculasTurma(Turma turma) {
+    public Matricula[] getMatriculasTurma(int codigoTurma) {
 	System.out.println("getMatriculasTurma(Turma turma)");
 	
 	List<Matricula> matriculasAluno = new ArrayList<Matricula>();
 	for (Matricula matricula : BancoDados.getInstance().matriculas) {
-	    if (matricula.turma.codigo == turma.codigo) {
+	    if (matricula.turma.codigo == codigoTurma) {
 		matriculasAluno.add(matricula);
 	    }
 	}
@@ -88,8 +88,8 @@ class consulta_alunoImpl extends IAcademicoPOA {
 	return mats;
     }
 
-    @Override
-    public Matricula[] getMatriculasSemestre(Aluno aluno, short ano, short semestre) {
+   /* @Override
+    public Matricula[] getMatriculasSemestre(int codigoAluno, short ano, short semestre) {
 	System.out.println("getMatriculasSemestre(Aluno aluno, short ano, short semestre)");
 	
 	List<Matricula> matriculasSemestre = new ArrayList<>();
@@ -102,7 +102,7 @@ class consulta_alunoImpl extends IAcademicoPOA {
 	mats = matriculasSemestre.toArray(mats);
 	return mats;
     }
-
+*/
     @Override
     public boolean matricular(Aluno aluno, Turma turma, StringHolder mensagemErro) {
 	System.out.println("matricular(Aluno aluno, Turma turma, StringHolder mensagemErro)");
@@ -119,7 +119,7 @@ class consulta_alunoImpl extends IAcademicoPOA {
     }
 
     @Override
-    public Horario[] getHorarios() {
+    public Horario[] getHorarios(int codigoTurma) {
 	System.out.println("getHorarios()");
 	
 	Horario[] horarios = new Horario[] { new Horario("18:30-20:10", "S410"), new Horario("20:20-22:00", "S415"), };

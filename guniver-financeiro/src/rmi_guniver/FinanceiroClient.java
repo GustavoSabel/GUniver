@@ -7,9 +7,12 @@ import java.util.List;
 public class FinanceiroClient {
 	public static void main(String[] args) {
 		try {
-			FinanceiroRemote obj = (FinanceiroRemote) Naming.lookup("//"
-					+ args[0] + "/FinanceiroRemote");
-
+			//FinanceiroRemote obj = (FinanceiroRemote) Naming.lookup("//"
+			//		+ args[0] + "/FinanceiroRemote");
+		    
+			FinanceiroRemote obj = (FinanceiroRemote) Naming.lookup("//localhost/FinanceiroRemote");
+		    
+		    
 			Mensalidade men = new Mensalidade();
 			men.setCodito(1);
 			men.setCodigoAluno(1);

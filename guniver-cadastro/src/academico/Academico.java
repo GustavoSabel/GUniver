@@ -9,9 +9,14 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 public class Academico {
 
+    private String endereco;
+    public Academico(String endereco) {
+	this.endereco = endereco;
+    }
+    
     public IAcademico getAcademico() throws Exception {
 	try {
-	    String[] args = new String[] { "-ORBInitialHost", "localhost" };
+	    String[] args = new String[] { "-ORBInitialHost", this.endereco };
 	    ORB orb = ORB.init(args, null);
 
 	    org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");
@@ -26,13 +31,11 @@ public class Academico {
     }
 
     public Matricula[] buscarMatriculas(rmi_guniver.Aluno aluno) throws Exception {
-	academico.Aluno alunoAc = new Aluno(aluno.getCodigo(), aluno.getNome());
-	return getAcademico().getMatriculasAluno(alunoAc);
+	return getAcademico().getMatriculasAluno(aluno.getCodigo());
     }
     
     public Matricula[] buscarMatriculas(rmi_guniver.Turma turma) throws Exception {
-	academico.Turma turmaAc = new Turma(turma.getCodigo(), (short)turma.getAno(), (short)turma.getSemestre(), new academico.Disciplina(0, ""));
-	return getAcademico().getMatriculasTurma(turmaAc);
+	return getAcademico().getMatriculasTurma(turma.getCodigo());
     }
 
 }

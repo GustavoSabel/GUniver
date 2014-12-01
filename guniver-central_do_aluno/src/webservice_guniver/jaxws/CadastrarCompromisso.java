@@ -18,7 +18,7 @@ public class CadastrarCompromisso {
     @XmlElement(name = "arg0", namespace = "")
     private int arg0;
     @XmlElement(name = "arg1", namespace = "")
-    private webservice_guniver.Compromisso arg1;
+    private webservice_guniver.model.Compromisso arg1;
 
     /**
      * 
@@ -43,7 +43,7 @@ public class CadastrarCompromisso {
      * @return
      *     returns Compromisso
      */
-    public webservice_guniver.Compromisso getArg1() {
+    public webservice_guniver.model.Compromisso getArg1() {
         return this.arg1;
     }
 
@@ -52,7 +52,7 @@ public class CadastrarCompromisso {
      * @param arg1
      *     the value for the arg1 property
      */
-    public void setArg1(webservice_guniver.Compromisso arg1) {
+    public void setArg1(webservice_guniver.model.Compromisso arg1) {
         this.arg1 = arg1;
     }
 
