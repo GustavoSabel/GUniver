@@ -4,5 +4,3 @@ set caminhoProjeto=C:\Users\Gustavo\git\GUniver
 cd %caminhoProjeto%\guniver-central_do_aluno\bin"
 set classpath=.
 start java webservice_guniver.PublicaService
-
-cmd

@@ -1,7 +1,8 @@
 package rmi_guniver;
 
-import java.rmi.*;
-import java.rmi.server.*;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 

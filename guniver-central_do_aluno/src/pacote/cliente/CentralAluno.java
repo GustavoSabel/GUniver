@@ -8,6 +8,7 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.ws.Action;
+import javax.xml.ws.FaultAction;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
@@ -24,33 +25,6 @@ import javax.xml.ws.ResponseWrapper;
 })
 public interface CentralAluno {
 
-
-    /**
-     * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "removerCompromisso", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.RemoverCompromisso")
-    @ResponseWrapper(localName = "removerCompromissoResponse", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.RemoverCompromissoResponse")
-    @Action(input = "http://webservice_guniver/CentralAluno/removerCompromissoRequest", output = "http://webservice_guniver/CentralAluno/removerCompromissoResponse")
-    public void removerCompromisso(
-        @WebParam(name = "arg0", targetNamespace = "")
-        long arg0);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns java.util.List<pacote.cliente.Compromisso>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getCompromissosAluno", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.GetCompromissosAluno")
-    @ResponseWrapper(localName = "getCompromissosAlunoResponse", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.GetCompromissosAlunoResponse")
-    @Action(input = "http://webservice_guniver/CentralAluno/getCompromissosAlunoRequest", output = "http://webservice_guniver/CentralAluno/getCompromissosAlunoResponse")
-    public List<Compromisso> getCompromissosAluno(
-        @WebParam(name = "arg0", targetNamespace = "")
-        long arg0);
 
     /**
      * 
@@ -93,5 +67,115 @@ public interface CentralAluno {
     public String getMaterial(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns java.util.List<pacote.cliente.Prova>
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getProvas", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.GetProvas")
+    @ResponseWrapper(localName = "getProvasResponse", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.GetProvasResponse")
+    @Action(input = "http://webservice_guniver/CentralAluno/getProvasRequest", output = "http://webservice_guniver/CentralAluno/getProvasResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://webservice_guniver/CentralAluno/getProvas/Fault/Exception")
+    })
+    public List<Prova> getProvas(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        int arg1)
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<pacote.cliente.Horario>
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getHorarios", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.GetHorarios")
+    @ResponseWrapper(localName = "getHorariosResponse", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.GetHorariosResponse")
+    @Action(input = "http://webservice_guniver/CentralAluno/getHorariosRequest", output = "http://webservice_guniver/CentralAluno/getHorariosResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://webservice_guniver/CentralAluno/getHorarios/Fault/Exception")
+    })
+    public List<Horario> getHorarios(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0)
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "removerCompromisso", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.RemoverCompromisso")
+    @ResponseWrapper(localName = "removerCompromissoResponse", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.RemoverCompromissoResponse")
+    @Action(input = "http://webservice_guniver/CentralAluno/removerCompromissoRequest", output = "http://webservice_guniver/CentralAluno/removerCompromissoResponse")
+    public void removerCompromisso(
+        @WebParam(name = "arg0", targetNamespace = "")
+        long arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<pacote.cliente.Compromisso>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getCompromissosAluno", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.GetCompromissosAluno")
+    @ResponseWrapper(localName = "getCompromissosAlunoResponse", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.GetCompromissosAlunoResponse")
+    @Action(input = "http://webservice_guniver/CentralAluno/getCompromissosAlunoRequest", output = "http://webservice_guniver/CentralAluno/getCompromissosAlunoResponse")
+    public List<Compromisso> getCompromissosAluno(
+        @WebParam(name = "arg0", targetNamespace = "")
+        long arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<pacote.cliente.Matricula>
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getMatriculasAluno", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.GetMatriculasAluno")
+    @ResponseWrapper(localName = "getMatriculasAlunoResponse", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.GetMatriculasAlunoResponse")
+    @Action(input = "http://webservice_guniver/CentralAluno/getMatriculasAlunoRequest", output = "http://webservice_guniver/CentralAluno/getMatriculasAlunoResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://webservice_guniver/CentralAluno/getMatriculasAluno/Fault/Exception")
+    })
+    public List<Matricula> getMatriculasAluno(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0)
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<pacote.cliente.Matricula>
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getMatriculasTurma", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.GetMatriculasTurma")
+    @ResponseWrapper(localName = "getMatriculasTurmaResponse", targetNamespace = "http://webservice_guniver/", className = "pacote.cliente.GetMatriculasTurmaResponse")
+    @Action(input = "http://webservice_guniver/CentralAluno/getMatriculasTurmaRequest", output = "http://webservice_guniver/CentralAluno/getMatriculasTurmaResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://webservice_guniver/CentralAluno/getMatriculasTurma/Fault/Exception")
+    })
+    public List<Matricula> getMatriculasTurma(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0)
+        throws Exception_Exception
+    ;
 
 }
