@@ -96,9 +96,10 @@ public abstract class EntitiesSynchronizer<EntityType> {
 	}
 
 	private Future<?> submit(SynchronizerTask<?> task) {
-		Future<?> future = executor.submit(task);
-		task.future = future;
+		Future<?> future;
 		synchronized (futures) {
+			future = executor.submit(task);
+			task.future = future;
 			futures.add(future);
 		}
 		return future;
