@@ -1,6 +1,8 @@
 package br.furb.guniver.modelo;
 
-public class Turma {
+import java.io.Serializable;
+
+public class Turma  implements Serializable{
 
     private int codigo;
     private Disciplina disciplina;

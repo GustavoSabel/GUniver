@@ -1,6 +1,8 @@
 package br.furb.guniver.modelo;
 
-public final class Matricula {
+import java.io.Serializable;
+
+public final class Matricula implements Serializable {
 
     private Aluno aluno = null;
     private Turma turma = null;

@@ -1,10 +1,11 @@
 package br.furb.guniver.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Compromisso {
+public class Compromisso implements Serializable {
 
     private long codigo;
     private String titulo;

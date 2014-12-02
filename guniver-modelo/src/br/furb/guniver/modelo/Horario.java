@@ -1,6 +1,8 @@
 package br.furb.guniver.modelo;
 
-public final class Horario {
+import java.io.Serializable;
+
+public final class Horario implements Serializable {
 
     private String horario;
     private String sala;

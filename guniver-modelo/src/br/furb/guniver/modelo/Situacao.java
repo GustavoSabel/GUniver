@@ -1,6 +1,8 @@
 package br.furb.guniver.modelo;
 
-public enum Situacao {
+import java.io.Serializable;
+
+public enum Situacao implements Serializable {
     pago,
     a_pago,
     atrasado

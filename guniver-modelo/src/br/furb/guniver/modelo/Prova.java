@@ -1,6 +1,8 @@
 package br.furb.guniver.modelo;
 
-public final class Prova {
+import java.io.Serializable;
+
+public final class Prova  implements Serializable{
 
     private String descricao;
     private Aluno aluno;
