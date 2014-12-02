@@ -1,6 +1,7 @@
 package br.furb.guniver.sync;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -10,6 +11,7 @@ public abstract class EntitiesSynchronizer<EntityType> {
 
 	private String moduleUrl;
 	private Collection<SyncListener<EntityType>> syncListeners;
+	private LinkedList<Future<?>> futures = new LinkedList<>();
 
 	public EntitiesSynchronizer(String moduleUrl, ThreadPoolExecutor executor) {
 		if (moduleUrl == null || moduleUrl.trim().isEmpty()) {
@@ -50,7 +52,7 @@ public abstract class EntitiesSynchronizer<EntityType> {
 			}
 		};
 
-		return executor.submit(downloadTask);
+		return submit(downloadTask);
 	}
 
 	public Future<?> downloadAll() {
@@ -61,7 +63,7 @@ public abstract class EntitiesSynchronizer<EntityType> {
 			}
 		};
 
-		return executor.submit(downloadAllTask);
+		return submit(downloadAllTask);
 	}
 
 	public Future<?> upload(EntityType entity) {
@@ -72,7 +74,7 @@ public abstract class EntitiesSynchronizer<EntityType> {
 			}
 		};
 
-		return executor.submit(uploadTask);
+		return submit(uploadTask);
 	}
 
 	public Future<?> uploadAll(Collection<EntityType> entities) {
@@ -83,7 +85,32 @@ public abstract class EntitiesSynchronizer<EntityType> {
 			}
 		};
 
-		return executor.submit(uploadAllTask);
+		return submit(uploadAllTask);
+	}
+
+	private Future<?> submit(SynchronizerTask<?> task) {
+		Future<?> future = executor.submit(task);
+		task.future = future;
+		synchronized (futures) {
+			futures.add(future);
+		}
+		return future;
+	}
+
+	private void taskEnded(Future<?> future) {
+		synchronized (futures) {
+			futures.remove(future);
+		}
+	}
+
+	public void stop() {
+		Future<?> future;
+		synchronized (futures) {
+			while ((future = futures.poll()) != null) {
+				future.cancel(false);
+			}
+		}
+		executor.shutdownNow();
 	}
 
 	protected abstract void doDownload(EntityType entityAccessor);
@@ -100,7 +127,7 @@ public abstract class EntitiesSynchronizer<EntityType> {
 		}
 	}
 
-	public boolean removeSyncListener(SyncListener<EntityType> l) {
+	public boolean removeSyncListener(@SuppressWarnings("rawtypes") SyncListener l) {
 		return syncListeners.remove(l);
 	}
 
@@ -146,6 +173,7 @@ public abstract class EntitiesSynchronizer<EntityType> {
 	 */
 	private abstract class SynchronizerTask<ParameterType> implements Runnable {
 
+		protected Future<?> future;
 		private final ParameterType parameter;
 
 		public SynchronizerTask() {
@@ -160,7 +188,9 @@ public abstract class EntitiesSynchronizer<EntityType> {
 		public void run() {
 			try {
 				doTask(parameter);
+				taskEnded(future);
 			} catch (Throwable t) {
+				taskEnded(future);
 				fireSyncFailed(t);
 			}
 		}
