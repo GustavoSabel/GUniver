@@ -70,7 +70,7 @@ public abstract class EntitiesSynchronizer<EntityType> {
 	}
 
 	public Future<?> upload(EntityType entity) {
-		SynchronizerTask<EntityType> uploadTask = new SynchronizerTask<EntityType>() {
+		SynchronizerTask<EntityType> uploadTask = new SynchronizerTask<EntityType>(entity) {
 			@Override
 			void doTask(EntityType parameter) {
 				doUpload(parameter);
