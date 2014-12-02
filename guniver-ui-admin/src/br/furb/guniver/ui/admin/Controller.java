@@ -1,5 +1,8 @@
 package br.furb.guniver.ui.admin;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,6 +12,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import br.furb.guniver.modelo.Aluno;
 import br.furb.guniver.modelo.Curso;
@@ -22,6 +26,7 @@ import br.furb.guniver.sync.EntitiesSynchronizer;
 import br.furb.guniver.sync.ProvasSynchronizer;
 import br.furb.guniver.sync.SyncListener;
 import br.furb.guniver.sync.TurmasSynchronizer;
+import br.furb.guniver.ui.utils.UIUtils;
 
 public class Controller {
 
@@ -99,13 +104,17 @@ public class Controller {
 	public void downloadAlunos() {
 		requireSynchronizer(Aluno.class).downloadAll();
 	}
-	
+
 	public void uploadAluno(Aluno aluno) {
 		requireSynchronizer(Aluno.class).upload(aluno);
 	}
 
 	public void downloadCursos() {
 		requireSynchronizer(Curso.class).downloadAll();
+	}
+
+	public void uploadCurso(Curso curso) {
+		requireSynchronizer(Curso.class).upload(curso);
 	}
 
 	public void downloadDisciplinas() {
@@ -183,6 +192,22 @@ public class Controller {
 		}
 	}
 
+	public void showError(String message, Throwable t) {
+		String stackTrace;
+		try (StringWriter sw = new StringWriter(); // 
+				PrintWriter pw = new PrintWriter(sw)) {
+			t.printStackTrace(pw);
+			stackTrace = sw.toString();
+		} catch (IOException e) {
+			stackTrace = "";
+		}
+		showError(message + "\n\n" + stackTrace);
+	}
+
+	public void showError(String message) {
+		UIUtils.showMessage(getMainWindow(), message, "Ops!", JOptionPane.ERROR_MESSAGE);
+	}
+
 	public AlunoFragment getAlunoFragment() {
 		return alunoFragment;
 	}
@@ -242,8 +267,7 @@ public class Controller {
 
 		@Override
 		public void syncFailed(Throwable reason) {
-			// TODO Auto-generated method stub
-
+			showError("Erro na comunicação de Alunos", reason);
 		}
 	}
 
@@ -251,26 +275,22 @@ public class Controller {
 
 		@Override
 		public void downloadAllComplete(Collection<Curso> entities) {
-			// TODO Auto-generated method stub
-
+			getCursoFragment().setCursos(entities);
 		}
 
 		@Override
 		public void downloadComplete(Curso downloadedEntity) {
-			// TODO Auto-generated method stub
-
+			getCursoFragment().reloadTable();
 		}
 
 		@Override
 		public void uploadComplete(Curso uploadedEntity) {
-			// TODO Auto-generated method stub
-
+			getCursoFragment().updateCurso(uploadedEntity);
 		}
 
 		@Override
 		public void syncFailed(Throwable reason) {
-			// TODO Auto-generated method stub
-
+			showError("Erro na comunicação de Cursos", reason);
 		}
 	}
 
@@ -296,8 +316,7 @@ public class Controller {
 
 		@Override
 		public void syncFailed(Throwable reason) {
-			// TODO Auto-generated method stub
-
+			showError("Erro na comunicação de Disciplinas", reason);
 		}
 	}
 
@@ -323,8 +342,7 @@ public class Controller {
 
 		@Override
 		public void syncFailed(Throwable reason) {
-			// TODO Auto-generated method stub
-
+			showError("Erro na comunicação de Provas", reason);
 		}
 	}
 
@@ -350,11 +368,8 @@ public class Controller {
 
 		@Override
 		public void syncFailed(Throwable reason) {
-			// TODO Auto-generated method stub
-
+			showError("Erro na comunicação de Turmas", reason);
 		}
 	}
-
-
 
 }

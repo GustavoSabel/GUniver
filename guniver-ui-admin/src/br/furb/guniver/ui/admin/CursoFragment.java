@@ -5,6 +5,11 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.AbstractListModel;
 import javax.swing.JButton;
@@ -15,17 +20,27 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+
+import br.furb.guniver.modelo.Curso;
 
 @SuppressWarnings("serial")
 public class CursoFragment extends Fragment {
 
 	private JTable tableCursos;
 	private Controller controller;
+	private DefaultTableModel dataModel;
+	private boolean fChangingData;
+
+	private List<Curso> cursos = new ArrayList<>();
 
 	public CursoFragment(Controller controller) {
 		this.controller = controller;
+		// $hide>>$
 		controller.setCursoFragment(this);
+		// $hide<<$
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 200, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };
@@ -51,13 +66,57 @@ public class CursoFragment extends Fragment {
 		add(scrollPaneCursos, gbc_scrollPaneCursos);
 
 		tableCursos = new JTable();
-		tableCursos.setModel(new DefaultTableModel(new Object[][] { { null, null }, }, new String[] { "C\u00F3digo", "Nome" }) {
+		dataModel = new DefaultTableModel(new Object[][] { { null, null }, }, new String[] { "C\u00F3digo", "Nome" }) {
 			Class[] columnTypes = new Class[] { Long.class, Object.class };
 
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+		};
+
+		dataModel.addTableModelListener(new TableModelListener() {
+
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				if (!fChangingData && e.getType() == TableModelEvent.UPDATE) {
+					int row = e.getFirstRow();
+					int col = e.getColumn();
+					Curso curso;
+					boolean newCurso;
+					if (row == cursos.size()) {
+						curso = new Curso(0, null);
+						newCurso = true;
+					} else {
+						curso = cursos.get(row);
+						newCurso = false;
+					}
+					Object newValue = dataModel.getValueAt(row, col);
+					Object oldValue;
+					switch (col) {
+					case 0:
+						oldValue = curso.getCodigo();
+						curso.setCodigo(((Long) newValue).intValue());
+						break;
+					case 1:
+						oldValue = curso.getDescricao();
+						curso.setDescricao((String) newValue);
+						break;
+					default:
+						oldValue = new Object(); // always differente
+						break;
+					}
+					if (!newValue.equals(oldValue)) {
+						if (newCurso) {
+							cursos.add(curso);
+							reloadTable();
+						}
+						CursoFragment.this.controller.uploadCurso(curso);
+					}
+				}
+			}
 		});
+
+		tableCursos.setModel(dataModel);
 		tableCursos.getColumnModel().getColumn(1).setPreferredWidth(150);
 		scrollPaneCursos.setViewportView(tableCursos);
 
@@ -126,6 +185,40 @@ public class CursoFragment extends Fragment {
 
 		JButton buttonAddDisciplina = new JButton("+");
 		panelManageDisciplinas.add(buttonAddDisciplina);
+	}
+
+	public void setCursos(Collection<Curso> cursos) {
+		fChangingData = true;
+		this.cursos.clear();
+		this.cursos.addAll(cursos);
+
+		@SuppressWarnings("unchecked")
+		Vector<Vector<?>> dataVector = dataModel.getDataVector();
+		dataVector.clear();
+
+		for (Curso c : cursos) {
+			Vector<Object> row = new Vector<>();
+			row.add(c.getCodigo());
+			row.add(c.getDescricao());
+			dataVector.add(row);
+		}
+		// empty row
+		dataVector.add(new Vector<>(Arrays.asList(null, null)));
+
+		dataModel.fireTableDataChanged();
+		fChangingData = false;
+	}
+
+	public void reloadTable() {
+		setCursos(new ArrayList<>(cursos));
+
+	}
+
+	public void updateCurso(Curso uploadedEntity) {
+		int row = this.cursos.indexOf(uploadedEntity);
+		fChangingData = true;
+		dataModel.fireTableRowsUpdated(row, row);
+		fChangingData = false;
 	}
 
 }
