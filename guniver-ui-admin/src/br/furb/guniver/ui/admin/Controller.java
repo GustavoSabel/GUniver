@@ -98,6 +98,7 @@ public class Controller {
 		downloadAlunos();
 		downloadCursos();
 		downloadDisciplinas();
+		downloadProva();
 		downloadTurma();
 	}
 
@@ -123,6 +124,14 @@ public class Controller {
 
 	public void uploadDisciplina(Disciplina disciplina) {
 		requireSynchronizer(Disciplina.class).upload(disciplina);
+	}
+
+	public void downloadProva() {
+		requireSynchronizer(Prova.class).downloadAll();
+	}
+
+	public void uploadProva(Prova prova) {
+		requireSynchronizer(Prova.class).upload(prova);
 	}
 
 	public void downloadTurma() {
@@ -325,20 +334,17 @@ public class Controller {
 
 		@Override
 		public void downloadAllComplete(Collection<Prova> entities) {
-			// TODO Auto-generated method stub
-
+			getProvaFragment().setProvas(entities);
 		}
 
 		@Override
 		public void downloadComplete(Prova downloadedEntity) {
-			// TODO Auto-generated method stub
-
+			getProvaFragment().updateProva(downloadedEntity);
 		}
 
 		@Override
 		public void uploadComplete(Prova uploadedEntity) {
-			// TODO Auto-generated method stub
-
+			getProvaFragment().updateProva(uploadedEntity);
 		}
 
 		@Override
