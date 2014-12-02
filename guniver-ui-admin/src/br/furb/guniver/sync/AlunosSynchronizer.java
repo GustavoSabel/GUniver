@@ -1,5 +1,6 @@
 package br.furb.guniver.sync;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -13,26 +14,22 @@ public class AlunosSynchronizer extends EntitiesSynchronizer<Aluno> {
 
 	@Override
 	protected void doDownload(Aluno entityAccessor) {
-		// TODO Auto-generated method stub
-
+		entityAccessor.setNome("Nome do aluno " + entityAccessor.getCodigo());
 	}
 
 	@Override
 	protected Collection<Aluno> doDownloadAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return Arrays.asList(new Aluno(1, "joao123", "123456", "João"), // 
+				new Aluno(5, "pedroso", "qsenha", "Pedro Silva"), // 
+				new Aluno(234, "ramonin", "hoho2512", "Ramon Noel"));
 	}
 
 	@Override
 	protected void doUpload(Aluno entity) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	protected void doUploadAll(Collection<Aluno> entities) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
