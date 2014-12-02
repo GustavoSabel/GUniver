@@ -9,9 +9,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +29,8 @@ public class DisciplinaFragment extends Fragment {
 	private DefaultTableModel dataModel;
 	private boolean fChangingData;
 	private List<Disciplina> disciplinas = new ArrayList<>();
+	private JButton btnRemover;
+	private Disciplina selectedDisciplina;
 
 	public DisciplinaFragment(Controller controller) {
 		this.controller = controller;
@@ -97,16 +102,27 @@ public class DisciplinaFragment extends Fragment {
 		});
 
 		tableDisciplinas.setModel(dataModel);
+
+		DefaultListSelectionModel selectionModel = new DefaultListSelectionModel();
+		selectionModel.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				int index = e.getFirstIndex();
+				if (index < 0) {
+					selectedDisciplina = null;
+				} else {
+					selectedDisciplina = disciplinas.get(index);
+				}
+			}
+		});
+		tableDisciplinas.setSelectionModel(selectionModel);
 		tableDisciplinas.getColumnModel().getColumn(1).setPreferredWidth(150);
 		scrollPaneTable.setViewportView(tableDisciplinas);
 
-		JButton btnRemover = new JButton("Remover");
-		GridBagConstraints gbc_btnRemover = new GridBagConstraints();
-		gbc_btnRemover.insets = new Insets(0, 5, 5, 5);
-		gbc_btnRemover.anchor = GridBagConstraints.EAST;
-		gbc_btnRemover.gridx = 0;
-		gbc_btnRemover.gridy = 1;
-		add(btnRemover, gbc_btnRemover);
+		btnRemover = new JButton("Remover");
+
+		setPickUpMode(false);
 	}
 
 	public void setDisciplinas(Collection<Disciplina> disciplinas) {
@@ -140,6 +156,23 @@ public class DisciplinaFragment extends Fragment {
 		fChangingData = true;
 		dataModel.fireTableRowsUpdated(row, row);
 		fChangingData = false;
+	}
+
+	public void setPickUpMode(boolean picking) {
+		if (picking) {
+			remove(btnRemover);
+		} else {
+			GridBagConstraints gbc_btnRemover = new GridBagConstraints();
+			gbc_btnRemover.insets = new Insets(0, 5, 5, 5);
+			gbc_btnRemover.anchor = GridBagConstraints.EAST;
+			gbc_btnRemover.gridx = 0;
+			gbc_btnRemover.gridy = 1;
+			add(btnRemover, gbc_btnRemover);
+		}
+	}
+
+	public Disciplina getSelectedDisciplina() {
+		return selectedDisciplina;
 	}
 
 }

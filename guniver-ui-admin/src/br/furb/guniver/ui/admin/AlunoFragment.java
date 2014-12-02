@@ -199,7 +199,6 @@ public class AlunoFragment extends Fragment {
 			gbc_btnRemover.gridy = 1;
 			add(btnRemover, gbc_btnRemover);
 		}
-
 	}
 
 }

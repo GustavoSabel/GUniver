@@ -26,6 +26,10 @@ import javax.swing.table.DefaultTableModel;
 
 import br.furb.guniver.modelo.Curso;
 
+/**
+ * @deprecated não será usado
+ */
+@Deprecated
 @SuppressWarnings("serial")
 public class CursoFragment extends Fragment {
 

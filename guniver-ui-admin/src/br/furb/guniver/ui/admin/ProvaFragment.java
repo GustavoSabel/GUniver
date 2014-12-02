@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
@@ -124,6 +125,7 @@ public class ProvaFragment extends Fragment {
 				}
 			}
 		});
+		tableProvas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableProvas.setSelectionModel(selModel);
 
 		tableProvas.setModel(dataModel);
@@ -196,9 +198,7 @@ public class ProvaFragment extends Fragment {
 	}
 
 	public void updateProva(Prova uploadedEntity) {
-		fChangingData = true;
-		setProvas(new ArrayList<>(provas));
-		fChangingData = false;
+		reloadTable();
 	}
 
 	private void changeAluno(Prova prova) {

@@ -6,6 +6,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 import br.furb.guniver.modelo.Curso;
 
+/**
+ * @deprecated não será usado.
+ */
+@Deprecated
 public class CursosSynchronizer extends EntitiesSynchronizer<Curso> {
 
 	public CursosSynchronizer(String moduleUrl, ThreadPoolExecutor executor) {

@@ -399,8 +399,19 @@ public class Controller {
 
 	public Turma pickTurma() {
 		TurmaFragment selectionFragment = new TurmaFragment(this);
-		//		selectionFragment.setTurmas(turmas);
-		// TODO Auto-generated method stub
-		return null;
+		selectionFragment.setTurmas(turmas);
+		selectionFragment.setPickUpMode(true);
+		JOptionPane.showOptionDialog(getMainWindow(), selectionFragment, "Seleção de Turma", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {
+				"Cancelar", "Escolher" }, "Cancelar");
+		return selectionFragment.getSelectedTurma();
+	}
+
+	public Disciplina pickDisciplina() {
+		DisciplinaFragment selectionFragment = new DisciplinaFragment(this);
+		selectionFragment.setDisciplinas(disciplinas);
+		selectionFragment.setPickUpMode(true);
+		JOptionPane.showOptionDialog(getMainWindow(), selectionFragment, "Seleção de Disciplina", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {
+				"Cancelar", "Escolher" }, "Cancelar");
+		return selectionFragment.getSelectedDisciplina();
 	}
 }
