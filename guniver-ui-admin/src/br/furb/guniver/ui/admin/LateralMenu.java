@@ -10,6 +10,7 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
@@ -18,7 +19,6 @@ import javax.swing.border.EtchedBorder;
 public class LateralMenu extends JPanel {
 
 	private final AlunoFragment fragmentAluno;
-	private final CursoFragment fragmentCurso;
 	private final DisciplinaFragment fragmentDisciplina;
 	private final ProvaFragment fragmentProva;
 	private final TurmaFragment fragmentTurma;
@@ -27,7 +27,6 @@ public class LateralMenu extends JPanel {
 
 	private JPanel stage;
 	private JButton btnAluno;
-	private JButton btnCurso;
 	private JButton btnDisciplina;
 	private JButton btnProva;
 	private JButton btnTurma;
@@ -60,17 +59,6 @@ public class LateralMenu extends JPanel {
 		gbc_btnAluno.gridy = 0;
 		add(btnAluno, gbc_btnAluno);
 
-		btnCurso = new JButton("Curso");
-		btnCurso.setFont(buttonsFont);
-		btnCurso.setPreferredSize(buttonsPreferredSize);
-		btnCurso.addActionListener(actionListener);
-		GridBagConstraints gbc_btnCurso = new GridBagConstraints();
-		gbc_btnCurso.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnCurso.insets = new Insets(0, 2, 5, 2);
-		gbc_btnCurso.gridx = 0;
-		gbc_btnCurso.gridy = 1;
-		add(btnCurso, gbc_btnCurso);
-
 		btnDisciplina = new JButton("Disciplina");
 		btnDisciplina.setFont(buttonsFont);
 		btnDisciplina.setPreferredSize(buttonsPreferredSize);
@@ -79,7 +67,7 @@ public class LateralMenu extends JPanel {
 		gbc_btnDisciplina.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnDisciplina.insets = new Insets(0, 2, 5, 2);
 		gbc_btnDisciplina.gridx = 0;
-		gbc_btnDisciplina.gridy = 2;
+		gbc_btnDisciplina.gridy = 1;
 		add(btnDisciplina, gbc_btnDisciplina);
 
 		btnTurma = new JButton("Turma");
@@ -94,13 +82,13 @@ public class LateralMenu extends JPanel {
 		GridBagConstraints gbc_btnProva = new GridBagConstraints();
 		gbc_btnProva.insets = new Insets(0, 0, 5, 0);
 		gbc_btnProva.gridx = 0;
-		gbc_btnProva.gridy = 3;
+		gbc_btnProva.gridy = 2;
 		add(btnProva, gbc_btnProva);
 		GridBagConstraints gbc_btnTurma = new GridBagConstraints();
 		gbc_btnTurma.insets = new Insets(0, 2, 5, 2);
 		gbc_btnTurma.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnTurma.gridx = 0;
-		gbc_btnTurma.gridy = 4;
+		gbc_btnTurma.gridy = 3;
 		add(btnTurma, gbc_btnTurma);
 
 		btnWebServices = new JButton("Web Services");
@@ -111,11 +99,10 @@ public class LateralMenu extends JPanel {
 		gbc_btnWebServices.insets = new Insets(0, 2, 1, 2);
 		gbc_btnWebServices.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnWebServices.gridx = 0;
-		gbc_btnWebServices.gridy = 5;
+		gbc_btnWebServices.gridy = 4;
 		add(btnWebServices, gbc_btnWebServices);
 
 		fragmentAluno = new AlunoFragment(controller);
-		fragmentCurso = new CursoFragment(controller);
 		fragmentDisciplina = new DisciplinaFragment(controller);
 		fragmentTurma = new TurmaFragment(controller);
 		fragmentProva = new ProvaFragment(controller);
@@ -132,8 +119,6 @@ public class LateralMenu extends JPanel {
 			Fragment fragment;
 			if (src == btnAluno) {
 				fragment = fragmentAluno;
-			} else if (src == btnCurso) {
-				fragment = fragmentCurso;
 			} else if (src == btnDisciplina) {
 				fragment = fragmentDisciplina;
 			} else if (src == btnProva) {
@@ -160,6 +145,7 @@ public class LateralMenu extends JPanel {
 		stage.add(fragment, BorderLayout.CENTER);
 		stage.revalidate();
 		stage.repaint();
+		stage.setBorder(BorderFactory.createTitledBorder(fragment.getTitle()));
 		this.activeFragment = fragment;
 		fragment.onEnter();
 	}
@@ -180,9 +166,10 @@ public class LateralMenu extends JPanel {
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
 		btnAluno.setEnabled(enabled);
-		btnCurso.setEnabled(enabled);
 		btnDisciplina.setEnabled(enabled);
+		btnProva.setEnabled(enabled);
 		btnTurma.setEnabled(enabled);
+		btnWebServices.setEnabled(enabled);
 	}
 
 }

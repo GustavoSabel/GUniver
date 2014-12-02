@@ -16,4 +16,6 @@ public abstract class Fragment extends JPanel {
 	public void onExit() {
 	}
 
+	public abstract String getTitle();
+
 }

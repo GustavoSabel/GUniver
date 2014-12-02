@@ -225,4 +225,9 @@ public class CursoFragment extends Fragment {
 		fChangingData = false;
 	}
 
+	@Override
+	public String getTitle() {
+		return "Cursos";
+	}
+
 }

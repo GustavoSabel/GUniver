@@ -201,4 +201,9 @@ public class AlunoFragment extends Fragment {
 		}
 	}
 
+	@Override
+	public String getTitle() {
+		return "Alunos";
+	}
+
 }

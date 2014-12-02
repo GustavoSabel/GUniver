@@ -217,4 +217,9 @@ public class ProvaFragment extends Fragment {
 		}
 	}
 
+	@Override
+	public String getTitle() {
+		return "Provas";
+	}
+
 }

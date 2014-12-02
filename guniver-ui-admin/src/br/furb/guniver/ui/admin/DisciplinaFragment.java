@@ -175,4 +175,9 @@ public class DisciplinaFragment extends Fragment {
 		return selectedDisciplina;
 	}
 
+	@Override
+	public String getTitle() {
+		return "Disciplinas";
+	}
+
 }

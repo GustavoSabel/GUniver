@@ -164,4 +164,9 @@ public class WebServicesFragment extends Fragment {
 		controller.downloadAll();
 	}
 
+	@Override
+	public String getTitle() {
+		return "Web Services";
+	}
+
 }

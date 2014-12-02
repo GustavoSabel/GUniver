@@ -164,4 +164,9 @@ public class TurmaFragment extends Fragment {
 		return selectedTurma;
 	}
 
+	@Override
+	public String getTitle() {
+		return "Turmas";
+	}
+
 }
