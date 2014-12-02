@@ -31,7 +31,7 @@ public class LateralMenu extends JPanel {
 
 	private Fragment activeFragment;
 
-	public LateralMenu(JPanel stage) {
+	public LateralMenu(JPanel stage, Controller controller) {
 		Font buttonsFont = new Font("Segoe UI Semibold", Font.PLAIN, 18);
 		Dimension buttonsPreferredSize = new Dimension(150, 40);
 
@@ -104,7 +104,9 @@ public class LateralMenu extends JPanel {
 		fragmentCurso = new CursoFragment();
 		fragmentDisciplina = new DisciplinaFragment();
 		fragmentTurma = new TurmaFragment();
-		fragmentWebServices = new WebServicesFragment();
+		fragmentWebServices = new WebServicesFragment(controller);
+		
+		switchToFragment(fragmentWebServices);
 	}
 
 	private ActionListener actionListener = new ActionListener() {

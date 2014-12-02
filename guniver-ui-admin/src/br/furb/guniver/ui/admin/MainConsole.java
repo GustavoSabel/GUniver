@@ -66,7 +66,7 @@ public class MainConsole {
 		JPanel stage = new JPanel();
 		frmGuniverManager.getContentPane().add(stage, BorderLayout.CENTER);
 
-		LateralMenu lateralMenu = new LateralMenu(stage);
+		LateralMenu lateralMenu = new LateralMenu(stage, controller);
 		frmGuniverManager.getContentPane().add(lateralMenu, BorderLayout.WEST);
 	}
 
