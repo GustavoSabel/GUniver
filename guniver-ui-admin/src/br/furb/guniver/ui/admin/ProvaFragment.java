@@ -143,6 +143,8 @@ public class ProvaFragment extends Fragment {
 		add(panelManageProva, gbc_panelManageProva);
 
 		JButton btnRemover = new JButton("Remover");
+		btnRemover.setVisible(false);
+		btnRemover.setEnabled(false);
 		panelManageProva.add(btnRemover);
 
 		JButton btnAlterarAluno = new JButton("Alterar Aluno");

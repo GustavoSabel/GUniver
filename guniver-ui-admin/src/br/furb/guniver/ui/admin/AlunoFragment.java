@@ -139,6 +139,8 @@ public class AlunoFragment extends Fragment {
 		scrollPaneTable.setViewportView(tableAlunos);
 
 		btnRemover = new JButton("Remover");
+		btnRemover.setVisible(false);
+		btnRemover.setEnabled(false);
 		btnRemover.addActionListener(new ActionListener() {
 
 			@Override

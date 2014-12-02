@@ -144,6 +144,8 @@ public class TurmaFragment extends Fragment {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 
 		JButton btnRemover = new JButton("Remover");
+		btnRemover.setVisible(false);
+		btnRemover.setEnabled(false);
 		panelManageTurmas.add(btnRemover);
 
 		JButton btnAlterarDisciplina = new JButton("Alterar Disciplina");

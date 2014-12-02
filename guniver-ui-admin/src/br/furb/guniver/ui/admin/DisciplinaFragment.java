@@ -121,6 +121,8 @@ public class DisciplinaFragment extends Fragment {
 		scrollPaneTable.setViewportView(tableDisciplinas);
 
 		btnRemover = new JButton("Remover");
+		btnRemover.setVisible(false);
+		btnRemover.setEnabled(false);
 
 		setPickUpMode(false);
 	}
