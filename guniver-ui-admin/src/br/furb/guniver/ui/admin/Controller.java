@@ -56,7 +56,6 @@ public class Controller {
 		listeners = new HashMap<>();
 
 		listeners.put(Aluno.class, new AlunoSyncListener());
-		listeners.put(Curso.class, new CursoSyncListener());
 		listeners.put(Disciplina.class, new DisciplinaSyncListener());
 		listeners.put(Prova.class, new ProvaSyncListener());
 		listeners.put(Turma.class, new TurmaSyncListener());
@@ -75,7 +74,6 @@ public class Controller {
 	public void setSynchronizers(Map<Class<?>, EntitiesSynchronizer<?>> synchronizers) {
 		synchronized (this.synchronizers) {
 			registerSynchronizer(Aluno.class, synchronizers);
-			registerSynchronizer(Curso.class, synchronizers);
 			registerSynchronizer(Disciplina.class, synchronizers);
 			registerSynchronizer(Prova.class, synchronizers);
 			registerSynchronizer(Turma.class, synchronizers);
@@ -112,10 +110,12 @@ public class Controller {
 		requireSynchronizer(Aluno.class).upload(aluno);
 	}
 
+	@Deprecated
 	public void downloadCursos() {
 		requireSynchronizer(Curso.class).downloadAll();
 	}
 
+	@Deprecated
 	public void uploadCurso(Curso curso) {
 		requireSynchronizer(Curso.class).upload(curso);
 	}
@@ -190,7 +190,6 @@ public class Controller {
 			ThreadPoolExecutor executor = new ThreadPoolExecutor(THREAD_POOL_MAX_SIZE, THREAD_POOL_MAX_SIZE, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>());
 			Map<Class<?>, EntitiesSynchronizer<?>> synchronizers = new HashMap<>();
 			synchronizers.put(Aluno.class, new AlunosSynchronizer(cadastrosUrl, executor));
-			synchronizers.put(Curso.class, new CursosSynchronizer(cadastrosUrl, executor));
 			synchronizers.put(Disciplina.class, new DisciplinasSynchronizer(cadastrosUrl, executor));
 			synchronizers.put(Turma.class, new TurmasSynchronizer(cadastrosUrl, executor));
 			synchronizers.put(Prova.class, new ProvasSynchronizer(academicoUrl, executor));
@@ -231,10 +230,12 @@ public class Controller {
 		this.alunoFragment = alunoFragment;
 	}
 
+	@Deprecated
 	public CursoFragment getCursoFragment() {
 		return cursoFragment;
 	}
 
+	@Deprecated
 	public void setCursoFragment(CursoFragment cursoFragment) {
 		this.cursoFragment = cursoFragment;
 	}
@@ -288,6 +289,7 @@ public class Controller {
 		}
 	}
 
+	@Deprecated
 	private class CursoSyncListener implements SyncListener<Curso> {
 
 		@Override
