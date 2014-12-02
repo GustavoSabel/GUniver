@@ -155,6 +155,7 @@ public class WebServicesFragment extends Fragment {
 				controller.changeUrls( //
 						urls[0], // Academico
 						urls[1]);// Cadastro
+				originalUrls = urls;
 			}
 		}
 	}
