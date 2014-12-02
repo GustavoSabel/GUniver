@@ -122,7 +122,7 @@ public class AlunoFragment extends Fragment {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				int index = e.getFirstIndex();
-				if (index < 0) {
+				if (index < 0 || index >= alunos.size()) {
 					selectedAluno = null;
 				} else {
 					selectedAluno = alunos.get(index);
