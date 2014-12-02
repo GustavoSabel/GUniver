@@ -14,14 +14,14 @@ import javax.xml.bind.annotation.XmlType;
 public class GetAlunosTurmaResponse {
 
     @XmlElement(name = "return", namespace = "")
-    private List<br.furb.guniver.modelo.cadastro.Aluno> _return;
+    private List<br.furb.guniver.modelo.Aluno> _return;
 
     /**
      * 
      * @return
      *     returns List<Aluno>
      */
-    public List<br.furb.guniver.modelo.cadastro.Aluno> getReturn() {
+    public List<br.furb.guniver.modelo.Aluno> getReturn() {
         return this._return;
     }
 
@@ -30,7 +30,7 @@ public class GetAlunosTurmaResponse {
      * @param _return
      *     the value for the _return property
      */
-    public void setReturn(List<br.furb.guniver.modelo.cadastro.Aluno> _return) {
+    public void setReturn(List<br.furb.guniver.modelo.Aluno> _return) {
         this._return = _return;
     }
 

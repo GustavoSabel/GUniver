@@ -14,14 +14,14 @@ import javax.xml.bind.annotation.XmlType;
 public class GetMatriculasTurmaResponse {
 
     @XmlElement(name = "return", namespace = "")
-    private Collection<br.furb.guniver.modelo.academico.Matricula> _return;
+    private Collection<br.furb.guniver.modelo.Matricula> _return;
 
     /**
      * 
      * @return
      *     returns Collection<Matricula>
      */
-    public Collection<br.furb.guniver.modelo.academico.Matricula> getReturn() {
+    public Collection<br.furb.guniver.modelo.Matricula> getReturn() {
         return this._return;
     }
 
@@ -30,7 +30,7 @@ public class GetMatriculasTurmaResponse {
      * @param _return
      *     the value for the _return property
      */
-    public void setReturn(Collection<br.furb.guniver.modelo.academico.Matricula> _return) {
+    public void setReturn(Collection<br.furb.guniver.modelo.Matricula> _return) {
         this._return = _return;
     }
 

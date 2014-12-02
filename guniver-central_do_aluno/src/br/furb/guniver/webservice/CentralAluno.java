@@ -1,14 +1,11 @@
 package br.furb.guniver.webservice;
 
 import java.rmi.RemoteException;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
-import br.furb.guniver.modelo.academico.Aluno;
-import br.furb.guniver.modelo.academico.Prova;
-import br.furb.guniver.modelo.central_do_aluno.Compromisso;
+import br.furb.guniver.modelo.*;
 import br.furb.guniver.modelo.endereco.Endereco;
 import br.furb.guniver.modulo.Academico;
 import br.furb.guniver.modulo.Cadastro;
@@ -44,49 +41,49 @@ public class CentralAluno {
     @WebMethod
     public Collection<Prova> getProvas(int codigoAluno, int codigoTurma) throws Exception {
 	Academico academico = new Academico(Endereco.academico.getEndereco());
-	return academico.getProvas(codigoAluno, codigoTurma);
+	return Conversor.CastProvas(academico.getProvas(codigoAluno, codigoTurma));
     }
 
     @WebMethod
-    public Collection<br.furb.guniver.modelo.academico.Matricula> getMatriculasAluno(int codigoAluno) throws Exception {
+    public Collection<Matricula> getMatriculasAluno(int codigoAluno) throws Exception {
 	Academico academico = new Academico(Endereco.academico.getEndereco());
-	return academico.getMatriculasAluno(codigoAluno);
+	return Conversor.CastMatriculas(academico.getMatriculasAluno(codigoAluno));
     }
 
     @WebMethod
-    public Collection<br.furb.guniver.modelo.academico.Matricula> getMatriculasTurma(int codigoTurma) throws Exception {
+    public Collection<Matricula> getMatriculasTurma(int codigoTurma) throws Exception {
 	Academico academico = new Academico(Endereco.academico.getEndereco());
-	return academico.getMatriculasTurma(codigoTurma);
+	return Conversor.CastMatriculas(academico.getMatriculasTurma(codigoTurma));
     }
 
     @WebMethod
-    public Collection<br.furb.guniver.modelo.academico.Horario> getHorarios(int codigoTurma) throws Exception {
+    public Collection<Horario> getHorarios(int codigoTurma) throws Exception {
 	Academico academico = new Academico(Endereco.academico.getEndereco());
-	return academico.getHorarios(codigoTurma);
+	return Conversor.CastHorarios(academico.getHorarios(codigoTurma));
     }
     
     @WebMethod
-    public List<br.furb.guniver.modelo.cadastro.Aluno> getAlunos() throws RemoteException {
-	return Cadastro.getInstancia().getAlunos();
+    public List<Aluno> getAlunos() throws RemoteException {
+	return Conversor.CastAlunos(Cadastro.getInstancia().getAlunos());
     }
     
     @WebMethod
-    public br.furb.guniver.modelo.cadastro.Curso getCursos(int codigoCurso) throws RemoteException {
-	return Cadastro.getInstancia().getCursos(codigoCurso);
+    public List<Curso> getCursos(int codigoCurso) throws RemoteException {
+	return Conversor.CastCursos(Cadastro.getInstancia().getCursos(codigoCurso));
     }
     
     @WebMethod
-    public List<br.furb.guniver.modelo.cadastro.Disciplina> getDisciplinas(int codigoCurso) throws RemoteException {
-	return Cadastro.getInstancia().getDisciplinas(codigoCurso);
+    public List<Disciplina> getDisciplinas(int codigoCurso) throws RemoteException {
+	return Conversor.CastDisciplinas(Cadastro.getInstancia().getDisciplinas(codigoCurso));
     }
     
     @WebMethod
-    public List<br.furb.guniver.modelo.cadastro.Turma> getTurmas(int codigoAluno) throws RemoteException {
-	return Cadastro.getInstancia().getTurmas(codigoAluno);
+    public List<Turma> getTurmas(int codigoAluno) throws RemoteException {
+	return Conversor.CastTurmas(Cadastro.getInstancia().getTurmas(codigoAluno));
     }
     
     @WebMethod
-    public List<br.furb.guniver.modelo.cadastro.Aluno> getAlunosTurma(int codigoTurma) throws RemoteException {
-	return Cadastro.getInstancia().getAlunosTurma(codigoTurma);
+    public List<Aluno> getAlunosTurma(int codigoTurma) throws RemoteException {
+	return Conversor.CastAlunos(Cadastro.getInstancia().getAlunosTurma(codigoTurma));
     }
 }

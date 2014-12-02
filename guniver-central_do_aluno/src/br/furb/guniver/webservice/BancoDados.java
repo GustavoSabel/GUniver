@@ -3,7 +3,7 @@ package br.furb.guniver.webservice;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import br.furb.guniver.modelo.central_do_aluno.Compromisso;
+import br.furb.guniver.modelo.Compromisso;
 
 public class BancoDados {
 

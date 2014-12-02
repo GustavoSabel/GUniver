@@ -15,7 +15,7 @@ idlj -fall -pkgPrefix academico br.furb.guniver.modelo Academico.idl
 
 REM CENTRAL DO ALUNO
 cd %caminhoCentraAluno%
-set classpath=.
+set classpath=.;%caminhoModelo%
 apt br\furb\guniver\webservice\CentralAluno.java
 
 cd..

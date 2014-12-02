@@ -14,14 +14,14 @@ import javax.xml.bind.annotation.XmlType;
 public class GetHorariosResponse {
 
     @XmlElement(name = "return", namespace = "")
-    private Collection<br.furb.guniver.modelo.academico.Horario> _return;
+    private Collection<br.furb.guniver.modelo.Horario> _return;
 
     /**
      * 
      * @return
      *     returns Collection<Horario>
      */
-    public Collection<br.furb.guniver.modelo.academico.Horario> getReturn() {
+    public Collection<br.furb.guniver.modelo.Horario> getReturn() {
         return this._return;
     }
 
@@ -30,7 +30,7 @@ public class GetHorariosResponse {
      * @param _return
      *     the value for the _return property
      */
-    public void setReturn(Collection<br.furb.guniver.modelo.academico.Horario> _return) {
+    public void setReturn(Collection<br.furb.guniver.modelo.Horario> _return) {
         this._return = _return;
     }
 

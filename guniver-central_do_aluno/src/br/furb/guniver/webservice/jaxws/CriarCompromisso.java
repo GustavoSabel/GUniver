@@ -13,14 +13,14 @@ import javax.xml.bind.annotation.XmlType;
 public class CriarCompromisso {
 
     @XmlElement(name = "arg0", namespace = "")
-    private br.furb.guniver.modelo.central_do_aluno.Compromisso arg0;
+    private br.furb.guniver.modelo.Compromisso arg0;
 
     /**
      * 
      * @return
      *     returns Compromisso
      */
-    public br.furb.guniver.modelo.central_do_aluno.Compromisso getArg0() {
+    public br.furb.guniver.modelo.Compromisso getArg0() {
         return this.arg0;
     }
 
@@ -29,7 +29,7 @@ public class CriarCompromisso {
      * @param arg0
      *     the value for the arg0 property
      */
-    public void setArg0(br.furb.guniver.modelo.central_do_aluno.Compromisso arg0) {
+    public void setArg0(br.furb.guniver.modelo.Compromisso arg0) {
         this.arg0 = arg0;
     }
 

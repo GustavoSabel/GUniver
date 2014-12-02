@@ -1,4 +1,4 @@
-package br.furb.guniver.modelo.central_do_aluno;
+package br.furb.guniver.modelo;
 
 import java.util.ArrayList;
 import java.util.Date;
