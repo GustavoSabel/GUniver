@@ -19,14 +19,14 @@ public class Cadastro {
 
     private Cadastro() {
 	try {
-	    alunoRemote = (AlunoRemote) Naming.lookup("//" + br.furb.guniver.endereco.Endereco.cadastro.getEndereco() + "/AlunoRemote");
+	    alunoRemote = (AlunoRemote) Naming.lookup("//" + br.furb.guniver.modelo.endereco.Endereco.cadastro.getEndereco() + "/AlunoRemote");
 
-	    cursoRemote = (CursoRemote) Naming.lookup("//" + br.furb.guniver.endereco.Endereco.cadastro.getEndereco() + "/CursoRemote");
+	    cursoRemote = (CursoRemote) Naming.lookup("//" + br.furb.guniver.modelo.endereco.Endereco.cadastro.getEndereco() + "/CursoRemote");
 
-	    disciplinaRemote = (DisciplinaRemote) Naming.lookup("//" + br.furb.guniver.endereco.Endereco.cadastro.getEndereco()
+	    disciplinaRemote = (DisciplinaRemote) Naming.lookup("//" + br.furb.guniver.modelo.endereco.Endereco.cadastro.getEndereco()
 		    + "/DisciplinaRemote");
 
-	    turmaRemote = (TurmaRemote) Naming.lookup("//" + br.furb.guniver.endereco.Endereco.cadastro.getEndereco() + "/TurmaRemote");
+	    turmaRemote = (TurmaRemote) Naming.lookup("//" + br.furb.guniver.modelo.endereco.Endereco.cadastro.getEndereco() + "/TurmaRemote");
 	} catch (Exception ex) {
 	    System.out.println("Erro ao se conectar ao módulo cadastro. " + ex.getMessage());
 	}

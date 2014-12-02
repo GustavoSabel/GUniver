@@ -4,10 +4,10 @@ set caminhoCentraAluno=%caminhoProjeto%\guniver-central_do_aluno\src
 
 cd %caminhoCentraAluno%
 set classpath=.
-apt br\furb\guniver\webservice_guniver\CentralAluno.java
+apt br\furb\guniver\webservice\CentralAluno.java
 
 cd..
 cd bin
-start java br.furb.guniver.webservice_guniver.PublicaService
+start java br.furb.guniver.webservice.PublicaService
 
 wsimport -keep -p pacote.cliente http://localhost:8080/centralAluno?wsdl
