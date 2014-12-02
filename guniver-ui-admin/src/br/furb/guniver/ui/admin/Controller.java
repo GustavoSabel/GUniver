@@ -121,6 +121,10 @@ public class Controller {
 		requireSynchronizer(Disciplina.class).downloadAll();
 	}
 
+	public void uploadDisciplina(Disciplina disciplina) {
+		requireSynchronizer(Disciplina.class).upload(disciplina);
+	}
+
 	public void downloadTurma() {
 		requireSynchronizer(Turma.class).downloadAll();
 	}
@@ -257,7 +261,7 @@ public class Controller {
 
 		@Override
 		public void downloadComplete(Aluno downloadedEntity) {
-			getAlunoFragment().reloadTable();
+			getAlunoFragment().updateAluno(downloadedEntity);
 		}
 
 		@Override
@@ -280,7 +284,7 @@ public class Controller {
 
 		@Override
 		public void downloadComplete(Curso downloadedEntity) {
-			getCursoFragment().reloadTable();
+			getCursoFragment().updateCurso(downloadedEntity);
 		}
 
 		@Override
@@ -298,20 +302,17 @@ public class Controller {
 
 		@Override
 		public void downloadAllComplete(Collection<Disciplina> entities) {
-			// TODO Auto-generated method stub
-
+			getDisciplinaFragment().setDisciplinas(entities);
 		}
 
 		@Override
 		public void downloadComplete(Disciplina downloadedEntity) {
-			// TODO Auto-generated method stub
-
+			getDisciplinaFragment().updateDisciplina(downloadedEntity);
 		}
 
 		@Override
 		public void uploadComplete(Disciplina uploadedEntity) {
-			// TODO Auto-generated method stub
-
+			getDisciplinaFragment().updateDisciplina(uploadedEntity);
 		}
 
 		@Override

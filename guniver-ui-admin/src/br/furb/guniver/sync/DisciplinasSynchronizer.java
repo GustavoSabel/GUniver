@@ -1,5 +1,6 @@
 package br.furb.guniver.sync;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -19,8 +20,9 @@ public class DisciplinasSynchronizer extends EntitiesSynchronizer<Disciplina> {
 
 	@Override
 	protected Collection<Disciplina> doDownloadAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return Arrays.asList(new Disciplina(123, "Primeira disciplina", null), //
+				new Disciplina(54322, "Disciplina Dois", null), //
+				new Disciplina(6785451, "Terceira", null));
 	}
 
 	@Override
