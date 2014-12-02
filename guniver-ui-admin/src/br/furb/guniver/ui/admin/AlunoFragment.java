@@ -82,11 +82,19 @@ public class AlunoFragment extends Fragment {
 					switch (col) {
 					case 0:
 						oldValue = aluno.getCodigo();
-						aluno.setCodigo(((Long) dataModel.getValueAt(row, col)).intValue());
+						aluno.setCodigo(((Long) newValue).intValue());
 						break;
 					case 1:
 						oldValue = aluno.getNome();
-						aluno.setNome((String) dataModel.getValueAt(row, col));
+						aluno.setNome((String) newValue);
+						break;
+					case 2:
+						oldValue = aluno.getNomeUsuario();
+						aluno.setNomeUsuario((String) newValue);
+						break;
+					case 3:
+						oldValue = aluno.getSenha();
+						aluno.setSenha((String) newValue);
 						break;
 					default:
 						oldValue = new Object(); // always differente
