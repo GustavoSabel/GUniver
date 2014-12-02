@@ -1,13 +1,14 @@
 package br.furb.guniver.sync;
 
 import java.util.Collection;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import modulo.cadastro.Aluno;
 
-public class AlunoSynchronizer extends EntitiesSynchronizer<Aluno> {
+public class AlunosSynchronizer extends EntitiesSynchronizer<Aluno> {
 
-	public AlunoSynchronizer(String moduleUrl) {
-		super(moduleUrl);
+	public AlunosSynchronizer(String moduleUrl, ThreadPoolExecutor executor) {
+		super(moduleUrl, executor);
 	}
 
 	@Override
