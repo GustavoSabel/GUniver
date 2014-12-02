@@ -4,11 +4,14 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
@@ -45,6 +48,7 @@ public class TurmaFragment extends Fragment {
 		});
 		tableTurmas.getColumnModel().getColumn(1).setPreferredWidth(50);
 		tableTurmas.getColumnModel().getColumn(2).setPreferredWidth(60);
+		tableTurmas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPaneTurmas.setViewportView(tableTurmas);
 
 		JPanel panelManageTurmas = new JPanel();
@@ -62,7 +66,20 @@ public class TurmaFragment extends Fragment {
 		panelManageTurmas.add(btnRemover);
 
 		JButton btnAlterarDisciplina = new JButton("Alterar Disciplina");
+		btnAlterarDisciplina.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (selectedTurma != null) {
+					changeTurma();
+				}
+			}
+		});
 		panelManageTurmas.add(btnAlterarDisciplina);
+	}
+	
+	private void changeTurma() {
+		
 	}
 
 }

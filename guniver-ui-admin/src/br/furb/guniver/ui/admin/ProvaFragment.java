@@ -4,6 +4,8 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,6 +30,7 @@ public class ProvaFragment extends Fragment {
 	private DefaultTableModel dataModel;
 	private List<Prova> provas = new ArrayList<>();
 	private boolean fChangingData;
+	private Prova selectedProva;
 
 	public ProvaFragment(Controller controller) {
 		this.controller = controller;
@@ -122,9 +125,27 @@ public class ProvaFragment extends Fragment {
 		panelManageProva.add(btnRemover);
 
 		JButton btnAlterarAluno = new JButton("Alterar Aluno");
+		btnAlterarAluno.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (selectedProva != null) {
+					changeAluno(selectedProva);
+				}
+			}
+		});
 		panelManageProva.add(btnAlterarAluno);
 
 		JButton btnAlterarTurma = new JButton("Alterar Turma");
+		btnAlterarTurma.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (selectedProva != null) {
+					changeTurma(selectedProva);
+				}
+			}
+		});
 		panelManageProva.add(btnAlterarTurma);
 	}
 
@@ -161,4 +182,15 @@ public class ProvaFragment extends Fragment {
 		dataModel.fireTableRowsUpdated(row, row);
 		fChangingData = false;
 	}
+
+	private void changeAluno(Prova prova) {
+		prova.setAluno(controller.pickAluno());
+		updateProva(prova);
+	}
+
+	private void changeTurma(Prova prova) {
+		prova.setTurma(controller.pickTurma());
+		updateProva(prova);
+	}
+
 }

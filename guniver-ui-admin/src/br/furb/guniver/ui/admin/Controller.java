@@ -379,4 +379,11 @@ public class Controller {
 		}
 	}
 
+	public Aluno pickAluno() {
+		AlunoFragment selectionFragment = new AlunoFragment(this);
+		selectionFragment.setPickUpMode(true);
+		JOptionPane.showOptionDialog(getMainWindow(), selectionFragment, "Seleção de Aluno", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Cancelar", "Escolher"}, "Cancelar");
+		return selectionFragment.getSelectedAluno();
+	}
+
 }

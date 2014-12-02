@@ -11,11 +11,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +35,7 @@ public class AlunoFragment extends Fragment {
 	private Controller controller;
 
 	private boolean fChangingData;
+	private Aluno selectedAluno;
 
 	public AlunoFragment(Controller controller) {
 		this.controller = controller;
@@ -111,6 +115,21 @@ public class AlunoFragment extends Fragment {
 			}
 		});
 
+		DefaultListSelectionModel selectionModel = new DefaultListSelectionModel();
+		selectionModel.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				int index = e.getFirstIndex();
+				if (index < 0) {
+					selectedAluno = null;
+				} else {
+					selectedAluno = alunos.get(index);
+				}
+			}
+		});
+		tableAlunos.setSelectionModel(selectionModel);
+
 		tableAlunos.setModel(dataModel);
 		tableAlunos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableAlunos.getColumnModel().getColumn(1).setPreferredWidth(150);
@@ -166,6 +185,15 @@ public class AlunoFragment extends Fragment {
 		fChangingData = true;
 		dataModel.fireTableRowsUpdated(row, row);
 		fChangingData = false;
+	}
+
+	public Aluno getSelectedAluno() {
+		return selectedAluno;
+	}
+
+	public void setPickUpMode(boolean b) {
+		// TODO: alterar botões
+
 	}
 
 }
