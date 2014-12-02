@@ -25,8 +25,6 @@ import br.furb.guniver.sync.TurmasSynchronizer;
 
 public class Controller {
 
-	private static Class<?>[] ENTITIES_CLASSES = { Aluno.class, Curso.class, Disciplina.class, Prova.class, Turma.class };
-
 	public static int THREAD_POOL_MAX_SIZE = 5;
 
 	private Map<Class<?>, EntitiesSynchronizer<?>> synchronizers;

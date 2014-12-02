@@ -1,25 +1,28 @@
 package br.furb.guniver.ui.admin;
-import java.awt.GridBagLayout;
-import javax.swing.JScrollPane;
+
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import java.awt.FlowLayout;
-
 
 public class TurmaFragment extends Fragment {
+
 	private JTable tableTurmas;
+
 	public TurmaFragment() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
-		
+
 		JScrollPane scrollPaneTurmas = new JScrollPane();
 		GridBagConstraints gbc_scrollPaneTurmas = new GridBagConstraints();
 		gbc_scrollPaneTurmas.insets = new Insets(5, 5, 5, 5);
@@ -27,19 +30,11 @@ public class TurmaFragment extends Fragment {
 		gbc_scrollPaneTurmas.gridx = 0;
 		gbc_scrollPaneTurmas.gridy = 0;
 		add(scrollPaneTurmas, gbc_scrollPaneTurmas);
-		
+
 		tableTurmas = new JTable();
-		tableTurmas.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-			},
-			new String[] {
-				"C\u00F3digo", "Ano", "Semestre", "Disciplina"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Long.class, Short.class, Byte.class, String.class
-			};
+		tableTurmas.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null }, }, new String[] { "C\u00F3digo", "Ano", "Semestre", "Disciplina" }) {
+			Class[] columnTypes = new Class[] { Long.class, Short.class, Byte.class, String.class };
+
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
@@ -47,7 +42,7 @@ public class TurmaFragment extends Fragment {
 		tableTurmas.getColumnModel().getColumn(1).setPreferredWidth(50);
 		tableTurmas.getColumnModel().getColumn(2).setPreferredWidth(60);
 		scrollPaneTurmas.setViewportView(tableTurmas);
-		
+
 		JPanel panelManageTurmas = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelManageTurmas.getLayout();
 		flowLayout.setVgap(0);
@@ -58,10 +53,10 @@ public class TurmaFragment extends Fragment {
 		gbc_panelManageTurmas.gridx = 0;
 		gbc_panelManageTurmas.gridy = 1;
 		add(panelManageTurmas, gbc_panelManageTurmas);
-		
+
 		JButton btnRemover = new JButton("Remover");
 		panelManageTurmas.add(btnRemover);
-		
+
 		JButton btnAlterarDisciplina = new JButton("Alterar Disciplina");
 		panelManageTurmas.add(btnAlterarDisciplina);
 	}
