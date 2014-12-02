@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import modulo.cadastro.Aluno;
-import modulo.cadastro.Curso;
-import modulo.cadastro.Disciplina;
-import modulo.cadastro.Turma;
+import br.furb.guniver.modelo.Aluno;
+import br.furb.guniver.modelo.Curso;
+import br.furb.guniver.modelo.Disciplina;
+import br.furb.guniver.modelo.Turma;
 import br.furb.guniver.sync.EntitiesSynchronizer;
 
 public class Controller {
@@ -72,7 +72,7 @@ public class Controller {
 	public void downloadTurma() {
 		synchronizers.get(Turma.class).downloadAll();
 	}
-	
+
 	private EntitiesSynchronizer<?> requireSynchronizer(Class<?> entityClass) {
 		EntitiesSynchronizer<?> synchronizer = synchronizers.get(entityClass);
 		if (synchronizer == null) {

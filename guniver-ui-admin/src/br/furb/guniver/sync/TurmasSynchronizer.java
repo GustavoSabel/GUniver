@@ -3,7 +3,7 @@ package br.furb.guniver.sync;
 import java.util.Collection;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import modulo.cadastro.Turma;
+import br.furb.guniver.modelo.Turma;
 
 public class TurmasSynchronizer extends EntitiesSynchronizer<Turma> {
 

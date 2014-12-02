@@ -3,7 +3,7 @@ package br.furb.guniver.sync;
 import java.util.Collection;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import modulo.cadastro.Aluno;
+import br.furb.guniver.modelo.Aluno;
 
 public class AlunosSynchronizer extends EntitiesSynchronizer<Aluno> {
 

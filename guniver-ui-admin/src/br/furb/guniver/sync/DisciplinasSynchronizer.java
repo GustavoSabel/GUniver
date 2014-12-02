@@ -3,7 +3,7 @@ package br.furb.guniver.sync;
 import java.util.Collection;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import modulo.cadastro.Disciplina;
+import br.furb.guniver.modelo.Disciplina;
 
 public class DisciplinasSynchronizer extends EntitiesSynchronizer<Disciplina> {
 
