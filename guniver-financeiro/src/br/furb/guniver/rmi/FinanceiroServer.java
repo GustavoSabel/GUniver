@@ -1,4 +1,4 @@
-package rmi_guniver;
+package br.furb.guniver.rmi;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import br.furb.guniver.modelo.Mensalidade;
+import br.furb.guniver.modelo.Situacao;
 
 public class FinanceiroServer extends UnicastRemoteObject implements
 		FinanceiroRemote {

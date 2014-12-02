@@ -45,7 +45,9 @@ public class ObjectFactory {
     private final static QName _GetDisciplinas_QNAME = new QName("http://webservice.guniver.furb.br/", "getDisciplinas");
     private final static QName _GetTurmas_QNAME = new QName("http://webservice.guniver.furb.br/", "getTurmas");
     private final static QName _GetMaterialResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getMaterialResponse");
+    private final static QName _GetMensalidadesPendentesResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getMensalidadesPendentesResponse");
     private final static QName _GetTurmasResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getTurmasResponse");
+    private final static QName _GetMensalidadesPendentes_QNAME = new QName("http://webservice.guniver.furb.br/", "getMensalidadesPendentes");
     private final static QName _GetProvasResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getProvasResponse");
     private final static QName _GetCompromissosAlunoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getCompromissosAlunoResponse");
     private final static QName _GetDisciplinasResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getDisciplinasResponse");
@@ -278,11 +280,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetMensalidadesPendentes }
+     * 
+     */
+    public GetMensalidadesPendentes createGetMensalidadesPendentes() {
+        return new GetMensalidadesPendentes();
+    }
+
+    /**
      * Create an instance of {@link GetTurmasResponse }
      * 
      */
     public GetTurmasResponse createGetTurmasResponse() {
         return new GetTurmasResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetMensalidadesPendentesResponse }
+     * 
+     */
+    public GetMensalidadesPendentesResponse createGetMensalidadesPendentesResponse() {
+        return new GetMensalidadesPendentesResponse();
     }
 
     /**
@@ -323,6 +341,14 @@ public class ObjectFactory {
      */
     public Horario createHorario() {
         return new Horario();
+    }
+
+    /**
+     * Create an instance of {@link Mensalidade }
+     * 
+     */
+    public Mensalidade createMensalidade() {
+        return new Mensalidade();
     }
 
     /**
@@ -547,12 +573,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetMensalidadesPendentesResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getMensalidadesPendentesResponse")
+    public JAXBElement<GetMensalidadesPendentesResponse> createGetMensalidadesPendentesResponse(GetMensalidadesPendentesResponse value) {
+        return new JAXBElement<GetMensalidadesPendentesResponse>(_GetMensalidadesPendentesResponse_QNAME, GetMensalidadesPendentesResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetTurmasResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getTurmasResponse")
     public JAXBElement<GetTurmasResponse> createGetTurmasResponse(GetTurmasResponse value) {
         return new JAXBElement<GetTurmasResponse>(_GetTurmasResponse_QNAME, GetTurmasResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetMensalidadesPendentes }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getMensalidadesPendentes")
+    public JAXBElement<GetMensalidadesPendentes> createGetMensalidadesPendentes(GetMensalidadesPendentes value) {
+        return new JAXBElement<GetMensalidadesPendentes>(_GetMensalidadesPendentes_QNAME, GetMensalidadesPendentes.class, null, value);
     }
 
     /**

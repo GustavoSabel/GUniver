@@ -1,4 +1,4 @@
-package rmi_guniver;
+package br.furb.guniver.modelo;
 
 import java.io.Serializable;
 import java.util.Date;

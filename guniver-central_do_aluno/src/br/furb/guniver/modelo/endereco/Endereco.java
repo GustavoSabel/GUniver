@@ -2,7 +2,8 @@ package br.furb.guniver.modelo.endereco;
 
 public enum Endereco {
     academico("localhost"),
-    cadastro("localhost");
+    cadastro("localhost"),
+    financeiro("localhost");
 
     private String endereco;
 

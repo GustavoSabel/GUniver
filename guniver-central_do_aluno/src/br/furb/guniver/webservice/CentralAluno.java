@@ -1,6 +1,7 @@
 package br.furb.guniver.webservice;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.jws.WebMethod;
@@ -10,6 +11,7 @@ import br.furb.guniver.modelo.endereco.Endereco;
 import br.furb.guniver.modulo.Academico;
 import br.furb.guniver.modulo.Cadastro;
 import br.furb.guniver.modulo.ConversorAcademico;
+import br.furb.guniver.modulo.Financeiro;
 
 @WebService
 public class CentralAluno {
@@ -86,5 +88,10 @@ public class CentralAluno {
     @WebMethod
     public List<Aluno> getAlunosTurma(int codigoTurma) throws RemoteException {
 	return Cadastro.getInstancia().getAlunosTurma(codigoTurma);
+    }
+    
+    @WebMethod
+    public List<Mensalidade> getMensalidadesPendentes(int codigoAluno) throws RemoteException {
+	return Financeiro.getInstancia().getMensalidadesPendentes(codigoAluno);
     }
 }

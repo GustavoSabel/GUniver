@@ -1,4 +1,4 @@
-package endereco;
+package br.furb.guniver.modelo.endereco;
 
 public enum Endereco {
     cadastro("localhost");

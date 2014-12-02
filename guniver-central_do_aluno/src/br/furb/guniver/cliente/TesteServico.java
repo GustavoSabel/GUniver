@@ -68,6 +68,7 @@ public class TesteServico {
 
 	    TestarIntegracaoAcademico();
 	    TestarIntegracaoCadastro();
+	    TestarIntegracaoFinanceiro();
 
 	} catch (Exception ex) {
 	    System.out.println("Erro: " + ex.getMessage());
@@ -87,6 +88,14 @@ public class TesteServico {
 	System.out.println("Consultou Turmas");
     }
 
+    private static void TestarIntegracaoFinanceiro() {
+	System.out.println("TESTANDO INTEGRAÇÃO COM O MODULO FINANCEIRO");
+	CentralAluno port = new CentralAlunoService().getCentralAlunoPort();
+	int codigoALuno = 1;
+	port.getMensalidadesPendentes(codigoALuno);
+	System.out.println("Consultou as Mensalidades do aluno 1");
+    }
+    
     public static void TestarIntegracaoAcademico() {
 	try {
 	    System.out.println("TESTANDO INTEGRAÇÃO COM O MODULO ACADEMICO");

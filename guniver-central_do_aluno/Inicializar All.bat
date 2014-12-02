@@ -35,4 +35,4 @@ start java %caminhoPadrao%.rmi.InicializadorServicos
 REM FINANCEIRO
 cd %caminhoFinanceiro%
 set classpath=.;%caminhoModelo%
-start java rmi_guniver.FinanceiroServer
+start java %caminhoPadrao%.rmi.FinanceiroServer

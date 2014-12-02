@@ -1,4 +1,4 @@
-package rmi_guniver;
+package br.furb.guniver.modelo;
 
 public enum Situacao {
     pago,

@@ -1,7 +1,8 @@
-package rmi_guniver;
+package br.furb.guniver.rmi;
 
 import java.util.ArrayList;
 import java.util.List;
+import br.furb.guniver.modelo.Mensalidade;
 
 
 public class BancoDados {
