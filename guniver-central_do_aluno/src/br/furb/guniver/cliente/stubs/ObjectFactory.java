@@ -24,10 +24,11 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _GetAlunosTurmaResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getAlunosTurmaResponse");
     private final static QName _GetCurso_QNAME = new QName("http://webservice.guniver.furb.br/", "getCurso");
+    private final static QName _GetAlunosTurmaResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getAlunosTurmaResponse");
     private final static QName _GetMatriculasAlunoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getMatriculasAlunoResponse");
     private final static QName _GetHorarios_QNAME = new QName("http://webservice.guniver.furb.br/", "getHorarios");
+    private final static QName _AutenticaUsuario_QNAME = new QName("http://webservice.guniver.furb.br/", "autenticaUsuario");
     private final static QName _GetAlunos_QNAME = new QName("http://webservice.guniver.furb.br/", "getAlunos");
     private final static QName _GetProvas_QNAME = new QName("http://webservice.guniver.furb.br/", "getProvas");
     private final static QName _CriarCompromisso_QNAME = new QName("http://webservice.guniver.furb.br/", "criarCompromisso");
@@ -52,9 +53,10 @@ public class ObjectFactory {
     private final static QName _GetCompromissosAlunoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getCompromissosAlunoResponse");
     private final static QName _GetDisciplinasResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getDisciplinasResponse");
     private final static QName _RemoverCompromissoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "removerCompromissoResponse");
-    private final static QName _GetCursoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getCursoResponse");
     private final static QName _GetMaterial_QNAME = new QName("http://webservice.guniver.furb.br/", "getMaterial");
+    private final static QName _GetCursoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getCursoResponse");
     private final static QName _GetMatriculasTurmaResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getMatriculasTurmaResponse");
+    private final static QName _AutenticaUsuarioResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "autenticaUsuarioResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: br.furb.guniver.cliente.stubs
@@ -104,6 +106,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link AutenticaUsuario }
+     * 
+     */
+    public AutenticaUsuario createAutenticaUsuario() {
+        return new AutenticaUsuario();
+    }
+
+    /**
      * Create an instance of {@link GetHorarios }
      * 
      */
@@ -120,19 +130,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetCurso }
-     * 
-     */
-    public GetCurso createGetCurso() {
-        return new GetCurso();
-    }
-
-    /**
      * Create an instance of {@link GetAlunosTurmaResponse }
      * 
      */
     public GetAlunosTurmaResponse createGetAlunosTurmaResponse() {
         return new GetAlunosTurmaResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetCurso }
+     * 
+     */
+    public GetCurso createGetCurso() {
+        return new GetCurso();
     }
 
     /**
@@ -221,6 +231,14 @@ public class ObjectFactory {
      */
     public CriarCompromissoResponse createCriarCompromissoResponse() {
         return new CriarCompromissoResponse();
+    }
+
+    /**
+     * Create an instance of {@link AutenticaUsuarioResponse }
+     * 
+     */
+    public AutenticaUsuarioResponse createAutenticaUsuarioResponse() {
+        return new AutenticaUsuarioResponse();
     }
 
     /**
@@ -384,21 +402,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetAlunosTurmaResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getAlunosTurmaResponse")
-    public JAXBElement<GetAlunosTurmaResponse> createGetAlunosTurmaResponse(GetAlunosTurmaResponse value) {
-        return new JAXBElement<GetAlunosTurmaResponse>(_GetAlunosTurmaResponse_QNAME, GetAlunosTurmaResponse.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetCurso }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getCurso")
     public JAXBElement<GetCurso> createGetCurso(GetCurso value) {
         return new JAXBElement<GetCurso>(_GetCurso_QNAME, GetCurso.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAlunosTurmaResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getAlunosTurmaResponse")
+    public JAXBElement<GetAlunosTurmaResponse> createGetAlunosTurmaResponse(GetAlunosTurmaResponse value) {
+        return new JAXBElement<GetAlunosTurmaResponse>(_GetAlunosTurmaResponse_QNAME, GetAlunosTurmaResponse.class, null, value);
     }
 
     /**
@@ -417,6 +435,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getHorarios")
     public JAXBElement<GetHorarios> createGetHorarios(GetHorarios value) {
         return new JAXBElement<GetHorarios>(_GetHorarios_QNAME, GetHorarios.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AutenticaUsuario }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "autenticaUsuario")
+    public JAXBElement<AutenticaUsuario> createAutenticaUsuario(AutenticaUsuario value) {
+        return new JAXBElement<AutenticaUsuario>(_AutenticaUsuario_QNAME, AutenticaUsuario.class, null, value);
     }
 
     /**
@@ -636,15 +663,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCursoResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getCursoResponse")
-    public JAXBElement<GetCursoResponse> createGetCursoResponse(GetCursoResponse value) {
-        return new JAXBElement<GetCursoResponse>(_GetCursoResponse_QNAME, GetCursoResponse.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetMaterial }{@code >}}
      * 
      */
@@ -654,12 +672,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCursoResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getCursoResponse")
+    public JAXBElement<GetCursoResponse> createGetCursoResponse(GetCursoResponse value) {
+        return new JAXBElement<GetCursoResponse>(_GetCursoResponse_QNAME, GetCursoResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetMatriculasTurmaResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getMatriculasTurmaResponse")
     public JAXBElement<GetMatriculasTurmaResponse> createGetMatriculasTurmaResponse(GetMatriculasTurmaResponse value) {
         return new JAXBElement<GetMatriculasTurmaResponse>(_GetMatriculasTurmaResponse_QNAME, GetMatriculasTurmaResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AutenticaUsuarioResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "autenticaUsuarioResponse")
+    public JAXBElement<AutenticaUsuarioResponse> createAutenticaUsuarioResponse(AutenticaUsuarioResponse value) {
+        return new JAXBElement<AutenticaUsuarioResponse>(_AutenticaUsuarioResponse_QNAME, AutenticaUsuarioResponse.class, null, value);
     }
 
 }

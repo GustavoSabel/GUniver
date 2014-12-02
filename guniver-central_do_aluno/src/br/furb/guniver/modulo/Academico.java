@@ -8,7 +8,11 @@ import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.InvalidName;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
-import br.furb.guniver.modelo.academico.*;
+import br.furb.guniver.modelo.academico.Horario;
+import br.furb.guniver.modelo.academico.IAcademico;
+import br.furb.guniver.modelo.academico.IAcademicoHelper;
+import br.furb.guniver.modelo.academico.Matricula;
+import br.furb.guniver.modelo.academico.Prova;
 public class Academico {
 
     private String endereco;

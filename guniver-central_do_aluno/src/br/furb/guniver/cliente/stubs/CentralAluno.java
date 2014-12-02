@@ -265,4 +265,22 @@ public interface CentralAluno {
         @WebParam(name = "arg0", targetNamespace = "")
         int arg0);
 
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns br.furb.guniver.cliente.stubs.Aluno
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "autenticaUsuario", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.AutenticaUsuario")
+    @ResponseWrapper(localName = "autenticaUsuarioResponse", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.AutenticaUsuarioResponse")
+    @Action(input = "http://webservice.guniver.furb.br/CentralAluno/autenticaUsuarioRequest", output = "http://webservice.guniver.furb.br/CentralAluno/autenticaUsuarioResponse")
+    public Aluno autenticaUsuario(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1);
+
 }

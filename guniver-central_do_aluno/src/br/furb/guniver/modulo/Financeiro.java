@@ -3,17 +3,9 @@ package br.furb.guniver.modulo;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.List;
-import br.furb.guniver.modelo.Aluno;
-import br.furb.guniver.modelo.Curso;
-import br.furb.guniver.modelo.Disciplina;
 import br.furb.guniver.modelo.Mensalidade;
-import br.furb.guniver.modelo.Turma;
 import br.furb.guniver.modelo.endereco.Endereco;
-import br.furb.guniver.rmi.AlunoRemote;
-import br.furb.guniver.rmi.CursoRemote;
-import br.furb.guniver.rmi.DisciplinaRemote;
 import br.furb.guniver.rmi.FinanceiroRemote;
-import br.furb.guniver.rmi.TurmaRemote;
 
 public class Financeiro {
 

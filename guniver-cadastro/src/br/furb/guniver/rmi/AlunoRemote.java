@@ -6,7 +6,8 @@ import java.util.List;
 import br.furb.guniver.modelo.Aluno;
 
 public interface AlunoRemote extends Remote {
-	public Aluno BuscarAluno(int codigo) throws RemoteException;
-	public List<Aluno> BuscarAlunos() throws RemoteException;
-	public void CadastrarAluno(Aluno aluno) throws RemoteException;
+	public Aluno getAluno(int codigo) throws RemoteException;
+	public List<Aluno> getAlunos() throws RemoteException;
+	public void cadastrarAluno(Aluno aluno) throws RemoteException;
+	public Aluno getAlunoPorNomeUsuario(String nomeUsuario) throws RemoteException;
 }

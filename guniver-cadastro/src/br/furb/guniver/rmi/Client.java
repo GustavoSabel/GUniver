@@ -28,17 +28,17 @@ public class Client {
 	AlunoRemote alunoRemote = (AlunoRemote) Naming.lookup("//" + endereco + "/AlunoRemote");
 	Aluno alunoTeste = new Aluno(1, "Bruno");
 	System.out.println("Cadastrar aluno" + alunoTeste.getCodigo() + " - " + alunoTeste.getNome());
-	alunoRemote.CadastrarAluno(alunoTeste);
+	alunoRemote.cadastrarAluno(alunoTeste);
 	alunoTeste = new Aluno(40, "Vivian");
 	System.out.println("Cadastrar aluno" + alunoTeste.getCodigo() + " - " + alunoTeste.getNome());
-	alunoRemote.CadastrarAluno(alunoTeste);
+	alunoRemote.cadastrarAluno(alunoTeste);
 
 	System.out.println("Buscar aluno 1");
-	Aluno al = alunoRemote.BuscarAluno(1);
+	Aluno al = alunoRemote.getAluno(1);
 	System.out.println("Aluno: " + al.getCodigo() + " - " + al.getNome());
 
 	System.out.println("Consultar aluno");
-	for (Aluno aluno : alunoRemote.BuscarAlunos()) {
+	for (Aluno aluno : alunoRemote.getAlunos()) {
 	    System.out.println(" - Aluno: " + aluno.getCodigo() + " - " + aluno.getNome());
 	}
     }
@@ -70,7 +70,7 @@ public class Client {
 	disc = new Disciplina(20, "Banco de Dados", curso);
 	disciplinaRemote.cadastrarDisciplina(disc);
 	System.out.println("Consultar disciplinas");
-	for (Disciplina d : disciplinaRemote.buscarDisciplinas(1)) {
+	for (Disciplina d : disciplinaRemote.getDisciplinas(1)) {
 	    System.out.println(" - Disciplina = " + d.getCodigo() + " - " + d.getNome());
 	}
     }
@@ -83,12 +83,12 @@ public class Client {
 	turmaRemote.cadastrarTurma(turmaNova);
 	BancoDados.getIntancia().getAlunos().add(new Aluno(1, "Teseeeeeeeeeee"));
 	System.out.println("Alunos da Turma 1:");
-	for (Aluno aluno : turmaRemote.BuscarAlunosTurma(1)) {
+	for (Aluno aluno : turmaRemote.getAlunosTurma(1)) {
 	    System.out.println(" - Aluno: " + aluno.getCodigo() + " - " + aluno.getNome());
 	}
 
 	System.out.println("Turmas do Aluno 1:");
-	for (Turma turma : turmaRemote.BuscarTurmas(1)) {
+	for (Turma turma : turmaRemote.getTurmas(1)) {
 	    System.out.println(" - Turma: " + turma.getCodigo() + " - Semestre: " + turma.getAno() + "/"
 		    + turma.getSemestre() + " - Disciplina" + turma.getDisciplina().getNome());
 	}

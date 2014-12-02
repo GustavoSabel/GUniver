@@ -13,7 +13,7 @@ public class DisciplinaServer extends UnicastRemoteObject implements DisciplinaR
     }
 
     @Override
-    public List<Disciplina> buscarDisciplinas(int codCurso) throws RemoteException {
+    public List<Disciplina> getDisciplinas(int codCurso) throws RemoteException {
 	List<Disciplina> listDisc = new ArrayList<>();
 	for (Disciplina disciplina : BancoDados.getIntancia().getDisciplina()) {
 	    if (disciplina.getCurso().getCodigo() == codCurso) {
@@ -33,7 +33,7 @@ public class DisciplinaServer extends UnicastRemoteObject implements DisciplinaR
     }
 
     @Override
-    public Disciplina buscarDisciplina(int codDisciplina) throws RemoteException {
+    public Disciplina getDisciplina(int codDisciplina) throws RemoteException {
 	for (Disciplina disciplina : BancoDados.getIntancia().getDisciplina()) {
 	    if (disciplina.getCodigo() == codDisciplina) {
 		return disciplina;

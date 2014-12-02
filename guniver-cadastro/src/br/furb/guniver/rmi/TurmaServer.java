@@ -41,7 +41,7 @@ public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
     }
 
     @Override
-    public List<Aluno> BuscarAlunosTurma(int codTurma) throws RemoteException {
+    public List<Aluno> getAlunosTurma(int codTurma) throws RemoteException {
 	System.out.println("Executado BuscarAlunosTurma(int codTurma)");
 	try {
 	    List<Aluno> alunos = new ArrayList<Aluno>();
@@ -66,7 +66,7 @@ public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
     }
 
     @Override
-    public List<Turma> BuscarTurmas(int codAluno) throws RemoteException {
+    public List<Turma> getTurmas(int codAluno) throws RemoteException {
 	System.out.println("Executado BuscarTurmas(int codAluno)");
 	try {
 	    List<Turma> turmas = new ArrayList<Turma>();

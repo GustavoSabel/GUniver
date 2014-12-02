@@ -43,7 +43,7 @@ public class Cadastro {
     }
 
     public List<Aluno> getAlunos() throws RemoteException {
-	return alunoRemote.BuscarAlunos();
+	return alunoRemote.getAlunos();
     }
 
     public Curso getCurso(int codigoCurso) throws RemoteException {
@@ -51,14 +51,18 @@ public class Cadastro {
     }
 
     public List<Disciplina> getDisciplinas(int codigoCurso) throws RemoteException {
-	return disciplinaRemote.buscarDisciplinas(codigoCurso);
+	return disciplinaRemote.getDisciplinas(codigoCurso);
     }
 
     public List<Turma> getTurmas(int codigoAluno) throws RemoteException {
-	return turmaRemote.BuscarTurmas(codigoAluno);
+	return turmaRemote.getTurmas(codigoAluno);
     }
 
     public List<Aluno> getAlunosTurma(int codigoTurma) throws RemoteException {
-	return turmaRemote.BuscarAlunosTurma(codigoTurma);
+	return turmaRemote.getAlunosTurma(codigoTurma);
+    }
+    
+    public Aluno getAlunoPorNomeUsuario(String nomeUsuario) throws RemoteException {
+	return alunoRemote.getAlunoPorNomeUsuario(nomeUsuario);
     }
 }

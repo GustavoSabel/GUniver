@@ -2,15 +2,28 @@ package br.furb.guniver.modelo;
 
 public class Aluno {
 
+    private String nomeUsuario;
     private String nome;
     private int codigo;
-
-    public Aluno(int codigo, String nome) {
-	this.codigo = codigo;
-	this.nome = nome;
-    }
+    private String senha;
 
     public Aluno() {
+    }
+
+    public Aluno(int codigo, String nomeUsuario) {
+	this();
+	this.codigo = codigo;
+	this.nomeUsuario = nomeUsuario;
+    }
+
+    public Aluno(int codigo, String nomeUsuario, String senha) {
+	this(codigo, nomeUsuario);
+	this.senha = senha;
+    }
+    
+    public Aluno(int codigo, String nomeUsuario, String senha, String nome) {
+	this(codigo, nomeUsuario, senha);
+	this.nome = nome;
     }
 
     public int getCodigo() {
@@ -28,4 +41,21 @@ public class Aluno {
     public void setNome(String nome) {
 	this.nome = nome;
     }
+
+    public String getSenha() {
+	return senha;
+    }
+
+    public void setSenha(String senha) {
+	this.senha = senha;
+    }
+
+    public String getNomeUsuario() {
+	return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+	this.nomeUsuario = nomeUsuario;
+    }
+
 }

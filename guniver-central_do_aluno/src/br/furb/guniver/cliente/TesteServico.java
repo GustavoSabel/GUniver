@@ -86,6 +86,11 @@ public class TesteServico {
 	System.out.println("Consultou Disciplinas");
 	port.getTurmas(1);
 	System.out.println("Consultou Turmas");
+	br.furb.guniver.cliente.stubs.Aluno aluno = port.autenticaUsuario("Teste", "1234");
+	if(aluno == null)
+	    System.out.println("Usuario teste nao autenticado");
+	else
+	    System.out.println("Usuario teste autenticado");
     }
 
     private static void TestarIntegracaoFinanceiro() {
