@@ -2,9 +2,10 @@ package br.furb.guniver.sync;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import br.furb.guniver.modelo.Turma;
+import br.furb.guniver.central_do_aluno.stubs.*;
 
 public class TurmasSynchronizer extends EntitiesSynchronizer<Turma> {
 
@@ -20,7 +21,8 @@ public class TurmasSynchronizer extends EntitiesSynchronizer<Turma> {
 
 	@Override
 	protected Collection<Turma> doDownloadAll() {
-		return Arrays.asList(new Turma(132, null, 2012, 1), new Turma(3452, null, 2012, 2));
+		//return Arrays.asList(new Turma(132, null, 2012, 1), new Turma(3452, null, 2012, 2));
+		return Collections.emptyList();
 	}
 
 	@Override

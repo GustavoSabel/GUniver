@@ -9,65 +9,68 @@ import br.furb.guniver.modelo.Turma;
 
 public class BancoDados {
 
-    private List<Aluno> alunos;
-    private List<Turma> turmas;
-    private List<Disciplina> disciplina;
-    private List<Curso> curso;
-    private static BancoDados instacia;
+	private List<Aluno> alunos;
+	private List<Turma> turmas;
+	private List<Disciplina> disciplina;
+	private List<Curso> curso;
+	private static BancoDados instacia;
 
-    private BancoDados() {
-	alunos = new ArrayList<>();
-	turmas = new ArrayList<>();
-	disciplina = new ArrayList<>();
-	curso = new ArrayList<>();
-	//CargaInicial();
-    }
-
-    public static BancoDados getIntancia() {
-	if (instacia == null)
-	    instacia = new BancoDados();
-	return instacia;
-    }
-
-    private void cargaInicial() {
-	Curso curso = new Curso(1, "Ciencia da Computacao");
-	Disciplina disc = new Disciplina(1, "Banco de Dados", curso);
-	Aluno alunoGustavo = new Aluno(1, "Gustavo Sabel");
-	alunos.add(alunoGustavo);
-	Turma turmaTeste = new Turma(1, disc, 2014, 2);
-	turmas.add(turmaTeste);
-    }
-
-    public List<Aluno> getAlunos() {
-	return alunos;
-    }
-
-    public Aluno getAluno(int codigoAluno) {
-	for (Aluno aluno : alunos) {
-	    if(aluno.getCodigo() == codigoAluno)
-		return aluno;
+	private BancoDados() {
+		alunos = new ArrayList<>();
+		turmas = new ArrayList<>();
+		disciplina = new ArrayList<>();
+		curso = new ArrayList<>();
+		cargaInicial();
 	}
-	return null;
-    }
-    
-    public Turma getTurma(int codigoTurma) {
-	for (Turma turma : turmas) {
-	    if(turma.getCodigo() == codigoTurma)
-		return turma;
+
+	public static BancoDados getIntancia() {
+		if (instacia == null)
+			instacia = new BancoDados();
+		return instacia;
 	}
-	return null;
-    }
 
-    public List<Turma> getTurmas() {
-	return turmas;
-    }
+	private void cargaInicial() {
+		Curso curso = new Curso(1, "Ciencia da Computacao");
+		Disciplina disc = new Disciplina(1, "Banco de Dados", curso);
+		Aluno alunoGustavo = new Aluno(1, "Gustavo Sabel");
+		alunos.add(alunoGustavo);
+		alunos.add(new Aluno(2, "asdsdsa"));
+		alunos.add(new Aluno(3, "11111"));
+		alunos.add(new Aluno(4, "aaaaaaaaaaaaaaaaa"));
+		Turma turmaTeste = new Turma(1, disc, 2014, 2);
+		turmas.add(turmaTeste);
+	}
 
-    public List<Disciplina> getDisciplina() {
-	return disciplina;
-    }
+	public List<Aluno> getAlunos() {
+		return alunos;
+	}
 
-    public List<Curso> getCurso() {
-	return curso;
-    }
+	public Aluno getAluno(int codigoAluno) {
+		for (Aluno aluno : alunos) {
+			if (aluno.getCodigo() == codigoAluno)
+				return aluno;
+		}
+		return null;
+	}
+
+	public Turma getTurma(int codigoTurma) {
+		for (Turma turma : turmas) {
+			if (turma.getCodigo() == codigoTurma)
+				return turma;
+		}
+		return null;
+	}
+
+	public List<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public List<Disciplina> getDisciplina() {
+		return disciplina;
+	}
+
+	public List<Curso> getCurso() {
+		return curso;
+	}
 
 }

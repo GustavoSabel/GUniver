@@ -2,9 +2,10 @@ package br.furb.guniver.sync;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import br.furb.guniver.modelo.Curso;
+import br.furb.guniver.central_do_aluno.stubs.*;
 
 /**
  * @deprecated não será usado.
@@ -23,9 +24,10 @@ public class CursosSynchronizer extends EntitiesSynchronizer<Curso> {
 
 	@Override
 	protected Collection<Curso> doDownloadAll() {
-		return Arrays.asList(new Curso(124, "Primeiro curso"),//
+		/*return Arrays.asList(new Curso(124, "Primeiro curso"),//
 				new Curso(456, "Segundo curso"), //
-				new Curso(02, "Terceiro curso"));
+				new Curso(02, "Terceiro curso"));*/
+		return Collections.emptyList();
 	}
 
 	@Override

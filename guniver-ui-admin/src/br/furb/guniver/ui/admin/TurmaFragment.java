@@ -24,8 +24,9 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-import br.furb.guniver.modelo.Disciplina;
-import br.furb.guniver.modelo.Turma;
+import br.furb.guniver.central_do_aluno.stubs.Disciplina;
+import br.furb.guniver.central_do_aluno.stubs.Turma;
+
 
 @SuppressWarnings("serial")
 public class TurmaFragment extends Fragment {
@@ -80,7 +81,7 @@ public class TurmaFragment extends Fragment {
 					Turma turma;
 					boolean newTurma;
 					if (row == turmas.size()) {
-						turma = new Turma(0, null, 0, 0);
+						turma = new Turma();
 						newTurma = true;
 					} else {
 						turma = turmas.get(row);

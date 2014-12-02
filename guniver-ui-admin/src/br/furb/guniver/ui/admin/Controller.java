@@ -15,11 +15,11 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import br.furb.guniver.modelo.Aluno;
-import br.furb.guniver.modelo.Curso;
-import br.furb.guniver.modelo.Disciplina;
-import br.furb.guniver.modelo.Prova;
-import br.furb.guniver.modelo.Turma;
+import br.furb.guniver.central_do_aluno.stubs.Aluno;
+import br.furb.guniver.central_do_aluno.stubs.Curso;
+import br.furb.guniver.central_do_aluno.stubs.Disciplina;
+import br.furb.guniver.central_do_aluno.stubs.Prova;
+import br.furb.guniver.central_do_aluno.stubs.Turma;
 import br.furb.guniver.sync.AlunosSynchronizer;
 import br.furb.guniver.sync.DisciplinasSynchronizer;
 import br.furb.guniver.sync.EntitiesSynchronizer;
@@ -70,7 +70,8 @@ public class Controller {
 		setSynchronizers(synchronizers);
 	}
 
-	public void setSynchronizers(Map<Class<?>, EntitiesSynchronizer<?>> synchronizers) {
+	public void setSynchronizers(
+			Map<Class<?>, EntitiesSynchronizer<?>> synchronizers) {
 		synchronized (this.synchronizers) {
 			registerSynchronizer(Aluno.class, synchronizers);
 			registerSynchronizer(Disciplina.class, synchronizers);
@@ -80,10 +81,13 @@ public class Controller {
 	}
 
 	@SuppressWarnings("unchecked")
-	private <T> void registerSynchronizer(Class<T> entityClass, Map<Class<?>, EntitiesSynchronizer<?>> synchronizers) {
-		EntitiesSynchronizer<T> synchronizer = (EntitiesSynchronizer<T>) synchronizers.get(entityClass);
+	private <T> void registerSynchronizer(Class<T> entityClass,
+			Map<Class<?>, EntitiesSynchronizer<?>> synchronizers) {
+		EntitiesSynchronizer<T> synchronizer = (EntitiesSynchronizer<T>) synchronizers
+				.get(entityClass);
 		if (synchronizer != null) {
-			synchronizer.addSyncListener((SyncListener<T>) listeners.get(entityClass));
+			synchronizer.addSyncListener((SyncListener<T>) listeners
+					.get(entityClass));
 		}
 		this.synchronizers.put(entityClass, synchronizer);
 	}
@@ -146,10 +150,13 @@ public class Controller {
 	private <T> EntitiesSynchronizer<T> requireSynchronizer(Class<T> entityClass) {
 		EntitiesSynchronizer<T> synchronizer;
 		synchronized (synchronizers) {
-			synchronizer = (EntitiesSynchronizer<T>) synchronizers.get(entityClass);
+			synchronizer = (EntitiesSynchronizer<T>) synchronizers
+					.get(entityClass);
 		}
 		if (synchronizer == null) {
-			throw new IllegalStateException(String.format("sincronizador da entidade %s não definido", entityClass.getSimpleName()));
+			throw new IllegalStateException(String.format(
+					"sincronizador da entidade %s não definido",
+					entityClass.getSimpleName()));
 		}
 		return synchronizer;
 	}
@@ -189,12 +196,18 @@ public class Controller {
 	public void changeUrls(String academicoUrl, String cadastrosUrl) {
 		stopSynchronizers();
 		synchronized (synchronizers) {
-			ThreadPoolExecutor executor = new ThreadPoolExecutor(THREAD_POOL_MAX_SIZE, THREAD_POOL_MAX_SIZE, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>());
+			ThreadPoolExecutor executor = new ThreadPoolExecutor(
+					THREAD_POOL_MAX_SIZE, THREAD_POOL_MAX_SIZE, 1,
+					TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>());
 			Map<Class<?>, EntitiesSynchronizer<?>> synchronizers = new HashMap<>();
-			synchronizers.put(Aluno.class, new AlunosSynchronizer(cadastrosUrl, executor));
-			synchronizers.put(Disciplina.class, new DisciplinasSynchronizer(cadastrosUrl, executor));
-			synchronizers.put(Turma.class, new TurmasSynchronizer(cadastrosUrl, executor));
-			synchronizers.put(Prova.class, new ProvasSynchronizer(academicoUrl, executor));
+			synchronizers.put(Aluno.class, new AlunosSynchronizer(cadastrosUrl,
+					executor));
+			synchronizers.put(Disciplina.class, new DisciplinasSynchronizer(
+					cadastrosUrl, executor));
+			synchronizers.put(Turma.class, new TurmasSynchronizer(cadastrosUrl,
+					executor));
+			synchronizers.put(Prova.class, new ProvasSynchronizer(academicoUrl,
+					executor));
 			setSynchronizers(synchronizers);
 		}
 	}
@@ -210,7 +223,7 @@ public class Controller {
 
 	public void showError(String message, Throwable t) {
 		String stackTrace;
-		try (StringWriter sw = new StringWriter(); // 
+		try (StringWriter sw = new StringWriter(); //
 				PrintWriter pw = new PrintWriter(sw)) {
 			t.printStackTrace(pw);
 			stackTrace = sw.toString();
@@ -221,7 +234,8 @@ public class Controller {
 	}
 
 	public void showError(String message) {
-		UIUtils.showMessage(getMainWindow(), message, "Ops!", JOptionPane.ERROR_MESSAGE);
+		UIUtils.showMessage(getMainWindow(), message, "Ops!",
+				JOptionPane.ERROR_MESSAGE);
 	}
 
 	public AlunoFragment getAlunoFragment() {
@@ -396,8 +410,10 @@ public class Controller {
 		AlunoFragment selectionFragment = new AlunoFragment(this);
 		selectionFragment.setAlunos(alunos);
 		selectionFragment.setPickUpMode(true);
-		JOptionPane.showOptionDialog(getMainWindow(), selectionFragment, "Seleção de Aluno", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {
-				"Cancelar", "Escolher" }, "Cancelar");
+		JOptionPane.showOptionDialog(getMainWindow(), selectionFragment,
+				"Seleção de Aluno", JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, new String[] { "Cancelar",
+						"Escolher" }, "Cancelar");
 		return selectionFragment.getSelectedAluno();
 	}
 
@@ -405,8 +421,10 @@ public class Controller {
 		TurmaFragment selectionFragment = new TurmaFragment(this);
 		selectionFragment.setTurmas(turmas);
 		selectionFragment.setPickUpMode(true);
-		JOptionPane.showOptionDialog(getMainWindow(), selectionFragment, "Seleção de Turma", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {
-				"Cancelar", "Escolher" }, "Cancelar");
+		JOptionPane.showOptionDialog(getMainWindow(), selectionFragment,
+				"Seleção de Turma", JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, new String[] { "Cancelar",
+						"Escolher" }, "Cancelar");
 		return selectionFragment.getSelectedTurma();
 	}
 
@@ -414,8 +432,10 @@ public class Controller {
 		DisciplinaFragment selectionFragment = new DisciplinaFragment(this);
 		selectionFragment.setDisciplinas(disciplinas);
 		selectionFragment.setPickUpMode(true);
-		JOptionPane.showOptionDialog(getMainWindow(), selectionFragment, "Seleção de Disciplina", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {
-				"Cancelar", "Escolher" }, "Cancelar");
+		JOptionPane.showOptionDialog(getMainWindow(), selectionFragment,
+				"Seleção de Disciplina", JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, new String[] { "Cancelar",
+						"Escolher" }, "Cancelar");
 		return selectionFragment.getSelectedDisciplina();
 	}
 

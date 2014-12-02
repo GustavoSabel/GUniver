@@ -24,7 +24,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-import br.furb.guniver.modelo.Curso;
+import br.furb.guniver.central_do_aluno.stubs.Curso;
 
 /**
  * @deprecated não será usado
@@ -48,8 +48,10 @@ public class CursoFragment extends Fragment {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 200, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 0.0,
+				Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 1.0, 0.0,
+				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		JLabel lblCursos = new JLabel("Cursos");
@@ -70,7 +72,8 @@ public class CursoFragment extends Fragment {
 		add(scrollPaneCursos, gbc_scrollPaneCursos);
 
 		tableCursos = new JTable();
-		dataModel = new DefaultTableModel(new Object[][] { { null, null }, }, new String[] { "C\u00F3digo", "Nome" }) {
+		dataModel = new DefaultTableModel(new Object[][] { { null, null }, },
+				new String[] { "C\u00F3digo", "Nome" }) {
 			Class[] columnTypes = new Class[] { Long.class, Object.class };
 
 			public Class getColumnClass(int columnIndex) {
@@ -88,7 +91,7 @@ public class CursoFragment extends Fragment {
 					Curso curso;
 					boolean newCurso;
 					if (row == cursos.size()) {
-						curso = new Curso(0, null);
+						curso = new Curso();
 						newCurso = true;
 					} else {
 						curso = cursos.get(row);

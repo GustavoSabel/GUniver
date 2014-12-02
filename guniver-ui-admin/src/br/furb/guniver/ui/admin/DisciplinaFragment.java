@@ -19,7 +19,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-import br.furb.guniver.modelo.Disciplina;
+import br.furb.guniver.central_do_aluno.stubs.Disciplina;
 
 @SuppressWarnings("serial")
 public class DisciplinaFragment extends Fragment {
@@ -51,7 +51,8 @@ public class DisciplinaFragment extends Fragment {
 		add(scrollPaneTable, gbc_scrollPaneTable);
 
 		tableDisciplinas = new JTable();
-		dataModel = new DefaultTableModel(new Object[][] { { null, null }, }, new String[] { "C\u00F3digo", "Nome" }) {
+		dataModel = new DefaultTableModel(new Object[][] { { null, null }, },
+				new String[] { "C\u00F3digo", "Nome" }) {
 			Class[] columnTypes = new Class[] { Long.class, String.class };
 
 			public Class getColumnClass(int columnIndex) {
@@ -69,7 +70,7 @@ public class DisciplinaFragment extends Fragment {
 					Disciplina disciplina;
 					boolean newDisciplina;
 					if (row == disciplinas.size()) {
-						disciplina = new Disciplina(0, null, null);
+						disciplina = new Disciplina();
 						newDisciplina = true;
 					} else {
 						disciplina = disciplinas.get(row);
@@ -95,7 +96,8 @@ public class DisciplinaFragment extends Fragment {
 							disciplinas.add(disciplina);
 							reloadTable();
 						}
-						DisciplinaFragment.this.controller.uploadDisciplina(disciplina);
+						DisciplinaFragment.this.controller
+								.uploadDisciplina(disciplina);
 					}
 				}
 			}

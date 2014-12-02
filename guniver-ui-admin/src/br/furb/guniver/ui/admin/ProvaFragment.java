@@ -24,9 +24,9 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-import br.furb.guniver.modelo.Aluno;
-import br.furb.guniver.modelo.Prova;
-import br.furb.guniver.modelo.Turma;
+import br.furb.guniver.central_do_aluno.stubs.Aluno;
+import br.furb.guniver.central_do_aluno.stubs.Prova;
+import br.furb.guniver.central_do_aluno.stubs.Turma;
 
 @SuppressWarnings("serial")
 public class ProvaFragment extends Fragment {
@@ -57,8 +57,11 @@ public class ProvaFragment extends Fragment {
 		add(scrollPaneProvas, gbc_scrollPaneProvas);
 
 		tableProvas = new JTable();
-		dataModel = new DefaultTableModel(new Object[][] { { null, null, null, null }, }, new String[] { "Aluno", "Turma", "Nota", "Descri\u00E7\u00E3o" }) {
-			Class[] columnTypes = new Class[] { String.class, Long.class, Float.class, String.class };
+		dataModel = new DefaultTableModel(new Object[][] { { null, null, null,
+				null }, }, new String[] { "Aluno", "Turma", "Nota",
+				"Descri\u00E7\u00E3o" }) {
+			Class[] columnTypes = new Class[] { String.class, Long.class,
+					Float.class, String.class };
 			boolean[] columnEditable = { false, false, true, true };
 
 			@Override

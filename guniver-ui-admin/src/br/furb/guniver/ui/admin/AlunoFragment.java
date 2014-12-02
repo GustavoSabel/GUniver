@@ -23,7 +23,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-import br.furb.guniver.modelo.Aluno;
+import br.furb.guniver.central_do_aluno.stubs.Aluno;
 import br.furb.guniver.ui.utils.UIUtils;
 
 @SuppressWarnings("serial")
