@@ -1,11 +1,14 @@
 package br.furb.guniver.ui.admin;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+
+import br.furb.guniver.ui.utils.UIUtils;
 
 /**
  * Janela principal do GUniver Manager.<br>
@@ -36,6 +39,7 @@ public class MainConsole {
 					}
 
 					MainConsole window = new MainConsole();
+					UIUtils.centerOnScreen(window.frmGuniverManager);
 					window.frmGuniverManager.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,8 +60,9 @@ public class MainConsole {
 	 */
 	private void initialize() {
 		frmGuniverManager = new JFrame();
+		frmGuniverManager.setMinimumSize(new Dimension(450, 350));
+		frmGuniverManager.setSize(new Dimension(600, 500));
 		frmGuniverManager.setTitle("GUniver Manager");
-		frmGuniverManager.setBounds(100, 100, 450, 300);
 		frmGuniverManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGuniverManager.getContentPane().setLayout(new BorderLayout(0, 0));
 
