@@ -12,15 +12,20 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
+import br.furb.guniver.modelo.Aluno;
 import br.furb.guniver.modelo.Prova;
+import br.furb.guniver.modelo.Turma;
 
 @SuppressWarnings("serial")
 public class ProvaFragment extends Fragment {
@@ -107,6 +112,20 @@ public class ProvaFragment extends Fragment {
 			}
 		});
 
+		DefaultListSelectionModel selModel = new DefaultListSelectionModel();
+		selModel.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				int index = e.getFirstIndex();
+				if (index < 0) {
+					selectedProva = null;
+				} else {
+					selectedProva = provas.get(index);
+				}
+			}
+		});
+		tableProvas.setSelectionModel(selModel);
+
 		tableProvas.setModel(dataModel);
 		scrollPaneProvas.setViewportView(tableProvas);
 
@@ -177,20 +196,25 @@ public class ProvaFragment extends Fragment {
 	}
 
 	public void updateProva(Prova uploadedEntity) {
-		int row = this.provas.indexOf(uploadedEntity);
 		fChangingData = true;
-		dataModel.fireTableRowsUpdated(row, row);
+		setProvas(new ArrayList<>(provas));
 		fChangingData = false;
 	}
 
 	private void changeAluno(Prova prova) {
-		prova.setAluno(controller.pickAluno());
-		updateProva(prova);
+		Aluno pickedAluno = controller.pickAluno();
+		if (pickedAluno != null) {
+			prova.setAluno(pickedAluno);
+			updateProva(prova);
+		}
 	}
 
 	private void changeTurma(Prova prova) {
-		prova.setTurma(controller.pickTurma());
-		updateProva(prova);
+		Turma turma = controller.pickTurma();
+		if (turma != null) {
+			prova.setTurma(turma);
+			updateProva(prova);
+		}
 	}
 
 }

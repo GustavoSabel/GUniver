@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -14,11 +15,14 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import br.furb.guniver.modelo.Turma;
+
 @SuppressWarnings("serial")
 public class TurmaFragment extends Fragment {
 
 	private JTable tableTurmas;
 	private Controller controller;
+	private Turma selectedTurma;
 
 	public TurmaFragment(Controller controller) {
 		this.controller = controller;
@@ -67,7 +71,7 @@ public class TurmaFragment extends Fragment {
 
 		JButton btnAlterarDisciplina = new JButton("Alterar Disciplina");
 		btnAlterarDisciplina.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (selectedTurma != null) {
@@ -77,9 +81,19 @@ public class TurmaFragment extends Fragment {
 		});
 		panelManageTurmas.add(btnAlterarDisciplina);
 	}
-	
+
 	private void changeTurma() {
-		
+		// TODO
+	}
+
+	public void setTurmas(Collection<Turma> entities) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void updateTurma(Turma downloadedEntity) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

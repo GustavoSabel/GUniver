@@ -36,6 +36,7 @@ public class AlunoFragment extends Fragment {
 
 	private boolean fChangingData;
 	private Aluno selectedAluno;
+	private JButton btnRemover;
 
 	public AlunoFragment(Controller controller) {
 		this.controller = controller;
@@ -137,7 +138,7 @@ public class AlunoFragment extends Fragment {
 		tableAlunos.getColumnModel().getColumn(3).setPreferredWidth(100);
 		scrollPaneTable.setViewportView(tableAlunos);
 
-		JButton btnRemover = new JButton("Remover");
+		btnRemover = new JButton("Remover");
 		btnRemover.addActionListener(new ActionListener() {
 
 			@Override
@@ -145,12 +146,8 @@ public class AlunoFragment extends Fragment {
 				UIUtils.showMessage(AlunoFragment.this.controller.getMainWindow(), "Função não implementada. Consulte os devs ;)", "Ops!", JOptionPane.WARNING_MESSAGE);
 			}
 		});
-		GridBagConstraints gbc_btnRemover = new GridBagConstraints();
-		gbc_btnRemover.anchor = GridBagConstraints.EAST;
-		gbc_btnRemover.insets = new Insets(0, 5, 5, 5);
-		gbc_btnRemover.gridx = 0;
-		gbc_btnRemover.gridy = 1;
-		add(btnRemover, gbc_btnRemover);
+
+		setPickUpMode(false);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -191,8 +188,17 @@ public class AlunoFragment extends Fragment {
 		return selectedAluno;
 	}
 
-	public void setPickUpMode(boolean b) {
-		// TODO: alterar botões
+	public void setPickUpMode(boolean pickingUp) {
+		if (pickingUp) {
+			remove(btnRemover);
+		} else {
+			GridBagConstraints gbc_btnRemover = new GridBagConstraints();
+			gbc_btnRemover.anchor = GridBagConstraints.EAST;
+			gbc_btnRemover.insets = new Insets(0, 5, 5, 5);
+			gbc_btnRemover.gridx = 0;
+			gbc_btnRemover.gridy = 1;
+			add(btnRemover, gbc_btnRemover);
+		}
 
 	}
 

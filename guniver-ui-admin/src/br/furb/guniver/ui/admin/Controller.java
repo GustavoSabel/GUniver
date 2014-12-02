@@ -6,6 +6,7 @@ import java.io.StringWriter;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -34,10 +35,11 @@ public class Controller {
 
 	private Map<Class<?>, EntitiesSynchronizer<?>> synchronizers;
 	private Map<Class<?>, SyncListener<?>> listeners;
-	private Collection<Aluno> alunos;
-	private Collection<Curso> cursos;
-	private Collection<Disciplina> disciplinas;
-	private Collection<Turma> turma;
+	private Collection<Aluno> alunos = new LinkedList<>();
+	private Collection<Curso> cursos = new LinkedList<>();
+	private Collection<Disciplina> disciplinas = new LinkedList<>();
+	private Collection<Prova> provas = new LinkedList<>();
+	private Collection<Turma> turmas = new LinkedList<>();
 
 	private AlunoFragment alunoFragment;
 	private CursoFragment cursoFragment;
@@ -166,8 +168,8 @@ public class Controller {
 		return orEmpty(disciplinas);
 	}
 
-	public Collection<Turma> getTurma() {
-		return orEmpty(turma);
+	public Collection<Turma> getTurmas() {
+		return orEmpty(turmas);
 	}
 
 	private static <T> Collection<T> orEmpty(Collection<T> collection) {
@@ -265,6 +267,8 @@ public class Controller {
 
 		@Override
 		public void downloadAllComplete(Collection<Aluno> entities) {
+			alunos.clear();
+			alunos.addAll(entities);
 			getAlunoFragment().setAlunos(entities);
 		}
 
@@ -288,6 +292,8 @@ public class Controller {
 
 		@Override
 		public void downloadAllComplete(Collection<Curso> entities) {
+			cursos.clear();
+			cursos.addAll(entities);
 			getCursoFragment().setCursos(entities);
 		}
 
@@ -311,6 +317,8 @@ public class Controller {
 
 		@Override
 		public void downloadAllComplete(Collection<Disciplina> entities) {
+			disciplinas.clear();
+			disciplinas.addAll(entities);
 			getDisciplinaFragment().setDisciplinas(entities);
 		}
 
@@ -334,6 +342,8 @@ public class Controller {
 
 		@Override
 		public void downloadAllComplete(Collection<Prova> entities) {
+			provas.clear();
+			provas.addAll(entities);
 			getProvaFragment().setProvas(entities);
 		}
 
@@ -357,20 +367,19 @@ public class Controller {
 
 		@Override
 		public void downloadAllComplete(Collection<Turma> entities) {
-			// TODO Auto-generated method stub
-
+			turmas.clear();
+			turmas.addAll(entities);
+			getTurmaFragment().setTurmas(entities);
 		}
 
 		@Override
 		public void downloadComplete(Turma downloadedEntity) {
-			// TODO Auto-generated method stub
-
+			getTurmaFragment().updateTurma(downloadedEntity);
 		}
 
 		@Override
 		public void uploadComplete(Turma uploadedEntity) {
-			// TODO Auto-generated method stub
-
+			getTurmaFragment().updateTurma(uploadedEntity);
 		}
 
 		@Override
@@ -381,9 +390,17 @@ public class Controller {
 
 	public Aluno pickAluno() {
 		AlunoFragment selectionFragment = new AlunoFragment(this);
+		selectionFragment.setAlunos(alunos);
 		selectionFragment.setPickUpMode(true);
-		JOptionPane.showOptionDialog(getMainWindow(), selectionFragment, "Seleção de Aluno", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Cancelar", "Escolher"}, "Cancelar");
+		JOptionPane.showOptionDialog(getMainWindow(), selectionFragment, "Seleção de Aluno", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {
+				"Cancelar", "Escolher" }, "Cancelar");
 		return selectionFragment.getSelectedAluno();
 	}
 
+	public Turma pickTurma() {
+		TurmaFragment selectionFragment = new TurmaFragment(this);
+		//		selectionFragment.setTurmas(turmas);
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
