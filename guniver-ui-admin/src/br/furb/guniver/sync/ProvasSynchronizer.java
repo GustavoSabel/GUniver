@@ -18,9 +18,9 @@ public class ProvasSynchronizer extends EntitiesSynchronizer<Prova> {
 	}
 
 	@Override
-	protected void doDownloadAll() {
+	protected Collection<Prova> doDownloadAll() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override

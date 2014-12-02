@@ -18,9 +18,9 @@ public class DisciplinasSynchronizer extends EntitiesSynchronizer<Disciplina> {
 	}
 
 	@Override
-	protected void doDownloadAll() {
+	protected Collection<Disciplina> doDownloadAll() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override

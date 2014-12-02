@@ -18,9 +18,9 @@ public class AlunosSynchronizer extends EntitiesSynchronizer<Aluno> {
 	}
 
 	@Override
-	protected void doDownloadAll() {
+	protected Collection<Aluno> doDownloadAll() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
