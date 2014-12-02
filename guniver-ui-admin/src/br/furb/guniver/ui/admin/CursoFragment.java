@@ -17,11 +17,15 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+@SuppressWarnings("serial")
 public class CursoFragment extends Fragment {
 
 	private JTable tableCursos;
+	private Controller controller;
 
-	public CursoFragment() {
+	public CursoFragment(Controller controller) {
+		this.controller = controller;
+		controller.setCursoFragment(this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 200, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };

@@ -34,6 +34,12 @@ public class Controller {
 	private Collection<Disciplina> disciplinas;
 	private Collection<Turma> turma;
 
+	private AlunoFragment alunoFragment;
+	private CursoFragment cursoFragment;
+	private DisciplinaFragment disciplinaFragment;
+	private ProvaFragment provaFragment;
+	private TurmaFragment turmaFragment;
+
 	private JFrame mainWindow;
 
 	private SyncListener<?> syncListener;
@@ -93,6 +99,10 @@ public class Controller {
 	public void downloadAlunos() {
 		requireSynchronizer(Aluno.class).downloadAll();
 	}
+	
+	public void uploadAluno(Aluno aluno) {
+		requireSynchronizer(Aluno.class).upload(aluno);
+	}
 
 	public void downloadCursos() {
 		requireSynchronizer(Curso.class).downloadAll();
@@ -106,10 +116,11 @@ public class Controller {
 		requireSynchronizer(Turma.class).downloadAll();
 	}
 
-	private EntitiesSynchronizer<?> requireSynchronizer(Class<?> entityClass) {
-		EntitiesSynchronizer<?> synchronizer;
+	@SuppressWarnings("unchecked")
+	private <T> EntitiesSynchronizer<T> requireSynchronizer(Class<T> entityClass) {
+		EntitiesSynchronizer<T> synchronizer;
 		synchronized (synchronizers) {
-			synchronizer = synchronizers.get(entityClass);
+			synchronizer = (EntitiesSynchronizer<T>) synchronizers.get(entityClass);
 		}
 		if (synchronizer == null) {
 			throw new IllegalStateException(String.format("sincronizador da entidade %s não definido", entityClass.getSimpleName()));
@@ -153,11 +164,13 @@ public class Controller {
 		stopSynchronizers();
 		synchronized (synchronizers) {
 			ThreadPoolExecutor executor = new ThreadPoolExecutor(THREAD_POOL_MAX_SIZE, THREAD_POOL_MAX_SIZE, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>());
+			Map<Class<?>, EntitiesSynchronizer<?>> synchronizers = new HashMap<>();
 			synchronizers.put(Aluno.class, new AlunosSynchronizer(cadastrosUrl, executor));
 			synchronizers.put(Curso.class, new CursosSynchronizer(cadastrosUrl, executor));
 			synchronizers.put(Disciplina.class, new DisciplinasSynchronizer(cadastrosUrl, executor));
 			synchronizers.put(Turma.class, new TurmasSynchronizer(cadastrosUrl, executor));
 			synchronizers.put(Prova.class, new ProvasSynchronizer(academicoUrl, executor));
+			setSynchronizers(synchronizers);
 		}
 	}
 
@@ -170,24 +183,61 @@ public class Controller {
 		}
 	}
 
+	public AlunoFragment getAlunoFragment() {
+		return alunoFragment;
+	}
+
+	public void setAlunoFragment(AlunoFragment alunoFragment) {
+		this.alunoFragment = alunoFragment;
+	}
+
+	public CursoFragment getCursoFragment() {
+		return cursoFragment;
+	}
+
+	public void setCursoFragment(CursoFragment cursoFragment) {
+		this.cursoFragment = cursoFragment;
+	}
+
+	public DisciplinaFragment getDisciplinaFragment() {
+		return disciplinaFragment;
+	}
+
+	public void setDisciplinaFragment(DisciplinaFragment disciplinaFragment) {
+		this.disciplinaFragment = disciplinaFragment;
+	}
+
+	public ProvaFragment getProvaFragment() {
+		return provaFragment;
+	}
+
+	public void setProvaFragment(ProvaFragment provaFragment) {
+		this.provaFragment = provaFragment;
+	}
+
+	public TurmaFragment getTurmaFragment() {
+		return turmaFragment;
+	}
+
+	public void setTurmaFragment(TurmaFragment turmaFragment) {
+		this.turmaFragment = turmaFragment;
+	}
+
 	private class AlunoSyncListener implements SyncListener<Aluno> {
 
 		@Override
 		public void downloadAllComplete(Collection<Aluno> entities) {
-			// TODO Auto-generated method stub
-
+			getAlunoFragment().setAlunos(entities);
 		}
 
 		@Override
 		public void downloadComplete(Aluno downloadedEntity) {
-			// TODO Auto-generated method stub
-
+			getAlunoFragment().reloadTable();
 		}
 
 		@Override
 		public void uploadComplete(Aluno uploadedEntity) {
-			// TODO Auto-generated method stub
-
+			getAlunoFragment().updateAluno(uploadedEntity);
 		}
 
 		@Override
@@ -304,5 +354,7 @@ public class Controller {
 
 		}
 	}
+
+
 
 }

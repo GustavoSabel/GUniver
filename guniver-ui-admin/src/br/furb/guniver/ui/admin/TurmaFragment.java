@@ -11,11 +11,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+@SuppressWarnings("serial")
 public class TurmaFragment extends Fragment {
 
 	private JTable tableTurmas;
+	private Controller controller;
 
-	public TurmaFragment() {
+	public TurmaFragment(Controller controller) {
+		this.controller = controller;
+		controller.setTurmaFragment(this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0 };

@@ -114,11 +114,11 @@ public class LateralMenu extends JPanel {
 		gbc_btnWebServices.gridy = 5;
 		add(btnWebServices, gbc_btnWebServices);
 
-		fragmentAluno = new AlunoFragment();
-		fragmentCurso = new CursoFragment();
-		fragmentDisciplina = new DisciplinaFragment();
-		fragmentTurma = new TurmaFragment();
-		fragmentProva = new ProvaFragment();
+		fragmentAluno = new AlunoFragment(controller);
+		fragmentCurso = new CursoFragment(controller);
+		fragmentDisciplina = new DisciplinaFragment(controller);
+		fragmentTurma = new TurmaFragment(controller);
+		fragmentProva = new ProvaFragment(controller);
 		fragmentWebServices = new WebServicesFragment(controller);
 
 		switchToFragment(fragmentWebServices);

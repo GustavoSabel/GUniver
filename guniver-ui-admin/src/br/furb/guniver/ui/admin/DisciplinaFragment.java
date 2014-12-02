@@ -9,11 +9,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+@SuppressWarnings("serial")
 public class DisciplinaFragment extends Fragment {
 
 	private JTable tableDisciplinas;
+	private Controller controller;
 
-	public DisciplinaFragment() {
+	public DisciplinaFragment(Controller controller) {
+		this.controller = controller;
+		controller.setDisciplinaFragment(this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0 };
