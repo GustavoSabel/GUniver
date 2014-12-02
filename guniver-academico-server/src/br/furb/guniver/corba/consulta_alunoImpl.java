@@ -36,7 +36,7 @@ class consulta_alunoImpl extends IAcademicoPOA {
     @Override
     public Matricula getMatricula(int codigoAluno, int codigoDisciplina) {
 
-	System.out.println("Executado getMatricula(Aluno aluno, Disciplina disciplina)");
+	System.out.println("Executado Matricula getMatricula(int codigoAluno, int codigoDisciplina)");
 	
 	// Não pode retorna NULL se não encontrar a matricula
 	Matricula matriculaDisci = new Matricula(new Aluno(0, ""), new Turma(0, (short) 0, (short) 0,
