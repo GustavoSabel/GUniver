@@ -21,6 +21,10 @@ public class Controller {
 	private Collection<Disciplina> disciplinas;
 	private Collection<Turma> turma;
 
+	public Controller() {
+		synchronizers = new HashMap<Class<?>, EntitiesSynchronizer<?>>();
+	}
+
 	/**
 	 * 
 	 * @param synchronizers
@@ -29,18 +33,21 @@ public class Controller {
 	 *            respectivo sincronizador.
 	 */
 	public Controller(Map<Class<?>, EntitiesSynchronizer<?>> synchronizers) {
+		setSynchronizers(synchronizers);
+	}
+
+	public void setSynchronizers(Map<Class<?>, EntitiesSynchronizer<?>> synchronizers) {
 		for (Class<?> entityClass : ENTITIES_CLASSES) {
 			EntitiesSynchronizer<?> synchronizer = synchronizers.get(entityClass);
-			if (synchronizer == null) {
-				throw new IllegalArgumentException(String.format("sincronizador para a entidade %s não informado", entityClass.getName()));
+			if (synchronizer != null) {
+				// TODO: adicionar listener
 			}
-			// TODO: adicionar listener
 			this.synchronizers.put(entityClass, synchronizer);
 		}
 	}
 
 	/**
-	 * Dispara requisições de sincronização para todos as entidades.<br>
+	 * Dispara requisições de sincronização para todas as entidades.<br>
 	 * Este método é assíncrono.
 	 */
 	public void synchronizeAll() {
@@ -64,6 +71,14 @@ public class Controller {
 
 	public void downloadTurma() {
 		synchronizers.get(Turma.class).downloadAll();
+	}
+	
+	private EntitiesSynchronizer<?> requireSynchronizer(Class<?> entityClass) {
+		EntitiesSynchronizer<?> synchronizer = synchronizers.get(entityClass);
+		if (synchronizer == null) {
+			throw new IllegalStateException(String.format("sincronizador da entidade %s não definido", entityClass.getName()));
+		}
+		return synchronizer;
 	}
 
 	public Map<Class<?>, EntitiesSynchronizer<?>> getSynchronizers() {

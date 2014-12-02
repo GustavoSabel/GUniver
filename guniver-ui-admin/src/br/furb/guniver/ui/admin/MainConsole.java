@@ -6,7 +6,6 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 
 import br.furb.guniver.ui.utils.UIUtils;
 
@@ -23,6 +22,7 @@ import br.furb.guniver.ui.utils.UIUtils;
 public class MainConsole {
 
 	private JFrame frmGuniverManager;
+	private Controller controller;
 
 	/**
 	 * Launch the application.
@@ -32,13 +32,9 @@ public class MainConsole {
 			@Override
 			public void run() {
 				try {
-					try {
-						UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-					} catch (Exception ex) {
-						ex.printStackTrace();
-					}
+					UIUtils.changeLookAndFeelIfPossible(UIUtils.SupportedLookAndFeel.SYSTEM_DEFAULT);
 
-					MainConsole window = new MainConsole();
+					MainConsole window = new MainConsole(new Controller());
 					UIUtils.centerOnScreen(window.frmGuniverManager);
 					window.frmGuniverManager.setVisible(true);
 				} catch (Exception e) {
@@ -51,7 +47,8 @@ public class MainConsole {
 	/**
 	 * Create the application.
 	 */
-	public MainConsole() {
+	public MainConsole(Controller controller) {
+		this.controller = controller;
 		initialize();
 	}
 
