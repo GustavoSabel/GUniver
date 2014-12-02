@@ -1,29 +1,16 @@
 package br.furb.guniver.rmi;
 
-import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
-import br.furb.guniver.modelo.cadastro.Disciplina;
+import br.furb.guniver.modelo.Disciplina;
 
 public class DisciplinaServer extends UnicastRemoteObject implements DisciplinaRemote {
 
     public DisciplinaServer() throws RemoteException {
 	super();
     }
-
-    /*public static void main(String[] args) {
-	try {
-	    DisciplinaServer obj = new DisciplinaServer();
-	    Naming.rebind("//localhost/DisciplinaRemote", obj);
-	    
-	    System.out.println("Módulo Cadastro - RMI - Disciplina");
-	    System.out.println("Servidor aguardando requisicoes ....");
-	} catch (Exception ex) {
-	    System.out.println("Exception: " + ex.getMessage());
-	}
-    }*/
 
     @Override
     public List<Disciplina> buscarDisciplinas(int codCurso) throws RemoteException {

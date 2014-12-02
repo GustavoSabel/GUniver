@@ -3,7 +3,7 @@ package br.furb.guniver.rmi;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
-import br.furb.guniver.modelo.cadastro.Curso;
+import br.furb.guniver.modelo.Curso;
 
 public interface CursoRemote extends Remote {
 	

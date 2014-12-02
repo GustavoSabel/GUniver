@@ -1,10 +1,7 @@
 package br.furb.guniver.rmi;
 
 import java.rmi.Naming;
-import br.furb.guniver.modelo.cadastro.Aluno;
-import br.furb.guniver.modelo.cadastro.Curso;
-import br.furb.guniver.modelo.cadastro.Disciplina;
-import br.furb.guniver.modelo.cadastro.Turma;
+import br.furb.guniver.modelo.*;
 
 public class Client {
 

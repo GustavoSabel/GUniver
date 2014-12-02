@@ -9,6 +9,12 @@ public final class Matricula {
     }
 
     
+    public Matricula(Aluno aluno, Turma turma) {
+	this.aluno = aluno;
+	this.turma = turma;
+    }
+
+
     public Aluno getAluno() {
         return aluno;
     }

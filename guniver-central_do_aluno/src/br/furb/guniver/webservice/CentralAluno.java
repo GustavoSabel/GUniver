@@ -9,6 +9,7 @@ import br.furb.guniver.modelo.*;
 import br.furb.guniver.modelo.endereco.Endereco;
 import br.furb.guniver.modulo.Academico;
 import br.furb.guniver.modulo.Cadastro;
+import br.furb.guniver.modulo.ConversorAcademico;
 
 @WebService
 public class CentralAluno {
@@ -41,49 +42,49 @@ public class CentralAluno {
     @WebMethod
     public Collection<Prova> getProvas(int codigoAluno, int codigoTurma) throws Exception {
 	Academico academico = new Academico(Endereco.academico.getEndereco());
-	return Conversor.CastProvas(academico.getProvas(codigoAluno, codigoTurma));
+	return ConversorAcademico.castProvas(academico.getProvas(codigoAluno, codigoTurma));
     }
 
     @WebMethod
     public Collection<Matricula> getMatriculasAluno(int codigoAluno) throws Exception {
 	Academico academico = new Academico(Endereco.academico.getEndereco());
-	return Conversor.CastMatriculas(academico.getMatriculasAluno(codigoAluno));
+	return ConversorAcademico.castMatriculas(academico.getMatriculasAluno(codigoAluno));
     }
 
     @WebMethod
     public Collection<Matricula> getMatriculasTurma(int codigoTurma) throws Exception {
 	Academico academico = new Academico(Endereco.academico.getEndereco());
-	return Conversor.CastMatriculas(academico.getMatriculasTurma(codigoTurma));
+	return ConversorAcademico.castMatriculas(academico.getMatriculasTurma(codigoTurma));
     }
 
     @WebMethod
     public Collection<Horario> getHorarios(int codigoTurma) throws Exception {
 	Academico academico = new Academico(Endereco.academico.getEndereco());
-	return Conversor.CastHorarios(academico.getHorarios(codigoTurma));
+	return ConversorAcademico.castHorarios(academico.getHorarios(codigoTurma));
     }
     
     @WebMethod
     public List<Aluno> getAlunos() throws RemoteException {
-	return Conversor.CastAlunos(Cadastro.getInstancia().getAlunos());
+	return Cadastro.getInstancia().getAlunos();
     }
     
     @WebMethod
-    public List<Curso> getCursos(int codigoCurso) throws RemoteException {
-	return Conversor.CastCursos(Cadastro.getInstancia().getCursos(codigoCurso));
+    public Curso getCurso(int codigoCurso) throws RemoteException {
+	return Cadastro.getInstancia().getCurso(codigoCurso);
     }
     
     @WebMethod
     public List<Disciplina> getDisciplinas(int codigoCurso) throws RemoteException {
-	return Conversor.CastDisciplinas(Cadastro.getInstancia().getDisciplinas(codigoCurso));
+	return Cadastro.getInstancia().getDisciplinas(codigoCurso);
     }
     
     @WebMethod
     public List<Turma> getTurmas(int codigoAluno) throws RemoteException {
-	return Conversor.CastTurmas(Cadastro.getInstancia().getTurmas(codigoAluno));
+	return Cadastro.getInstancia().getTurmas(codigoAluno);
     }
     
     @WebMethod
     public List<Aluno> getAlunosTurma(int codigoTurma) throws RemoteException {
-	return Conversor.CastAlunos(Cadastro.getInstancia().getAlunosTurma(codigoTurma));
+	return Cadastro.getInstancia().getAlunosTurma(codigoTurma);
     }
 }

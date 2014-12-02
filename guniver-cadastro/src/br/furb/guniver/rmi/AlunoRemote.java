@@ -1,8 +1,9 @@
 package br.furb.guniver.rmi;
 
-import java.rmi.*;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
-import br.furb.guniver.modelo.cadastro.Aluno;
+import br.furb.guniver.modelo.Aluno;
 
 public interface AlunoRemote extends Remote {
 	public Aluno BuscarAluno(int codigo) throws RemoteException;

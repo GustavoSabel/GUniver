@@ -1,9 +1,9 @@
 package br.furb.guniver.rmi;
 
-import java.rmi.*;
-import java.rmi.server.*;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
-import br.furb.guniver.modelo.cadastro.Aluno;
+import br.furb.guniver.modelo.Aluno;
 
 public class AlunoServer extends UnicastRemoteObject implements AlunoRemote {
 
@@ -12,18 +12,6 @@ public class AlunoServer extends UnicastRemoteObject implements AlunoRemote {
     public AlunoServer() throws RemoteException {
 	super();
     }
-
-    /*public static void main(String[] args) {
-	try {
-	    AlunoServer obj = new AlunoServer();
-	    Naming.rebind("//localhost/AlunoRemote", obj);
-	    
-	    System.out.println("Módulo Cadastro - RMI - Aluno");
-	    System.out.println("Servidor aguardando requisicoes ....");
-	} catch (Exception ex) {
-	    System.out.println("Exception: " + ex.getMessage());
-	}
-    }*/
 
     public Aluno BuscarAluno(int codigo) throws RemoteException {
 	for (Aluno aluno : BancoDados.getIntancia().getAlunos()) {

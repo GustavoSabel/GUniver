@@ -1,14 +1,14 @@
 package br.furb.guniver.rmi;
 
-import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import br.furb.guniver.modelo.Aluno;
+import br.furb.guniver.modelo.Turma;
 import br.furb.guniver.modelo.academico.Matricula;
-import br.furb.guniver.modelo.cadastro.Aluno;
-import br.furb.guniver.modelo.cadastro.Turma;
 import br.furb.guniver.modelo.endereco.Endereco;
+import br.furb.guniver.modulo.Academico;
 
 public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
 
@@ -17,18 +17,6 @@ public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
     public TurmaServer() throws RemoteException {
 	super();
     }
-
-    /*public static void main(String[] args) {
-    try {
-        TurmaServer obj = new TurmaServer();
-        Naming.rebind("//localhost/TurmaRemote", obj);
-
-        System.out.println("Módulo Cadastro - RMI - Turma");
-        System.out.println("Servidor aguardando requisicoes ....");
-    } catch (Exception ex) {
-        System.out.println("Exception: " + ex.getMessage());
-    }
-    }*/
 
     @Override
     public List<Turma> getTurma(int codDisc, int ano, int semestre) throws RemoteException {
@@ -58,8 +46,8 @@ public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
 	try {
 	    List<Aluno> alunos = new ArrayList<Aluno>();
 
-	    Matricula[] matriculasAcademico = new br.furb.guniver.modelo.academico.Academico(
-		    Endereco.academico.getEndereco()).buscarMatriculas(new Turma(codTurma, null, 0, 0));
+	    Matricula[] matriculasAcademico = new Academico(Endereco.academico.getEndereco())
+		    .buscarMatriculas(new Turma(codTurma, null, 0, 0));
 
 	    System.out.println("Número de matriculas: " + matriculasAcademico.length);
 
@@ -82,8 +70,8 @@ public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
 	System.out.println("Executado BuscarTurmas(int codAluno)");
 	try {
 	    List<Turma> turmas = new ArrayList<Turma>();
-	    Matricula[] matriculasAcademico = new br.furb.guniver.modelo.academico.Academico(
-		    Endereco.academico.getEndereco()).buscarMatriculas(new Aluno(codAluno, ""));
+	    Matricula[] matriculasAcademico = new Academico(Endereco.academico.getEndereco())
+		    .buscarMatriculas(new Aluno(codAluno, ""));
 
 	    for (Matricula matricula : matriculasAcademico) {
 		Turma turma = BancoDados.getIntancia().getTurma(matricula.turma.codigo);

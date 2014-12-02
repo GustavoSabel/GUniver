@@ -11,4 +11,8 @@ cd..
 cd bin
 start java br.furb.guniver.webservice.PublicaService
 
-wsimport -keep -p pacote.cliente http://localhost:8080/centralAluno?wsdl
+cd..
+cd src
+wsimport -keep -p br.furb.guniver.cliente.stubs http://localhost:8080/centralAluno?wsdl
+
+cmd

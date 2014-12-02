@@ -3,7 +3,7 @@ package br.furb.guniver.rmi;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
-import br.furb.guniver.modelo.cadastro.Disciplina;
+import br.furb.guniver.modelo.Disciplina;
 
 public interface DisciplinaRemote extends Remote {
 	

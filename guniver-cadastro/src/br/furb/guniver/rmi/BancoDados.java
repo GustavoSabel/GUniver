@@ -2,10 +2,10 @@ package br.furb.guniver.rmi;
 
 import java.util.ArrayList;
 import java.util.List;
-import br.furb.guniver.modelo.cadastro.Aluno;
-import br.furb.guniver.modelo.cadastro.Curso;
-import br.furb.guniver.modelo.cadastro.Disciplina;
-import br.furb.guniver.modelo.cadastro.Turma;
+import br.furb.guniver.modelo.Aluno;
+import br.furb.guniver.modelo.Curso;
+import br.furb.guniver.modelo.Disciplina;
+import br.furb.guniver.modelo.Turma;
 
 public class BancoDados {
 
@@ -29,7 +29,7 @@ public class BancoDados {
 	return instacia;
     }
 
-    private void CargaInicial() {
+    private void cargaInicial() {
 	Curso curso = new Curso(1, "Ciencia da Computacao");
 	Disciplina disc = new Disciplina(1, "Banco de Dados", curso);
 	Aluno alunoGustavo = new Aluno(1, "Gustavo Sabel");

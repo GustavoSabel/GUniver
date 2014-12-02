@@ -3,10 +3,14 @@ package br.furb.guniver.modulo;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.List;
-import br.furb.guniver.modelo.cadastro.AlunoRemote;
-import br.furb.guniver.modelo.cadastro.CursoRemote;
-import br.furb.guniver.modelo.cadastro.DisciplinaRemote;
-import br.furb.guniver.modelo.cadastro.TurmaRemote;
+import br.furb.guniver.modelo.Aluno;
+import br.furb.guniver.modelo.Curso;
+import br.furb.guniver.modelo.Disciplina;
+import br.furb.guniver.modelo.Turma;
+import br.furb.guniver.rmi.AlunoRemote;
+import br.furb.guniver.rmi.CursoRemote;
+import br.furb.guniver.rmi.DisciplinaRemote;
+import br.furb.guniver.rmi.TurmaRemote;
 
 public class Cadastro {
 
@@ -38,23 +42,23 @@ public class Cadastro {
 	return cadastro;
     }
 
-    public List<br.furb.guniver.modelo.cadastro.Aluno> getAlunos() throws RemoteException {
+    public List<Aluno> getAlunos() throws RemoteException {
 	return alunoRemote.BuscarAlunos();
     }
 
-    public br.furb.guniver.modelo.cadastro.Curso getCursos(int codigoCurso) throws RemoteException {
+    public Curso getCurso(int codigoCurso) throws RemoteException {
 	return cursoRemote.buscarCurso(codigoCurso);
     }
 
-    public List<br.furb.guniver.modelo.cadastro.Disciplina> getDisciplinas(int codigoCurso) throws RemoteException {
+    public List<Disciplina> getDisciplinas(int codigoCurso) throws RemoteException {
 	return disciplinaRemote.buscarDisciplinas(codigoCurso);
     }
 
-    public List<br.furb.guniver.modelo.cadastro.Turma> getTurmas(int codigoAluno) throws RemoteException {
+    public List<Turma> getTurmas(int codigoAluno) throws RemoteException {
 	return turmaRemote.BuscarTurmas(codigoAluno);
     }
 
-    public List<br.furb.guniver.modelo.cadastro.Aluno> getAlunosTurma(int codigoTurma) throws RemoteException {
+    public List<Aluno> getAlunosTurma(int codigoTurma) throws RemoteException {
 	return turmaRemote.BuscarAlunosTurma(codigoTurma);
     }
 }

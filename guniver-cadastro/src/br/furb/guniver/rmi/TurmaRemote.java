@@ -3,8 +3,8 @@ package br.furb.guniver.rmi;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
-import br.furb.guniver.modelo.cadastro.Aluno;
-import br.furb.guniver.modelo.cadastro.Turma;
+import br.furb.guniver.modelo.Aluno;
+import br.furb.guniver.modelo.Turma;
 
 public interface TurmaRemote extends Remote {
 	
