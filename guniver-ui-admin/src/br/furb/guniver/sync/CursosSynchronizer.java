@@ -19,9 +19,9 @@ public class CursosSynchronizer extends EntitiesSynchronizer<Curso> {
 	}
 
 	@Override
-	protected void doDownloadAll() {
+	protected Collection<Curso> doDownloadAll() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override

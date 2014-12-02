@@ -18,9 +18,9 @@ public class TurmasSynchronizer extends EntitiesSynchronizer<Turma> {
 	}
 
 	@Override
-	protected void doDownloadAll() {
+	protected Collection<Turma> doDownloadAll() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override

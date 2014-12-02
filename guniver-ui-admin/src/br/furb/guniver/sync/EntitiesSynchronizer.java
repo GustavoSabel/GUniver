@@ -1,5 +1,6 @@
 package br.furb.guniver.sync;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.Future;
@@ -22,6 +23,7 @@ public abstract class EntitiesSynchronizer<EntityType> {
 		}
 		this.executor = executor;
 		this.moduleUrl = moduleUrl;
+		this.syncListeners = new ArrayList<>();
 	}
 
 	public String getModuleUrl() {
@@ -49,6 +51,7 @@ public abstract class EntitiesSynchronizer<EntityType> {
 			@Override
 			void doTask(EntityType parameter) {
 				doDownload(parameter);
+				fireDownloadComplete(parameter);
 			}
 		};
 
@@ -59,7 +62,7 @@ public abstract class EntitiesSynchronizer<EntityType> {
 		SynchronizerTask<Void> downloadAllTask = new SynchronizerTask<Void>() {
 			@Override
 			void doTask(Void parameter) {
-				doDownloadAll();
+				fireDownloadAllComplete(doDownloadAll());
 			}
 		};
 
@@ -71,6 +74,7 @@ public abstract class EntitiesSynchronizer<EntityType> {
 			@Override
 			void doTask(EntityType parameter) {
 				doUpload(parameter);
+				fireUploadComplete(parameter);
 			}
 		};
 
@@ -82,6 +86,9 @@ public abstract class EntitiesSynchronizer<EntityType> {
 			@Override
 			void doTask(Collection<EntityType> parameter) {
 				doUploadAll(parameter);
+				for (EntityType p : parameter) {
+					fireUploadComplete(p);
+				}
 			}
 		};
 
@@ -115,7 +122,7 @@ public abstract class EntitiesSynchronizer<EntityType> {
 
 	protected abstract void doDownload(EntityType entityAccessor);
 
-	protected abstract void doDownloadAll();
+	protected abstract Collection<EntityType> doDownloadAll();
 
 	protected abstract void doUpload(EntityType entity);
 
@@ -152,8 +159,12 @@ public abstract class EntitiesSynchronizer<EntityType> {
 	}
 
 	protected void fireSyncFailed(Throwable reason) {
-		for (SyncListener<EntityType> syncListener : syncListeners) {
-			syncListener.syncFailed(reason);
+		if (syncListeners.isEmpty()) {
+			reason.printStackTrace();
+		} else {
+			for (SyncListener<EntityType> syncListener : syncListeners) {
+				syncListener.syncFailed(reason);
+			}
 		}
 	}
 
