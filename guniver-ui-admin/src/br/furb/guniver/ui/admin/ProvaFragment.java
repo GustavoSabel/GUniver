@@ -79,13 +79,13 @@ public class ProvaFragment extends Fragment {
 					int row = e.getFirstRow();
 					int col = e.getColumn();
 					Prova prova;
-					boolean newAluno;
+					boolean newProva;
 					if (row == provas.size()) {
 						prova = new Prova();
-						newAluno = true;
+						newProva = true;
 					} else {
 						prova = provas.get(row);
-						newAluno = false;
+						newProva = false;
 					}
 					Object newValue = dataModel.getValueAt(row, col);
 					Object oldValue;
@@ -103,7 +103,7 @@ public class ProvaFragment extends Fragment {
 						break;
 					}
 					if (!newValue.equals(oldValue)) {
-						if (newAluno) {
+						if (newProva) {
 							provas.add(prova);
 							reloadTable();
 						}
@@ -118,7 +118,7 @@ public class ProvaFragment extends Fragment {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				int index = e.getFirstIndex();
-				if (index < 0) {
+				if (index < 0 || index >= provas.size()) {
 					selectedProva = null;
 				} else {
 					selectedProva = provas.get(index);
@@ -180,8 +180,8 @@ public class ProvaFragment extends Fragment {
 
 		for (Prova p : provas) {
 			Vector<Object> row = new Vector<>();
-			row.add(p.getAluno().getNome());
-			row.add(p.getTurma().getCodigo());
+			row.add(p.getAluno() == null ? "--" : p.getAluno().getNome());
+			row.add(p.getTurma() == null ? "--" : p.getTurma().getCodigo());
 			row.add(p.getNota());
 			row.add(p.getDescricao());
 			dataVector.add(row);

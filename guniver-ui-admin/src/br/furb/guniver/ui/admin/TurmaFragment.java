@@ -20,6 +20,8 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import br.furb.guniver.modelo.Disciplina;
@@ -61,7 +63,58 @@ public class TurmaFragment extends Fragment {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return column != 3;
+			}
 		};
+
+		dataModel.addTableModelListener(new TableModelListener() {
+
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				if (!fChangingData && e.getType() == TableModelEvent.UPDATE) {
+					int row = e.getFirstRow();
+					int col = e.getColumn();
+					Turma turma;
+					boolean newTurma;
+					if (row == turmas.size()) {
+						turma = new Turma(0, null, 0, 0);
+						newTurma = true;
+					} else {
+						turma = turmas.get(row);
+						newTurma = false;
+					}
+					Object newValue = dataModel.getValueAt(row, col);
+					Object oldValue;
+					switch (col) {
+					case 0:
+						oldValue = turma.getCodigo();
+						turma.setCodigo(((Long) newValue).intValue());
+						break;
+					case 1:
+						oldValue = turma.getAno();
+						turma.setAno((Short) newValue);
+						break;
+					case 2:
+						oldValue = turma.getSemestre();
+						turma.setSemestre((Byte) newValue);
+						break;
+					default:
+						oldValue = new Object(); // always different
+						break;
+					}
+					if (!newValue.equals(oldValue)) {
+						if (newTurma) {
+							turmas.add(turma);
+							reloadTable();
+						}
+						TurmaFragment.this.controller.uploadTurma(turma);
+					}
+				}
+			}
+		});
 		tableTurmas.setModel(dataModel);
 
 		DefaultListSelectionModel selModel = new DefaultListSelectionModel();
@@ -70,7 +123,7 @@ public class TurmaFragment extends Fragment {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				int index = e.getFirstIndex();
-				if (index < 0) {
+				if (index < 0 || index >= turmas.size()) {
 					selectedTurma = null;
 				} else {
 					selectedTurma = turmas.get(index);

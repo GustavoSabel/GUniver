@@ -21,7 +21,6 @@ import br.furb.guniver.modelo.Disciplina;
 import br.furb.guniver.modelo.Prova;
 import br.furb.guniver.modelo.Turma;
 import br.furb.guniver.sync.AlunosSynchronizer;
-import br.furb.guniver.sync.CursosSynchronizer;
 import br.furb.guniver.sync.DisciplinasSynchronizer;
 import br.furb.guniver.sync.EntitiesSynchronizer;
 import br.furb.guniver.sync.ProvasSynchronizer;
@@ -96,7 +95,6 @@ public class Controller {
 	 */
 	public void downloadAll() {
 		downloadAlunos();
-		downloadCursos();
 		downloadDisciplinas();
 		downloadProva();
 		downloadTurma();
@@ -138,6 +136,10 @@ public class Controller {
 
 	public void downloadTurma() {
 		requireSynchronizer(Turma.class).downloadAll();
+	}
+
+	public void uploadTurma(Turma turma) {
+		requireSynchronizer(Turma.class).upload(turma);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -416,4 +418,5 @@ public class Controller {
 				"Cancelar", "Escolher" }, "Cancelar");
 		return selectionFragment.getSelectedDisciplina();
 	}
+
 }
