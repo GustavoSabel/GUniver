@@ -20,12 +20,10 @@ public class WebServicesFragment extends Fragment {
 
 	private JTextField txtAcademico;
 	private JTextField txtCadastro;
-	private JTextField txtCentralDoAluno;
-	private JTextField txtFinanceiro;
 	private Controller controller;
 
-	private JTextField[] urlFields;
-	private String[] originalUrls = new String[4];
+	private final JTextField[] urlFields;
+	private String[] originalUrls = new String[2];
 
 	public WebServicesFragment(Controller controller) {
 		this.controller = controller;
@@ -84,39 +82,6 @@ public class WebServicesFragment extends Fragment {
 		panel.add(txtCadastro, gbc_txtCadastro);
 		txtCadastro.setColumns(10);
 
-		JLabel lblCentralDoAluno = new JLabel("Central do Aluno");
-		GridBagConstraints gbc_lblCentralDoAluno = new GridBagConstraints();
-		gbc_lblCentralDoAluno.anchor = GridBagConstraints.EAST;
-		gbc_lblCentralDoAluno.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCentralDoAluno.gridx = 0;
-		gbc_lblCentralDoAluno.gridy = 2;
-		panel.add(lblCentralDoAluno, gbc_lblCentralDoAluno);
-
-		txtCentralDoAluno = new JTextField();
-		GridBagConstraints gbc_txtCentraldoaluno = new GridBagConstraints();
-		gbc_txtCentraldoaluno.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtCentraldoaluno.insets = new Insets(0, 0, 5, 0);
-		gbc_txtCentraldoaluno.gridx = 1;
-		gbc_txtCentraldoaluno.gridy = 2;
-		panel.add(txtCentralDoAluno, gbc_txtCentraldoaluno);
-		txtCentralDoAluno.setColumns(10);
-
-		JLabel lblFinanceiro = new JLabel("Financeiro:");
-		GridBagConstraints gbc_lblFinanceiro = new GridBagConstraints();
-		gbc_lblFinanceiro.anchor = GridBagConstraints.EAST;
-		gbc_lblFinanceiro.insets = new Insets(0, 0, 0, 5);
-		gbc_lblFinanceiro.gridx = 0;
-		gbc_lblFinanceiro.gridy = 3;
-		panel.add(lblFinanceiro, gbc_lblFinanceiro);
-
-		txtFinanceiro = new JTextField();
-		GridBagConstraints gbc_txtFinanceiro = new GridBagConstraints();
-		gbc_txtFinanceiro.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtFinanceiro.gridx = 1;
-		gbc_txtFinanceiro.gridy = 3;
-		panel.add(txtFinanceiro, gbc_txtFinanceiro);
-		txtFinanceiro.setColumns(10);
-
 		JPanel panelAcoes = new JPanel();
 		GridBagConstraints gbc_panelAcoes = new GridBagConstraints();
 		gbc_panelAcoes.insets = new Insets(0, 0, 5, 0);
@@ -144,7 +109,7 @@ public class WebServicesFragment extends Fragment {
 		});
 		panelAcoes.add(btnAtualizar);
 
-		urlFields = new JTextField[] { txtAcademico, txtCadastro, txtCentralDoAluno, txtFinanceiro };
+		urlFields = new JTextField[] { txtAcademico, txtCadastro };
 	}
 
 	@Override
@@ -189,9 +154,7 @@ public class WebServicesFragment extends Fragment {
 				String[] urls = readURLs();
 				controller.changeUrls( //
 						urls[0], // Academico
-						urls[1], // Cadastro
-						urls[2], // Central do aluno
-						urls[3]);// Financeiro
+						urls[1]);// Cadastro
 			}
 		}
 	}
