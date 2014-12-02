@@ -17,6 +17,12 @@ import javax.swing.border.EtchedBorder;
 @SuppressWarnings("serial")
 public class LateralMenu extends JPanel {
 
+	private final AlunoFragment fragmentAluno;
+	private final CursoFragment fragmentCurso;
+	private final DisciplinaFragment fragmentDisciplina;
+	private final TurmaFragment fragmentTurma;
+	private final WebServicesFragment fragmentWebServices;
+
 	private JPanel stage;
 	private JButton btnAluno;
 	private JButton btnCurso;
@@ -26,59 +32,79 @@ public class LateralMenu extends JPanel {
 	private Fragment activeFragment;
 
 	public LateralMenu(JPanel stage) {
+		Font buttonsFont = new Font("Segoe UI Semibold", Font.PLAIN, 18);
+		Dimension buttonsPreferredSize = new Dimension(150, 40);
+
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		setStage(stage);
 		setBackground(SystemColor.controlHighlight);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 75, 0 };
-		gridBagLayout.rowHeights = new int[] { 23, 23, 23, 23, 0 };
+		gridBagLayout.rowHeights = new int[] { 23, 23, 23, 23, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		btnAluno = new JButton("Aluno");
-		btnAluno.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 18));
-		btnAluno.setPreferredSize(new Dimension(140, 40));
+		btnAluno.setFont(buttonsFont);
+		btnAluno.setPreferredSize(buttonsPreferredSize);
 		btnAluno.addActionListener(actionListener);
 		GridBagConstraints gbc_btnAluno = new GridBagConstraints();
 		gbc_btnAluno.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnAluno.insets = new Insets(2, 2, 2, 2);
+		gbc_btnAluno.insets = new Insets(2, 2, 1, 2);
 		gbc_btnAluno.gridx = 0;
 		gbc_btnAluno.gridy = 0;
 		add(btnAluno, gbc_btnAluno);
 
 		btnCurso = new JButton("Curso");
-		btnCurso.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 18));
-		btnCurso.setPreferredSize(new Dimension(140, 40));
+		btnCurso.setFont(buttonsFont);
+		btnCurso.setPreferredSize(buttonsPreferredSize);
 		btnCurso.addActionListener(actionListener);
 		GridBagConstraints gbc_btnCurso = new GridBagConstraints();
 		gbc_btnCurso.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnCurso.insets = new Insets(0, 2, 2, 2);
+		gbc_btnCurso.insets = new Insets(0, 2, 1, 2);
 		gbc_btnCurso.gridx = 0;
 		gbc_btnCurso.gridy = 1;
 		add(btnCurso, gbc_btnCurso);
 
 		btnDisciplina = new JButton("Disciplina");
-		btnDisciplina.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 18));
-		btnDisciplina.setPreferredSize(new Dimension(140, 40));
+		btnDisciplina.setFont(buttonsFont);
+		btnDisciplina.setPreferredSize(buttonsPreferredSize);
 		btnDisciplina.addActionListener(actionListener);
 		GridBagConstraints gbc_btnDisciplina = new GridBagConstraints();
 		gbc_btnDisciplina.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnDisciplina.insets = new Insets(0, 2, 2, 2);
+		gbc_btnDisciplina.insets = new Insets(0, 2, 1, 2);
 		gbc_btnDisciplina.gridx = 0;
 		gbc_btnDisciplina.gridy = 2;
 		add(btnDisciplina, gbc_btnDisciplina);
 
 		btnTurma = new JButton("Turma");
-		btnTurma.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 18));
-		btnTurma.setPreferredSize(new Dimension(140, 40));
+		btnTurma.setFont(buttonsFont);
+		btnTurma.setPreferredSize(buttonsPreferredSize);
 		btnTurma.addActionListener(actionListener);
 		GridBagConstraints gbc_btnTurma = new GridBagConstraints();
-		gbc_btnTurma.insets = new Insets(0, 2, 2, 2);
+		gbc_btnTurma.insets = new Insets(0, 2, 1, 2);
 		gbc_btnTurma.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnTurma.gridx = 0;
 		gbc_btnTurma.gridy = 3;
 		add(btnTurma, gbc_btnTurma);
+
+		btnWebServices = new JButton("Web Services");
+		btnWebServices.setPreferredSize(buttonsPreferredSize);
+		btnWebServices.setFont(buttonsFont);
+		btnWebServices.addActionListener(actionListener);
+		GridBagConstraints gbc_btnWebServices = new GridBagConstraints();
+		gbc_btnWebServices.insets = new Insets(0, 2, 1, 2);
+		gbc_btnWebServices.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnWebServices.gridx = 0;
+		gbc_btnWebServices.gridy = 4;
+		add(btnWebServices, gbc_btnWebServices);
+
+		fragmentAluno = new AlunoFragment();
+		fragmentCurso = new CursoFragment();
+		fragmentDisciplina = new DisciplinaFragment();
+		fragmentTurma = new TurmaFragment();
+		fragmentWebServices = new WebServicesFragment();
 	}
 
 	private ActionListener actionListener = new ActionListener() {
@@ -88,19 +114,22 @@ public class LateralMenu extends JPanel {
 			JButton src = (JButton) e.getSource();
 			Fragment fragment;
 			if (src == btnAluno) {
-				fragment = new AlunoFragment();
+				fragment = fragmentAluno;
 			} else if (src == btnCurso) {
-				fragment = new CursoFragment();
+				fragment = fragmentCurso;
 			} else if (src == btnDisciplina) {
-				fragment = new DisciplinaFragment();
+				fragment = fragmentDisciplina;
 			} else if (src == btnTurma) {
-				fragment = new TurmaFragment();
+				fragment = fragmentTurma;
+			} else if (src == btnWebServices) {
+				fragment = fragmentWebServices;
 			} else {
 				return;
 			}
 			switchToFragment(fragment);
 		}
 	};
+	private JButton btnWebServices;
 
 	private void switchToFragment(Fragment fragment) {
 		if (activeFragment == fragment || (activeFragment != null && !activeFragment.canExit())) {
