@@ -15,4 +15,6 @@ public interface DisciplinaRemote extends Remote {
 
     public Disciplina getDisciplina(int codDisciplina) throws RemoteException;
 
+    public List<Disciplina> getDisciplinasAll() throws RemoteException;
+
 }

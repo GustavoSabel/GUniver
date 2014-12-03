@@ -67,4 +67,9 @@ public class DisciplinaServer extends UnicastRemoteObject implements DisciplinaR
 	return null;
     }
 
+	@Override
+	public List<Disciplina> getDisciplinasAll() throws RemoteException {
+		return BancoDados.getIntancia().getDisciplina();
+	}
+
 }
