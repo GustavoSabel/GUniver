@@ -1,8 +1,10 @@
 package br.furb.guniver.ui.portal;
 
+import java.awt.Component;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -10,9 +12,15 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 
 import br.furb.guniver.central_do_aluno.stubs.Aluno;
+import br.furb.guniver.central_do_aluno.stubs.Horario;
+import br.furb.guniver.central_do_aluno.stubs.Prova;
+import br.furb.guniver.central_do_aluno.stubs.Turma;
 import br.furb.guniver.sync.AlunosSynchronizer;
 import br.furb.guniver.sync.AuthenticationException;
+import br.furb.guniver.sync.HorariosSynchronizer;
+import br.furb.guniver.sync.ProvasSynchronizer;
 import br.furb.guniver.sync.SyncListener;
+import br.furb.guniver.sync.TurmasSynchronizer;
 import br.furb.guniver.ui.utils.UIUtils;
 
 public class PortalController {
@@ -21,10 +29,15 @@ public class PortalController {
 
 	private String webServiceUrl;
 	private LoginWindow loginWindow;
-	private AlunosSynchronizer $alunosSynchronizer;
-	private Aluno loggedUser;
-
 	private MainWindow mainWindow;
+
+	private AlunosSynchronizer $alunosSynchronizer;
+	private HorariosSynchronizer $horariosSynchronizer;
+	private ProvasSynchronizer $provasSynchronizer;
+	private TurmasSynchronizer $turmasSynchronizer;
+
+	private Aluno loggedUser;
+	private Collection<Turma> turmas = new LinkedList<>();
 
 	public PortalController() {
 		String hostAddress;
@@ -45,14 +58,31 @@ public class PortalController {
 	public void setWebServiceUrl(String webServiceUrl) {
 		this.webServiceUrl = webServiceUrl;
 		if ($alunosSynchronizer != null) {
-			$alunosSynchronizer.removeSyncListener(alunosListener);
 			$alunosSynchronizer.removeSyncListener(loginListener);
 			$alunosSynchronizer.stop();
+		}
+		if ($horariosSynchronizer != null) {
+			$horariosSynchronizer.removeSyncListener(horariosListener);
+			$horariosSynchronizer.stop();
+		}
+		if ($provasSynchronizer != null) {
+			$provasSynchronizer.removeSyncListener(provasListener);
+			$provasSynchronizer.stop();
+		}
+		if ($turmasSynchronizer != null) {
+			$turmasSynchronizer.removeSyncListener(turmasListener);
+			$turmasSynchronizer.stop();
 		}
 
 		ThreadPoolExecutor executor = new ThreadPoolExecutor(THREAD_POOL_MAX_SIZE, THREAD_POOL_MAX_SIZE, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>());
 		$alunosSynchronizer = new AlunosSynchronizer(webServiceUrl, executor);
-		$alunosSynchronizer.addSyncListener(alunosListener);
+		$horariosSynchronizer = new HorariosSynchronizer(webServiceUrl, executor);
+		$provasSynchronizer = new ProvasSynchronizer(webServiceUrl, executor);
+		$turmasSynchronizer = new TurmasSynchronizer(webServiceUrl, executor);
+
+		$alunosSynchronizer.addSyncListener(loginListener);
+		$provasSynchronizer.addSyncListener(provasListener);
+		$turmasSynchronizer.addSyncListener(turmasListener);
 	}
 
 	public void setLoginWindow(LoginWindow loginWindow) {
@@ -78,6 +108,27 @@ public class PortalController {
 		return $alunosSynchronizer;
 	}
 
+	public HorariosSynchronizer getHorariosSynchronizer() {
+		if ($horariosSynchronizer == null) {
+			throw new IllegalStateException("sincronizador de Horários não definido");
+		}
+		return $horariosSynchronizer;
+	}
+
+	public ProvasSynchronizer getProvasSynchronizer() {
+		if ($provasSynchronizer == null) {
+			throw new IllegalStateException("sincronizador de Provas não definido");
+		}
+		return $provasSynchronizer;
+	}
+
+	public TurmasSynchronizer getTurmasSynchronizer() {
+		if ($turmasSynchronizer == null) {
+			throw new IllegalStateException("sincronizador de Turmas não definido");
+		}
+		return $turmasSynchronizer;
+	}
+
 	public void login(String username, String password) {
 		Aluno aluno = new Aluno();
 		aluno.setNomeUsuario(username);
@@ -91,6 +142,14 @@ public class PortalController {
 		this.loggedUser = loggedUser;
 	}
 
+	public void showError(Throwable err) {
+		Component parent = getMainWindow();
+		if (parent == null) {
+			parent = getLoginWindow();
+		}
+		UIUtils.showError(parent, err);
+	}
+
 	public Aluno getLoggedUser() {
 		return loggedUser;
 	}
@@ -101,7 +160,6 @@ public class PortalController {
 		public void downloadComplete(Aluno downloadedEntity) {
 			getAlunosSynchronizer().removeSyncListener(this);
 			setLoggedUser(downloadedEntity);
-			getAlunosSynchronizer().addSyncListener(alunosListener);
 			getLoginWindow().dispose();
 			setLoginWindow(null);
 
@@ -109,6 +167,7 @@ public class PortalController {
 			mainWindow.setAluno(downloadedEntity);
 			UIUtils.centerOnScreen(mainWindow);
 			mainWindow.setVisible(true);
+			getTurmasSynchronizer().downloadAllByAluno(downloadedEntity);
 		}
 
 		@Override
@@ -131,10 +190,22 @@ public class PortalController {
 
 	};
 
-	private SyncListener<Aluno> alunosListener = new SyncListener<Aluno>() {
+	private SyncListener<Horario> horariosListener = new SyncListener<Horario>() {
 
 		@Override
-		public void uploadComplete(Aluno uploadedEntity) {
+		public void downloadAllComplete(Collection<Horario> entities) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void downloadComplete(Horario downloadedEntity) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void uploadComplete(Horario uploadedEntity) {
 			// TODO Auto-generated method stub
 
 		}
@@ -145,17 +216,67 @@ public class PortalController {
 
 		}
 
+	};
+
+	private SyncListener<Prova> provasListener = new SyncListener<Prova>() {
+
 		@Override
-		public void downloadComplete(Aluno downloadedEntity) {
+		public void downloadAllComplete(Collection<Prova> entities) {
 			// TODO Auto-generated method stub
 
 		}
 
 		@Override
-		public void downloadAllComplete(Collection<Aluno> entities) {
+		public void downloadComplete(Prova downloadedEntity) {
 			// TODO Auto-generated method stub
 
+		}
+
+		@Override
+		public void uploadComplete(Prova uploadedEntity) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void syncFailed(Throwable reason) {
+			// TODO Auto-generated method stub
+
+		}
+
+	};
+
+	private SyncListener<Turma> turmasListener = new SyncListener<Turma>() {
+
+		@Override
+		public void downloadAllComplete(Collection<Turma> entities) {
+			turmas.clear();
+			turmas.addAll(entities);
+			mainWindow.setTurmas(entities);
+		}
+
+		@Override
+		public void downloadComplete(Turma downloadedEntity) {
+			mainWindow.updateTurma(downloadedEntity);
+		}
+
+		@Override
+		public void uploadComplete(Turma uploadedEntity) {
+			mainWindow.updateTurma(uploadedEntity);
+		}
+
+		@Override
+		public void syncFailed(Throwable reason) {
+			showError(reason);
 		}
 	};
+
+	public void downloadProvas(Turma turma, Aluno aluno) {
+		getProvasSynchronizer().downloadAllByTurmaAndAluno(turma, aluno);
+	}
+
+	public void downloadHorario(Turma turma) {
+		getHorariosSynchronizer().downloadAllByTurma(turma);
+	}
 
 }
