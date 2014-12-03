@@ -22,6 +22,8 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class UIUtils {
 
+	public static String ERROR_TITLE = "Ops!";
+
 	/**
 	 * LookAndFeel suportado pela API.
 	 * 
@@ -96,7 +98,7 @@ public class UIUtils {
 	}
 
 	public static void showError(Component parent, Throwable t) {
-		JOptionPane.showMessageDialog(parent, generateMessage(t), "Erro", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(parent, generateMessage(t), ERROR_TITLE, JOptionPane.ERROR_MESSAGE);
 	}
 
 	private static JPanel generateMessage(Throwable t) {

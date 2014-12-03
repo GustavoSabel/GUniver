@@ -1,18 +1,28 @@
 package br.furb.guniver.ui.portal;
 
 import java.util.Collection;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.JOptionPane;
 
 import br.furb.guniver.central_do_aluno.stubs.Aluno;
 import br.furb.guniver.sync.AlunosSynchronizer;
+import br.furb.guniver.sync.AuthenticationException;
 import br.furb.guniver.sync.SyncListener;
 import br.furb.guniver.ui.utils.UIUtils;
 
 public class PortalController {
 
+	public static int THREAD_POOL_MAX_SIZE = 5;
+
 	private String webServiceUrl;
 	private LoginWindow loginWindow;
 	private AlunosSynchronizer $alunosSynchronizer;
 	private Aluno loggedUser;
+
+	private MainWindow mainWindow;
 
 	public PortalController() {
 		// TODO Auto-generated constructor stub
@@ -24,6 +34,15 @@ public class PortalController {
 
 	public void setWebServiceUrl(String webServiceUrl) {
 		this.webServiceUrl = webServiceUrl;
+		if ($alunosSynchronizer != null) {
+			$alunosSynchronizer.removeSyncListener(alunosListener);
+			$alunosSynchronizer.removeSyncListener(loginListener);
+			$alunosSynchronizer.stop();
+		}
+
+		ThreadPoolExecutor executor = new ThreadPoolExecutor(THREAD_POOL_MAX_SIZE, THREAD_POOL_MAX_SIZE, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>());
+		$alunosSynchronizer = new AlunosSynchronizer(webServiceUrl, executor);
+		$alunosSynchronizer.addSyncListener(alunosListener);
 	}
 
 	public void setLoginWindow(LoginWindow loginWindow) {
@@ -34,9 +53,17 @@ public class PortalController {
 		return loginWindow;
 	}
 
+	public void setMainWindow(MainWindow mainWindow) {
+		this.mainWindow = mainWindow;
+	}
+
+	public MainWindow getMainWindow() {
+		return mainWindow;
+	}
+
 	private AlunosSynchronizer getAlunosSynchronizer() {
 		if ($alunosSynchronizer == null) {
-			throw new IllegalStateException("");
+			throw new IllegalStateException("sincronizador de Alunos não definido");
 		}
 		return $alunosSynchronizer;
 	}
@@ -65,13 +92,23 @@ public class PortalController {
 			getAlunosSynchronizer().removeSyncListener(this);
 			setLoggedUser(downloadedEntity);
 			getAlunosSynchronizer().addSyncListener(alunosListener);
-			// TODO
+			getLoginWindow().dispose();
+			setLoginWindow(null);
+
+			MainWindow mainWindow = new MainWindow(PortalController.this);
+			mainWindow.setAluno(downloadedEntity);
+			UIUtils.centerOnScreen(mainWindow);
+			mainWindow.setVisible(true);
 		}
 
 		@Override
 		public void syncFailed(Throwable reason) {
 			getAlunosSynchronizer().removeSyncListener(this);
-			UIUtils.showError(getLoginWindow(), reason);
+			if (reason instanceof AuthenticationException) {
+				UIUtils.showMessage(getLoginWindow(), reason.getMessage(), "Ops!", JOptionPane.ERROR_MESSAGE);
+			} else {
+				UIUtils.showError(getLoginWindow(), reason);
+			}
 		}
 
 		@Override

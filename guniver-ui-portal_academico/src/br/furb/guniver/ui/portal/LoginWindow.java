@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import br.furb.guniver.ui.utils.UIUtils;
@@ -30,6 +31,7 @@ public class LoginWindow extends JFrame {
 	private JTextField txtUsuario;
 	private JPasswordField pwdPassword;
 	private PortalController controller;
+	private JLabel lblWebServiceUrl;
 
 	/**
 	 * Launch the application.
@@ -67,13 +69,21 @@ public class LoginWindow extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		JPanel panelCenter = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panelCenter.getLayout();
-		flowLayout_1.setVgap(0);
-		flowLayout_1.setHgap(0);
 		contentPane.add(panelCenter);
+		GridBagLayout gbl_panelCenter = new GridBagLayout();
+		gbl_panelCenter.columnWidths = new int[] { 0, 131, 0, 0 };
+		gbl_panelCenter.rowHeights = new int[] { 130, 0, 0 };
+		gbl_panelCenter.columnWeights = new double[] { 1.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panelCenter.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
+		panelCenter.setLayout(gbl_panelCenter);
 
 		JPanel panelLogin = new JPanel();
-		panelCenter.add(panelLogin);
+		GridBagConstraints gbc_panelLogin = new GridBagConstraints();
+		gbc_panelLogin.fill = GridBagConstraints.HORIZONTAL;
+		gbc_panelLogin.anchor = GridBagConstraints.NORTH;
+		gbc_panelLogin.gridx = 1;
+		gbc_panelLogin.gridy = 0;
+		panelCenter.add(panelLogin, gbc_panelLogin);
 		GridBagLayout gbl_panelLogin = new GridBagLayout();
 		gbl_panelLogin.columnWidths = new int[] { 0, 0, 0 };
 		gbl_panelLogin.rowHeights = new int[] { 0, 0, 0, 0, 0 };
@@ -129,7 +139,11 @@ public class LoginWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String username = txtUsuario.getText();
 				String password = new String(pwdPassword.getPassword());
-				LoginWindow.this.controller.login(username, password);
+				try {
+					LoginWindow.this.controller.login(username, password);
+				} catch (Exception ex) {
+					UIUtils.showError(rootPane, ex);
+				}
 			}
 		});
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
@@ -138,6 +152,15 @@ public class LoginWindow extends JFrame {
 		gbc_btnLogin.gridx = 0;
 		gbc_btnLogin.gridy = 3;
 		panelLogin.add(btnLogin, gbc_btnLogin);
+
+		lblWebServiceUrl = new JLabel("<sem web service>");
+		lblWebServiceUrl.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_lblWebServiceUrl = new GridBagConstraints();
+		gbc_lblWebServiceUrl.gridwidth = 3;
+		gbc_lblWebServiceUrl.insets = new Insets(0, 0, 0, 5);
+		gbc_lblWebServiceUrl.gridx = 0;
+		gbc_lblWebServiceUrl.gridy = 1;
+		panelCenter.add(lblWebServiceUrl, gbc_lblWebServiceUrl);
 
 		JPanel panelNorth = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelNorth.getLayout();
@@ -152,10 +175,15 @@ public class LoginWindow extends JFrame {
 		btnConfigurl.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String newUrl = JOptionPane.showInputDialog(rootPane, "Alterar a URL de conexão com o Web Service do Central do Aluno", "Alterar URL",
+				String newUrl = JOptionPane.showInputDialog(rootPane, "Alterar a URL de conexão com o Web Service do Central do Aluno:", "Alterar URL",
 						JOptionPane.INFORMATION_MESSAGE);
 				if (newUrl != null && !newUrl.trim().equals(LoginWindow.this.controller.getWebServiceUrl())) {
-					LoginWindow.this.controller.setWebServiceUrl(newUrl.trim());
+					try {
+						LoginWindow.this.controller.setWebServiceUrl(newUrl.trim());
+						lblWebServiceUrl.setText(LoginWindow.this.controller.getWebServiceUrl());
+					} catch (Exception ex) {
+						UIUtils.showError(rootPane, ex);
+					}
 				}
 			}
 		});

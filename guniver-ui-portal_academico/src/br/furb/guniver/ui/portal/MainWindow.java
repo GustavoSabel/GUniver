@@ -2,6 +2,8 @@ package br.furb.guniver.ui.portal;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -12,15 +14,14 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import java.awt.SystemColor;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import br.furb.guniver.central_do_aluno.stubs.Aluno;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
@@ -31,11 +32,17 @@ public class MainWindow extends JFrame {
 	private JTextField txtNome;
 	private JTable tableProvas;
 	private JTable tableHorario;
+	private PortalController portalController;
+	private Aluno aluno;
 
 	/**
 	 * Create the frame.
+	 * 
+	 * @param portalController
 	 */
-	public MainWindow() {
+	public MainWindow(PortalController portalController) {
+		this.portalController = portalController;
+		portalController.setMainWindow(this);
 		setTitle("Portal Acadêmico");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 628, 405);
@@ -178,7 +185,7 @@ public class MainWindow extends JFrame {
 		JList listTurmas = new JList();
 		listTurmas.setBackground(new Color(245, 245, 245));
 		scrollPaneListaTurmas.setViewportView(listTurmas);
-		
+
 		JPanel panelTurmaInfoWrapper = new JPanel();
 		panelTurmaInfoWrapper.setBorder(new TitledBorder(null, "Informa\u00E7\u00F5es da Turma", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panelTurmaInfoWrapper = new GridBagConstraints();
@@ -190,12 +197,12 @@ public class MainWindow extends JFrame {
 		gbc_panelTurmaInfoWrapper.gridy = 1;
 		contentPane.add(panelTurmaInfoWrapper, gbc_panelTurmaInfoWrapper);
 		GridBagLayout gbl_panelTurmaInfoWrapper = new GridBagLayout();
-		gbl_panelTurmaInfoWrapper.columnWidths = new int[]{0, 0, 0};
-		gbl_panelTurmaInfoWrapper.rowHeights = new int[]{0, 0, 0};
-		gbl_panelTurmaInfoWrapper.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
-		gbl_panelTurmaInfoWrapper.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_panelTurmaInfoWrapper.columnWidths = new int[] { 0, 0, 0 };
+		gbl_panelTurmaInfoWrapper.rowHeights = new int[] { 0, 0, 0 };
+		gbl_panelTurmaInfoWrapper.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
+		gbl_panelTurmaInfoWrapper.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
 		panelTurmaInfoWrapper.setLayout(gbl_panelTurmaInfoWrapper);
-		
+
 		JPanel panelDetalheTurma = new JPanel();
 		GridBagConstraints gbc_panelDetalheTurma = new GridBagConstraints();
 		gbc_panelDetalheTurma.gridwidth = 2;
@@ -205,12 +212,12 @@ public class MainWindow extends JFrame {
 		gbc_panelDetalheTurma.gridy = 0;
 		panelTurmaInfoWrapper.add(panelDetalheTurma, gbc_panelDetalheTurma);
 		GridBagLayout gbl_panelDetalheTurma = new GridBagLayout();
-		gbl_panelDetalheTurma.columnWidths = new int[]{0, 0};
-		gbl_panelDetalheTurma.rowHeights = new int[]{0, 0, 0};
-		gbl_panelDetalheTurma.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panelDetalheTurma.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelDetalheTurma.columnWidths = new int[] { 0, 0 };
+		gbl_panelDetalheTurma.rowHeights = new int[] { 0, 0, 0 };
+		gbl_panelDetalheTurma.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
+		gbl_panelDetalheTurma.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		panelDetalheTurma.setLayout(gbl_panelDetalheTurma);
-		
+
 		JPanel panelTurmaDetailDisciplina = new JPanel();
 		GridBagConstraints gbc_panelTurmaDetailDisciplina = new GridBagConstraints();
 		gbc_panelTurmaDetailDisciplina.anchor = GridBagConstraints.NORTHWEST;
@@ -218,17 +225,17 @@ public class MainWindow extends JFrame {
 		gbc_panelTurmaDetailDisciplina.gridy = 0;
 		panelDetalheTurma.add(panelTurmaDetailDisciplina, gbc_panelTurmaDetailDisciplina);
 		panelTurmaDetailDisciplina.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 0));
-		
+
 		JLabel lblNomeDisciplina = new JLabel("Nome Disciplina");
 		lblNomeDisciplina.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
 		panelTurmaDetailDisciplina.add(lblNomeDisciplina);
-		
+
 		JLabel labelSepDisciplina = new JLabel("-");
 		panelTurmaDetailDisciplina.add(labelSepDisciplina);
-		
+
 		JLabel lblCodigoDisciplina = new JLabel("(Codigo)");
 		panelTurmaDetailDisciplina.add(lblCodigoDisciplina);
-		
+
 		JLabel lblDetalhesCurso = new JLabel("Nome Curso - (Codigo)");
 		GridBagConstraints gbc_lblDetalhesCurso = new GridBagConstraints();
 		gbc_lblDetalhesCurso.insets = new Insets(0, 10, 0, 0);
@@ -236,7 +243,7 @@ public class MainWindow extends JFrame {
 		gbc_lblDetalhesCurso.gridx = 0;
 		gbc_lblDetalhesCurso.gridy = 1;
 		panelDetalheTurma.add(lblDetalhesCurso, gbc_lblDetalhesCurso);
-		
+
 		JPanel panelProvas = new JPanel();
 		panelProvas.setBorder(new TitledBorder(null, "Provas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panelProvas = new GridBagConstraints();
@@ -246,21 +253,14 @@ public class MainWindow extends JFrame {
 		gbc_panelProvas.gridy = 1;
 		panelTurmaInfoWrapper.add(panelProvas, gbc_panelProvas);
 		panelProvas.setLayout(new BorderLayout(0, 0));
-		
+
 		JScrollPane scrollPaneProvas = new JScrollPane();
 		panelProvas.add(scrollPaneProvas);
-		
+
 		tableProvas = new JTable();
-		tableProvas.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Descri\u00E7\u00E3o", "Nota"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, Double.class
-			};
+		tableProvas.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Descri\u00E7\u00E3o", "Nota" }) {
+			Class[] columnTypes = new Class[] { String.class, Double.class };
+
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
@@ -269,7 +269,7 @@ public class MainWindow extends JFrame {
 		tableProvas.setCellSelectionEnabled(true);
 		tableProvas.setFillsViewportHeight(true);
 		scrollPaneProvas.setViewportView(tableProvas);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Hor\u00E1rio", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -278,21 +278,14 @@ public class MainWindow extends JFrame {
 		gbc_panel.gridy = 1;
 		panelTurmaInfoWrapper.add(panel, gbc_panel);
 		panel.setLayout(new BorderLayout(0, 0));
-		
+
 		JScrollPane scrollPaneHorario = new JScrollPane();
 		panel.add(scrollPaneHorario, BorderLayout.CENTER);
-		
+
 		tableHorario = new JTable();
-		tableHorario.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Hor\u00E1rio", "Sala"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class
-			};
+		tableHorario.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Hor\u00E1rio", "Sala" }) {
+			Class[] columnTypes = new Class[] { String.class, String.class };
+
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
@@ -302,6 +295,13 @@ public class MainWindow extends JFrame {
 		tableHorario.setShowVerticalLines(false);
 		tableHorario.setFillsViewportHeight(true);
 		scrollPaneHorario.setViewportView(tableHorario);
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+		txtCodigo.setText(String.valueOf(aluno.getCodigo()));
+		txtUsuario.setText(aluno.getNomeUsuario());
+		txtNome.setText(aluno.getNome());
 	}
 
 }
