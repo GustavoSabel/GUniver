@@ -269,7 +269,6 @@ public interface CentralAluno {
 
     /**
      * 
-     * @param arg0
      * @return
      *     returns java.util.List<br.furb.guniver.cliente.stubs.Disciplina>
      */
@@ -278,9 +277,7 @@ public interface CentralAluno {
     @RequestWrapper(localName = "getDisciplinas", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.GetDisciplinas")
     @ResponseWrapper(localName = "getDisciplinasResponse", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.GetDisciplinasResponse")
     @Action(input = "http://webservice.guniver.furb.br/CentralAluno/getDisciplinasRequest", output = "http://webservice.guniver.furb.br/CentralAluno/getDisciplinasResponse")
-    public List<Disciplina> getDisciplinas(
-        @WebParam(name = "arg0", targetNamespace = "")
-        int arg0);
+    public List<Disciplina> getDisciplinas();
 
     /**
      * 
