@@ -15,17 +15,30 @@ public class CursoServer extends UnicastRemoteObject implements CursoRemote {
 
     @Override
     public List<Curso> getCursos() throws RemoteException {
+	System.out.println("Executado getCursos");
 	return BancoDados.getIntancia().getCurso();
     }
 
     @Override
     public void cadastrarCurso(Curso curso) throws RemoteException {
-	BancoDados.getIntancia().getCurso().add(curso);
-
+	System.out.println("Executado cadastrarCurso");
+	boolean cursoEncontrato = false;
+	for (Curso cursoBanco : BancoDados.getIntancia().getCurso()) {
+	    if (cursoBanco.getCodigo() == curso.getCodigo()) {
+		cursoBanco.setDescricao(curso.getDescricao());
+		cursoEncontrato = true;
+		System.out.println(" - curso atualizado");
+	    }
+	}
+	if (!cursoEncontrato) {
+	    BancoDados.getIntancia().getCurso().add(curso);
+	    System.out.println(" - curso gravado");
+	}
     }
 
     @Override
     public Curso buscarCurso(int codCurso) throws RemoteException {
+	System.out.println("Executado buscarCurso");
 	for (Curso curso : BancoDados.getIntancia().getCurso()) {
 	    if (curso.getCodigo() == codCurso) {
 		return curso;

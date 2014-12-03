@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import br.furb.guniver.modelo.Aluno;
+import br.furb.guniver.modelo.Disciplina;
 import br.furb.guniver.modelo.Turma;
 import br.furb.guniver.modelo.academico.Matricula;
 import br.furb.guniver.modelo.endereco.Endereco;
@@ -38,6 +39,25 @@ public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
     public void cadastrarTurma(Turma turma) throws RemoteException {
 	System.out.println("Executado cadastrarTurma(Turma turma)");
 	BancoDados.getIntancia().getTurmas().add(turma);
+	
+	boolean turmaEncontrato = false;
+	for (Turma turmaBanco : BancoDados.getIntancia().getTurmas()) {
+	    if (turmaBanco.getCodigo() == turma.getCodigo()) {
+		turmaBanco.setAno(turma.getAno());
+		turmaBanco.setSemestre(turma.getSemestre());
+		
+		//turmaBanco.setDisciplina(turma.getDisciplina())
+		//TODO: Verificar se deve mesmo ser atualizado o curso aqui
+		
+		turmaEncontrato = true;
+		System.out.println(" - Turma atualizada");
+	    }
+	}
+	if (!turmaEncontrato) {
+	    BancoDados.getIntancia().getTurmas().add(turma);
+	    System.out.println(" - Turma gravada");
+	}
+	
     }
 
     @Override
