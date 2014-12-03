@@ -70,6 +70,7 @@ public class DisciplinaServer extends UnicastRemoteObject implements DisciplinaR
 	@Override
 	public List<Disciplina> getDisciplinasAll() throws RemoteException {
 		return BancoDados.getIntancia().getDisciplina();
+		//teste
 	}
 
 }
