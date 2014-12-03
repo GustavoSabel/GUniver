@@ -11,21 +11,24 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+@SuppressWarnings("serial")
 public class CompromissosDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
+	private PortalController portalController;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			CompromissosDialog dialog = new CompromissosDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			CompromissosDialog dialog = new CompromissosDialog(null);
+			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -34,8 +37,11 @@ public class CompromissosDialog extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * 
+	 * @param portalController
 	 */
-	public CompromissosDialog() {
+	public CompromissosDialog(PortalController portalController) {
+		this.portalController = portalController;
 		setTitle("Compromissos");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -57,22 +63,15 @@ public class CompromissosDialog extends JDialog {
 			contentPanel.add(scrollPaneCompromissos, gbc_scrollPaneCompromissos);
 			{
 				table = new JTable();
-				table.setModel(new DefaultTableModel(
-					new Object[][] {
-					},
-					new String[] {
-						"In\u00EDcio", "Fim", "Dia inteiro", "T\u00EDtulo", "Descri\u00E7\u00E3o"
-					}
-				) {
-					Class[] columnTypes = new Class[] {
-						String.class, String.class, String.class, String.class, String.class
-					};
+				table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "In\u00EDcio", "Fim", "Dia inteiro", "T\u00EDtulo", "Descri\u00E7\u00E3o" }) {
+					Class[] columnTypes = new Class[] { String.class, String.class, String.class, String.class, String.class };
+
 					public Class getColumnClass(int columnIndex) {
 						return columnTypes[columnIndex];
 					}
-					boolean[] columnEditables = new boolean[] {
-						false, false, false, false, false
-					};
+
+					boolean[] columnEditables = new boolean[] { false, false, false, false, false };
+
 					public boolean isCellEditable(int row, int column) {
 						return columnEditables[column];
 					}

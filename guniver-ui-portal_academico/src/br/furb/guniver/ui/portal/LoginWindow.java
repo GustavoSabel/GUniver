@@ -44,10 +44,10 @@ public class LoginWindow extends JFrame {
 					UIUtils.changeLookAndFeelIfPossible(UIUtils.SupportedLookAndFeel.SYSTEM_DEFAULT);
 
 					PortalController controller = new PortalController();
-					LoginWindow frame = new LoginWindow(controller);
-					frame.setVisible(true);
-
-					UIUtils.centerOnScreen(frame);
+					LoginWindow loginWindow = new LoginWindow(controller);
+					loginWindow.setVisible(true);
+					
+					UIUtils.centerOnScreen(loginWindow);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -181,7 +181,7 @@ public class LoginWindow extends JFrame {
 				if (newUrl != null && !newUrl.trim().equals(LoginWindow.this.controller.getWebServiceUrl())) {
 					try {
 						LoginWindow.this.controller.setWebServiceUrl(newUrl.trim());
-						lblWebServiceUrl.setText(LoginWindow.this.controller.getWebServiceUrl());
+						updateUrlLabel();
 					} catch (Exception ex) {
 						UIUtils.showError(rootPane, ex);
 					}
@@ -191,6 +191,10 @@ public class LoginWindow extends JFrame {
 		panelNorth.add(btnConfigurl);
 		controller.setLoginWindow(this);
 
+		updateUrlLabel();
+	}
+
+	private void updateUrlLabel() {
 		lblWebServiceUrl.setText(LoginWindow.this.controller.getWebServiceUrl());
 	}
 

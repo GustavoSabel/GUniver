@@ -13,11 +13,14 @@ import javax.swing.JOptionPane;
 
 import br.furb.guniver.central_do_aluno.stubs.Aluno;
 import br.furb.guniver.central_do_aluno.stubs.Horario;
+import br.furb.guniver.central_do_aluno.stubs.Mensalidade;
 import br.furb.guniver.central_do_aluno.stubs.Prova;
 import br.furb.guniver.central_do_aluno.stubs.Turma;
 import br.furb.guniver.sync.AlunosSynchronizer;
 import br.furb.guniver.sync.AuthenticationException;
+import br.furb.guniver.sync.EntitiesSynchronizer;
 import br.furb.guniver.sync.HorariosSynchronizer;
+import br.furb.guniver.sync.MensalidadesSynchronizer;
 import br.furb.guniver.sync.ProvasSynchronizer;
 import br.furb.guniver.sync.SyncListener;
 import br.furb.guniver.sync.TurmasSynchronizer;
@@ -33,11 +36,15 @@ public class PortalController {
 
 	private AlunosSynchronizer $alunosSynchronizer;
 	private HorariosSynchronizer $horariosSynchronizer;
+	private MensalidadesSynchronizer $mensalidadesSynchronizer;
 	private ProvasSynchronizer $provasSynchronizer;
 	private TurmasSynchronizer $turmasSynchronizer;
 
 	private Aluno loggedUser;
 	private Collection<Turma> turmas = new LinkedList<>();
+	private Collection<Mensalidade> mensalidades = new LinkedList<>();
+
+	private MensalidadesDialog openMensalidadesDialog;
 
 	public PortalController() {
 		String hostAddress;
@@ -69,6 +76,10 @@ public class PortalController {
 			$provasSynchronizer.removeSyncListener(provasListener);
 			$provasSynchronizer.stop();
 		}
+		if ($mensalidadesSynchronizer != null) {
+			$mensalidadesSynchronizer.removeSyncListener(mensalidadesListener);
+			$mensalidadesSynchronizer.stop();
+		}
 		if ($turmasSynchronizer != null) {
 			$turmasSynchronizer.removeSyncListener(turmasListener);
 			$turmasSynchronizer.stop();
@@ -77,10 +88,13 @@ public class PortalController {
 		ThreadPoolExecutor executor = new ThreadPoolExecutor(THREAD_POOL_MAX_SIZE, THREAD_POOL_MAX_SIZE, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<Runnable>());
 		$alunosSynchronizer = new AlunosSynchronizer(webServiceUrl, executor);
 		$horariosSynchronizer = new HorariosSynchronizer(webServiceUrl, executor);
+		$mensalidadesSynchronizer = new MensalidadesSynchronizer(webServiceUrl, executor);
 		$provasSynchronizer = new ProvasSynchronizer(webServiceUrl, executor);
 		$turmasSynchronizer = new TurmasSynchronizer(webServiceUrl, executor);
 
 		$alunosSynchronizer.addSyncListener(loginListener);
+		$horariosSynchronizer.addSyncListener(horariosListener);
+		$mensalidadesSynchronizer.addSyncListener(mensalidadesListener);
 		$provasSynchronizer.addSyncListener(provasListener);
 		$turmasSynchronizer.addSyncListener(turmasListener);
 	}
@@ -113,6 +127,13 @@ public class PortalController {
 			throw new IllegalStateException("sincronizador de Horários não definido");
 		}
 		return $horariosSynchronizer;
+	}
+
+	private EntitiesSynchronizer<Mensalidade> getMensalidadesSynchronizer() {
+		if ($mensalidadesSynchronizer == null) {
+			throw new IllegalStateException("sincronizador de Mensalidades não definido");
+		}
+		return $mensalidadesSynchronizer;
 	}
 
 	public ProvasSynchronizer getProvasSynchronizer() {
@@ -152,6 +173,14 @@ public class PortalController {
 
 	public Aluno getLoggedUser() {
 		return loggedUser;
+	}
+
+	protected void setOpenMensalidadesDialog(MensalidadesDialog openMensalidadesDialog) {
+		this.openMensalidadesDialog = openMensalidadesDialog;
+	}
+
+	protected MensalidadesDialog getOpenMensalidadesDialog() {
+		return openMensalidadesDialog;
 	}
 
 	private SyncListener<Aluno> loginListener = new SyncListener<Aluno>() {
@@ -203,6 +232,37 @@ public class PortalController {
 
 		@Override
 		public void uploadComplete(Horario uploadedEntity) {
+		}
+
+		@Override
+		public void syncFailed(Throwable reason) {
+			UIUtils.showError(getLoginWindow(), reason);
+		}
+
+	};
+
+	private SyncListener<Mensalidade> mensalidadesListener = new SyncListener<Mensalidade>() {
+
+		@Override
+		public void downloadAllComplete(Collection<Mensalidade> entities) {
+			mensalidades.clear();
+			mensalidades.addAll(entities);
+			MensalidadesDialog m = getOpenMensalidadesDialog();
+			if (m != null) {
+				m.setMensalidades(entities);
+			}
+		}
+
+		@Override
+		public void downloadComplete(Mensalidade downloadedEntity) {
+			if (getOpenMensalidadesDialog() != null) {
+				getOpenMensalidadesDialog().reloadTable();
+			}
+
+		}
+
+		@Override
+		public void uploadComplete(Mensalidade uploadedEntity) {
 		}
 
 		@Override
@@ -265,6 +325,10 @@ public class PortalController {
 
 	public void downloadHorario(Turma turma) {
 		getHorariosSynchronizer().downloadAllByTurma(turma);
+	}
+
+	public void showMensalidades(Aluno aluno) {
+		getMensalidadesSynchronizer().downloadAll();
 	}
 
 }

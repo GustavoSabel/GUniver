@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -170,6 +172,12 @@ public class MainWindow extends JFrame {
 		panelBotoes.setLayout(gbl_panelBotoes);
 
 		JButton btnMensalidades = new JButton("Mensalidades");
+		btnMensalidades.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.portalController.showMensalidades(aluno);
+			}
+		});
 		GridBagConstraints gbc_btnMensalidades = new GridBagConstraints();
 		gbc_btnMensalidades.insets = new Insets(0, 0, 5, 0);
 		gbc_btnMensalidades.fill = GridBagConstraints.HORIZONTAL;
@@ -188,6 +196,14 @@ public class MainWindow extends JFrame {
 		panelBotoes.add(btnHorrios, gbc_btnHorrios);
 
 		JButton btnCompromissos = new JButton("Compromissos");
+		// TODO: vai ter mesmo?
+		btnCompromissos.setEnabled(false);
+		btnCompromissos.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//				MainWindow.this.portalController.showCompromissosScreen();
+			}
+		});
 		GridBagConstraints gbc_btnCompromissos = new GridBagConstraints();
 		gbc_btnCompromissos.anchor = GridBagConstraints.NORTH;
 		gbc_btnCompromissos.fill = GridBagConstraints.HORIZONTAL;
