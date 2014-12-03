@@ -4,9 +4,9 @@ set caminhoModelo=%caminhoProjeto%\guniver-modelo\bin
 
 cd %caminhoCadastro%
 set classpath=.;%caminhoModelo%
-rmic br.furb.guniver.rmi.AlunoServer
-rmic br.furb.guniver.rmi.TurmaServer
-rmic br.furb.guniver.rmi.CursoServer
-rmic br.furb.guniver.rmi.DisciplinaServer
+%jdk%\rmic br.furb.guniver.rmi.AlunoServer
+%jdk%\rmic br.furb.guniver.rmi.TurmaServer
+%jdk%\rmic br.furb.guniver.rmi.CursoServer
+%jdk%\rmic br.furb.guniver.rmi.DisciplinaServer
 
 cmd
