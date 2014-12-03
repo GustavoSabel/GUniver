@@ -1,7 +1,7 @@
 REM Inicializa o serviço central do aluno
 
-set path=%path%;"C:\Program Files\Java\jdk7"
-set caminhoProjeto=C:\Users\gsabel\git\GUniver
+set path=%path%;"C:\Program Files\Java\jdk1.7.0_71\bin"
+set caminhoProjeto=C:\Users\Gustavo\git\GUniver
 set caminhoCadastro=%caminhoProjeto%\guniver-cadastro\bin
 set caminhoAcademico=%caminhoProjeto%\guniver-academico-server\bin
 set caminhoCentraAluno=%caminhoProjeto%\guniver-central_do_aluno\bin
@@ -13,8 +13,8 @@ set caminhoPadrao=br.furb.guniver
 REM CENTRAL DO ALUNO
 cd %caminhoCentraAluno%
 set classpath=.;%caminhoModelo%;%caminhoCadastro%;%caminhoFinanceiro%;%caminhoProjeto%;%caminhoAcademico%
-start java %caminhoPadrao%.webservice.PublicaService
-
+java %caminhoPadrao%.webservice.PublicaService
+cmd
 
 set classpath=%caminhoCadastro%;%caminhoFinanceiro%;%caminhoModelo%;%caminhoProjeto%;%caminhoAcademico%
 start rmiregistry

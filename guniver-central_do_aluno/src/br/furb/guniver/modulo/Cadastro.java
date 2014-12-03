@@ -45,6 +45,10 @@ public class Cadastro {
     public List<Aluno> getAlunos() throws RemoteException {
 	return alunoRemote.getAlunos();
     }
+    
+    public Aluno getAluno(int codigoAluno) throws RemoteException {
+	return alunoRemote.getAluno(codigoAluno);
+    }
 
     public Curso getCurso(int codigoCurso) throws RemoteException {
 	return cursoRemote.buscarCurso(codigoCurso);
