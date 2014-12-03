@@ -58,9 +58,12 @@ public class ProvaFragment extends Fragment {
 		add(scrollPaneProvas, gbc_scrollPaneProvas);
 
 		tableProvas = new JTable();
-		dataModel = new DefaultTableModel(new Object[][] { { null, null, null, null, null }, }, new String[] { "C\u00F3digo", "Aluno", "Turma", "Nota", "Descri\u00E7\u00E3o" }) {
-			Class[] columnTypes = new Class[] { Integer.class, String.class, Long.class, Float.class, String.class };
-			boolean[] columnEditable = { true, false, false, true, true };
+		dataModel = new DefaultTableModel(new Object[][] { { null, null, null,
+				null }, }, new String[] { "Aluno", "Turma", "Nota",
+				"Descri\u00E7\u00E3o" }) {
+			Class[] columnTypes = new Class[] { String.class, Long.class,
+					Float.class, String.class };
+			boolean[] columnEditable = { false, false, true, true };
 
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -91,15 +94,11 @@ public class ProvaFragment extends Fragment {
 					Object newValue = dataModel.getValueAt(row, col);
 					Object oldValue;
 					switch (col) {
-					case 0:
-						oldValue = prova.getCodigo();
-						prova.setCodigo((Integer) newValue);
-						break;
-					case 3:
+					case 2:
 						oldValue = prova.getNota();
 						prova.setNota((Float) newValue);
 						break;
-					case 4:
+					case 3:
 						oldValue = prova.getDescricao();
 						prova.setDescricao((String) newValue);
 						break;
@@ -187,7 +186,6 @@ public class ProvaFragment extends Fragment {
 
 		for (Prova p : provas) {
 			Vector<Object> row = new Vector<>();
-			row.add(p.getCodigo());
 			row.add(p.getAluno() == null ? "--" : p.getAluno().getNome());
 			row.add(p.getTurma() == null ? "--" : p.getTurma().getCodigo());
 			row.add(p.getNota());
@@ -195,7 +193,7 @@ public class ProvaFragment extends Fragment {
 			dataVector.add(row);
 		}
 		// empty row
-		dataVector.add(new Vector<>(Arrays.asList(null, null, null, null, null)));
+		dataVector.add(new Vector<>(Arrays.asList(null, null, null, null)));
 
 		dataModel.fireTableDataChanged();
 		fChangingData = false;
