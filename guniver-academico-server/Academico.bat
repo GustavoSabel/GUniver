@@ -1,9 +1,8 @@
-set path=%path%;"C:\Program Files\Java\jdk1.7.0_71\bin"
-set caminhoProjeto=C:\Users\Gustavo\git\GUniver
+call ..\ConfigAmbiente.bat
 
 cd %caminhoProjeto%\guniver-academico-server\bin
 set classpath=.
-start orbd
-start java br.furb.guniver.corba.servidor
+start "ORBD" %jdk%\orbd
+start "Servidor - Academico" %jdk%\java br.furb.guniver.corba.servidor
 
 cmd
