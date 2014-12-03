@@ -153,7 +153,8 @@ public class LoginWindow extends JFrame {
 		gbc_btnLogin.gridy = 3;
 		panelLogin.add(btnLogin, gbc_btnLogin);
 
-		lblWebServiceUrl = new JLabel("<sem web service>");
+		String webServiceUrl = LoginWindow.this.controller.getWebServiceUrl();
+		lblWebServiceUrl = new JLabel(webServiceUrl == null ? "<sem web service>" : webServiceUrl);
 		lblWebServiceUrl.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblWebServiceUrl = new GridBagConstraints();
 		gbc_lblWebServiceUrl.gridwidth = 3;
@@ -189,6 +190,8 @@ public class LoginWindow extends JFrame {
 		});
 		panelNorth.add(btnConfigurl);
 		controller.setLoginWindow(this);
+
+		lblWebServiceUrl.setText(LoginWindow.this.controller.getWebServiceUrl());
 	}
 
 }

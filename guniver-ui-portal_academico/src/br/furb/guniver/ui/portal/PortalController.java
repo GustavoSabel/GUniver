@@ -1,5 +1,7 @@
 package br.furb.guniver.ui.portal;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -25,7 +27,15 @@ public class PortalController {
 	private MainWindow mainWindow;
 
 	public PortalController() {
-		// TODO Auto-generated constructor stub
+		String hostAddress;
+		try {
+			hostAddress = InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+			hostAddress = "localhost";
+		}
+
+		setWebServiceUrl(hostAddress);
 	}
 
 	public String getWebServiceUrl() {
