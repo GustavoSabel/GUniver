@@ -75,7 +75,8 @@ public class ProvasSynchronizer extends EntitiesSynchronizer<Prova> {
     @Override
     protected void doUpload(Prova entity) {
 	StringHolder mensagemErro = new StringHolder();
-	int codigo = getAcademico().cadastrarProva(ConversorAcademico.cast(entity), mensagemErro);
+	br.furb.guniver.modelo.academico.Prova prova = ConversorAcademico.cast(entity);
+	int codigo = getAcademico().cadastrarProva(prova, mensagemErro);
 
 	if (codigo == 0) {
 	    throw new RuntimeException(mensagemErro.value);

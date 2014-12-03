@@ -42,7 +42,9 @@ public class ConversorAcademico {
     }
 
     public static Prova cast(br.furb.guniver.modelo.academico.Prova prova) {
-	return new Prova(prova.descricao, new Aluno(prova.codigoAluno), new Turma(prova.codigoTurma), prova.nota);
+	Prova provaRetorno = new Prova(prova.descricao, new Aluno(prova.codigoAluno), new Turma(prova.codigoTurma), prova.nota);
+	provaRetorno.setCodigo(prova.codigo);
+	return provaRetorno;
     }
 
     private static Matricula cast(br.furb.guniver.modelo.academico.Matricula matricula) {
