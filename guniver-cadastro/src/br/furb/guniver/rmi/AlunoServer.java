@@ -14,6 +14,7 @@ public class AlunoServer extends UnicastRemoteObject implements AlunoRemote {
     }
 
     public Aluno getAluno(int codigo) throws RemoteException {
+	System.out.println("ExecutadogetAluno");
 	for (Aluno aluno : BancoDados.getIntancia().getAlunos()) {
 	    if (aluno.getCodigo() == codigo)
 		return aluno;
@@ -22,21 +23,34 @@ public class AlunoServer extends UnicastRemoteObject implements AlunoRemote {
     }
 
     public List<Aluno> getAlunos() throws RemoteException {
+	System.out.println("Executado getAlunos");
 	return BancoDados.getIntancia().getAlunos();
     }
 
     @Override
     public void cadastrarAluno(Aluno aluno) throws RemoteException {
+	System.out.println("Executado cadastrarAluno");
+	Boolean jaExiste = false;
 	for (Aluno alunoBanco : BancoDados.getIntancia().getAlunos()) {
-	    if (alunoBanco.getCodigo() == aluno.getCodigo())
-		throw new RemoteException("Já existe o aluno " + alunoBanco.getNome() + " com o código "
-			+ alunoBanco.getCodigo());
+	    if (alunoBanco.getCodigo() == aluno.getCodigo()) {
+		//throw new RemoteException("Já existe o aluno " + alunoBanco.getNome() + " com o código "
+		//	+ alunoBanco.getCodigo());
+		jaExiste = true;
+		alunoBanco.setNome(aluno.getNome());
+		alunoBanco.setNomeUsuario(aluno.getNomeUsuario());
+		alunoBanco.setSenha(aluno.getSenha());
+		System.out.println(" - Aluno alterado");
+	    }
 	}
-	BancoDados.getIntancia().getAlunos().add(aluno);
+	if (!jaExiste) {
+	    BancoDados.getIntancia().getAlunos().add(aluno);
+	    System.out.println(" - Aluno cadastrado");
+	}
     }
 
     @Override
     public Aluno getAlunoPorNomeUsuario(String nomeUsuario) throws RemoteException {
+	System.out.println("Executado getAlunoPorNomeUsuario");
 	for (Aluno aluno : BancoDados.getIntancia().getAlunos()) {
 	    if (aluno.getNomeUsuario() == nomeUsuario)
 		return aluno;
