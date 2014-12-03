@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "CentralAlunoService", targetNamespace = "http://webservice.guniver.furb.br/", wsdlLocation = "http://201.54.201.72:8080/centralAluno?wsdl")
+@WebServiceClient(name = "CentralAlunoService", targetNamespace = "http://webservice.guniver.furb.br/", wsdlLocation = "http://localhost:8080/centralAluno?wsdl")
 public class CentralAlunoService
     extends Service
 {
@@ -30,7 +30,7 @@ public class CentralAlunoService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://201.54.201.72:8080/centralAluno?wsdl");
+            url = new URL("http://localhost:8080/centralAluno?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
