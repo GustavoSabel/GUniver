@@ -13,6 +13,6 @@ public interface DisciplinaRemote extends Remote {
    //os métodos abaixo não aparecem no syncDisciplina
     public Disciplina getDisciplina(int codDisciplina) throws RemoteException;
     public List<Disciplina> getDisciplinasAll() throws RemoteException;
-    //teste
+    //
 
 }
