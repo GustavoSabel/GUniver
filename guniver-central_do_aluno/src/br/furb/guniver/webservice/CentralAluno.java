@@ -123,10 +123,17 @@ public class CentralAluno {
     }
 
     @WebMethod
-    public List<Turma> getTurmas(int codigoAluno) throws RemoteException {
+    public List<Turma> getTurmasAluno(int codigoAluno) throws RemoteException {
 	System.out.println("getTurmas");
-	return Cadastro.getInstancia().getTurmas(codigoAluno);
+	return Cadastro.getInstancia().getTurmasAluno(codigoAluno);
     }
+    
+    @WebMethod
+    public List<Turma> getTurmas() throws RemoteException {
+	System.out.println("getTurmas");
+	return Cadastro.getInstancia().getTurmas();
+    }
+
 
     @WebMethod
     public List<Aluno> getAlunosTurma(int codigoTurma) throws RemoteException {

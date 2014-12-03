@@ -37,6 +37,11 @@ public class BancoDados {
 		alunos.add(new Aluno(3, "vipanz", "senha3", "Vivian Panzenhagen"));
 		Turma turmaTeste = new Turma(1, disc, 2014, 2);
 		turmas.add(turmaTeste);
+		turmas.add(new Turma(2, disc, 2014, 2));
+		turmas.add(new Turma(3, disc, 2014, 2));
+		turmas.add(new Turma(5, disc, 2014, 2));
+		turmas.add(new Turma(6, disc, 2014, 2));
+		
 	}
 
 	public List<Aluno> getAlunos() {

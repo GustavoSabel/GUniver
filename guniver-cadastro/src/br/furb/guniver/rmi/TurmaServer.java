@@ -14,9 +14,11 @@ import br.furb.guniver.modulo.Academico;
 public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
 
     private static final long serialVersionUID = 1456L;
+    private Academico academico;
 
     public TurmaServer() throws RemoteException {
 	super();
+	academico = new Academico(Endereco.academico.getEndereco());
     }
 
     @Override
@@ -39,16 +41,16 @@ public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
     public void cadastrarTurma(Turma turma) throws RemoteException {
 	System.out.println("Executado cadastrarTurma(Turma turma)");
 	BancoDados.getIntancia().getTurmas().add(turma);
-	
+
 	boolean turmaEncontrato = false;
 	for (Turma turmaBanco : BancoDados.getIntancia().getTurmas()) {
 	    if (turmaBanco.getCodigo() == turma.getCodigo()) {
 		turmaBanco.setAno(turma.getAno());
 		turmaBanco.setSemestre(turma.getSemestre());
-		
+
 		//turmaBanco.setDisciplina(turma.getDisciplina())
 		//TODO: Verificar se deve mesmo ser atualizado o curso aqui
-		
+
 		turmaEncontrato = true;
 		System.out.println(" - Turma atualizada");
 	    }
@@ -57,7 +59,7 @@ public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
 	    BancoDados.getIntancia().getTurmas().add(turma);
 	    System.out.println(" - Turma gravada");
 	}
-	
+
     }
 
     @Override
@@ -66,8 +68,7 @@ public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
 	try {
 	    List<Aluno> alunos = new ArrayList<Aluno>();
 
-	    Matricula[] matriculasAcademico = new Academico(Endereco.academico.getEndereco())
-		    .buscarMatriculas(new Turma(codTurma, null, 0, 0));
+	    Matricula[] matriculasAcademico = academico.buscarMatriculas(new Turma(codTurma, null, 0, 0));
 
 	    System.out.println("Número de matriculas: " + matriculasAcademico.length);
 
@@ -86,12 +87,11 @@ public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
     }
 
     @Override
-    public List<Turma> getTurmas(int codAluno) throws RemoteException {
+    public List<Turma> getTurmasAluno(int codAluno) throws RemoteException {
 	System.out.println("Executado BuscarTurmas(int codAluno)");
 	try {
 	    List<Turma> turmas = new ArrayList<Turma>();
-	    Matricula[] matriculasAcademico = new Academico(Endereco.academico.getEndereco())
-		    .buscarMatriculas(new Aluno(codAluno, ""));
+	    Matricula[] matriculasAcademico = academico.buscarMatriculas(new Aluno(codAluno, ""));
 
 	    for (Matricula matricula : matriculasAcademico) {
 		Turma turma = BancoDados.getIntancia().getTurma(matricula.codigoTurma);
@@ -103,6 +103,11 @@ public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
 	} catch (Exception ex) {
 	    throw new RemoteException(ex.getMessage());
 	}
+    }
+
+    @Override
+    public List<Turma> getTurmas() throws RemoteException {
+	return BancoDados.getIntancia().getTurmas();
     }
 
 }

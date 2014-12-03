@@ -52,6 +52,7 @@ public class ObjectFactory {
     private final static QName _GetTurmas_QNAME = new QName("http://webservice.guniver.furb.br/", "getTurmas");
     private final static QName _GetMaterialResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getMaterialResponse");
     private final static QName _GetMensalidadesPendentesResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getMensalidadesPendentesResponse");
+    private final static QName _GetTurmasAluno_QNAME = new QName("http://webservice.guniver.furb.br/", "getTurmasAluno");
     private final static QName _GetTurmasResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getTurmasResponse");
     private final static QName _GetMensalidadesPendentes_QNAME = new QName("http://webservice.guniver.furb.br/", "getMensalidadesPendentes");
     private final static QName _GetProvasResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getProvasResponse");
@@ -59,6 +60,7 @@ public class ObjectFactory {
     private final static QName _CadastrarMatriculaResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "cadastrarMatriculaResponse");
     private final static QName _GetAluno_QNAME = new QName("http://webservice.guniver.furb.br/", "getAluno");
     private final static QName _GetDisciplinasResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getDisciplinasResponse");
+    private final static QName _GetTurmasAlunoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getTurmasAlunoResponse");
     private final static QName _RemoverCompromissoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "removerCompromissoResponse");
     private final static QName _GetCursoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getCursoResponse");
     private final static QName _GetMaterial_QNAME = new QName("http://webservice.guniver.furb.br/", "getMaterial");
@@ -330,6 +332,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetTurmasAlunoResponse }
+     * 
+     */
+    public GetTurmasAlunoResponse createGetTurmasAlunoResponse() {
+        return new GetTurmasAlunoResponse();
+    }
+
+    /**
      * Create an instance of {@link GetDisciplinasResponse }
      * 
      */
@@ -383,6 +393,14 @@ public class ObjectFactory {
      */
     public GetTurmasResponse createGetTurmasResponse() {
         return new GetTurmasResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetTurmasAluno }
+     * 
+     */
+    public GetTurmasAluno createGetTurmasAluno() {
+        return new GetTurmasAluno();
     }
 
     /**
@@ -726,6 +744,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTurmasAluno }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getTurmasAluno")
+    public JAXBElement<GetTurmasAluno> createGetTurmasAluno(GetTurmasAluno value) {
+        return new JAXBElement<GetTurmasAluno>(_GetTurmasAluno_QNAME, GetTurmasAluno.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetTurmasResponse }{@code >}}
      * 
      */
@@ -786,6 +813,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getDisciplinasResponse")
     public JAXBElement<GetDisciplinasResponse> createGetDisciplinasResponse(GetDisciplinasResponse value) {
         return new JAXBElement<GetDisciplinasResponse>(_GetDisciplinasResponse_QNAME, GetDisciplinasResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTurmasAlunoResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getTurmasAlunoResponse")
+    public JAXBElement<GetTurmasAlunoResponse> createGetTurmasAlunoResponse(GetTurmasAlunoResponse value) {
+        return new JAXBElement<GetTurmasAlunoResponse>(_GetTurmasAlunoResponse_QNAME, GetTurmasAlunoResponse.class, null, value);
     }
 
     /**

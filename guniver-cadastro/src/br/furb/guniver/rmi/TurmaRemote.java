@@ -12,7 +12,8 @@ public interface TurmaRemote extends Remote {
 	//public void addAluno(int codigo, Aluno aluno) throws RemoteException;
 	public void cadastrarTurma(Turma turma) throws RemoteException;
 	public List<Aluno> getAlunosTurma(int codTurma) throws RemoteException;
-	public List<Turma> getTurmas(int codAluno) throws RemoteException;
+	public List<Turma> getTurmasAluno(int codAluno) throws RemoteException;
+	public List<Turma> getTurmas() throws RemoteException;
 	//public List<Aluno> BuscarAlunosDisciplina(int codDisciplinas) throws RemoteException;
 
 

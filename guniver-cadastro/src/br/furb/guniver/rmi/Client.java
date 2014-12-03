@@ -99,7 +99,7 @@ public class Client {
 		}
 
 		System.out.println("Turmas do Aluno 1:");
-		for (Turma turma : turmaRemote.getTurmas(1)) {
+		for (Turma turma : turmaRemote.getTurmas()) {
 			System.out.println(" - Turma: " + turma.getCodigo()
 					+ " - Semestre: " + turma.getAno() + "/"
 					+ turma.getSemestre() + " - Disciplina"

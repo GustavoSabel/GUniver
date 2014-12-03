@@ -62,8 +62,12 @@ public class Cadastro {
 	return disciplinaRemote.getDisciplinas();
     }
     
-    public List<Turma> getTurmas(int codigoAluno) throws RemoteException {
-	return turmaRemote.getTurmas(codigoAluno);
+    public List<Turma> getTurmasAluno(int codigoAluno) throws RemoteException {
+	return turmaRemote.getTurmasAluno(codigoAluno);
+    }
+    
+    public List<Turma> getTurmas() throws RemoteException {
+	return turmaRemote.getTurmas();
     }
 
     public List<Aluno> getAlunosTurma(int codigoTurma) throws RemoteException {

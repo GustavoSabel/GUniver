@@ -302,6 +302,21 @@ public interface CentralAluno {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getTurmasAluno", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.central_do_aluno.stubs.GetTurmasAluno")
+    @ResponseWrapper(localName = "getTurmasAlunoResponse", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.central_do_aluno.stubs.GetTurmasAlunoResponse")
+    @Action(input = "http://webservice.guniver.furb.br/CentralAluno/getTurmasAlunoRequest", output = "http://webservice.guniver.furb.br/CentralAluno/getTurmasAlunoResponse")
+    public List<Turma> getTurmasAluno(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<br.furb.guniver.central_do_aluno.stubs.Turma>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getTurmas", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.central_do_aluno.stubs.GetTurmas")
     @ResponseWrapper(localName = "getTurmasResponse", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.central_do_aluno.stubs.GetTurmasResponse")
     @Action(input = "http://webservice.guniver.furb.br/CentralAluno/getTurmasRequest", output = "http://webservice.guniver.furb.br/CentralAluno/getTurmasResponse")
