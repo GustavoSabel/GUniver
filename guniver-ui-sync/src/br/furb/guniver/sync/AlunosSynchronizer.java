@@ -18,14 +18,16 @@ public class AlunosSynchronizer extends EntitiesSynchronizer<Aluno> {
 	    URL url = new URL("http://" + moduleUrl + ":8080/centralAluno");
 	    centralAluno = new CentralAlunoService(url).getCentralAlunoPort();
 	} catch (Exception ex) {
-	    System.out.println("Erro ao conectar com " + moduleUrl);
-	    System.out.println(ex.getMessage());
+	    throw new RuntimeException("Erro ao conectar com " + moduleUrl, ex);
 	}
     }
 
     @Override
     protected void doDownload(Aluno entityAccessor) {
-	entityAccessor.setNome("Nome do aluno " + entityAccessor.getCodigo());
+	Aluno aluno = centralAluno.getAluno(entityAccessor.getCodigo());
+	entityAccessor.setNome(aluno.getNome());
+	entityAccessor.setNomeUsuario(aluno.getNomeUsuario());
+	entityAccessor.setSenha(aluno.getSenha());
     }
 
     @Override
