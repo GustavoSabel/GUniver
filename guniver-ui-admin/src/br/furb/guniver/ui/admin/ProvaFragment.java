@@ -212,6 +212,7 @@ public class ProvaFragment extends Fragment {
 		if (pickedAluno != null) {
 			prova.setAluno(pickedAluno);
 			updateProva(prova);
+			ProvaFragment.this.controller.uploadProva(prova);
 		}
 	}
 
@@ -220,6 +221,7 @@ public class ProvaFragment extends Fragment {
 		if (turma != null) {
 			prova.setTurma(turma);
 			updateProva(prova);
+			ProvaFragment.this.controller.uploadProva(prova);
 		}
 	}
 

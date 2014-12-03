@@ -201,6 +201,7 @@ public class TurmaFragment extends Fragment {
 		if (disciplinaPicked != null) {
 			turma.setDisciplina(disciplinaPicked);
 			updateTurma(turma);
+			TurmaFragment.this.controller.uploadTurma(turma);
 		}
 	}
 
