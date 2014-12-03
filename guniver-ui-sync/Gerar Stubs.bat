@@ -5,6 +5,6 @@ set caminhoUiSync=%caminhoProjeto%\guniver-ui-sync\src
 cd %caminhoUiSync%
 set classpath=.;%caminhoModelo%
 
-wsimport -keep -p br.furb.guniver.central_do_aluno.stubs http://localhost:8080/centralAluno?wsdl
+wsimport -keep -p br.furb.guniver.central_do_aluno.stubs http://192.168.0.104:8080/centralAluno?wsdl
 
 cmd

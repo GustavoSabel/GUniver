@@ -3,6 +3,7 @@ package br.furb.guniver;
 import br.furb.guniver.central_do_aluno.stubs.Aluno;
 import br.furb.guniver.central_do_aluno.stubs.Disciplina;
 import br.furb.guniver.central_do_aluno.stubs.Turma;
+import br.furb.guniver.modelo.Curso;
 
 public class Conversor {
 
@@ -11,18 +12,31 @@ public class Conversor {
 		aluno.getNome());
     }
 
-    public static Disciplina cast(br.furb.guniver.modelo.Disciplina disciplina) {
-	// TODO Auto-generated method stub
-	return null;
+    public static br.furb.guniver.modelo.Turma cast(Turma entity) {
+	if(entity == null)
+	    return null;
+	
+	br.furb.guniver.modelo.Turma turma = new br.furb.guniver.modelo.Turma(entity.getCodigo(), Conversor.cast(entity
+		.getDisciplina()), entity.getAno(), entity.getSemestre());
+	return turma;
     }
 
-    public static Turma cast(br.furb.guniver.modelo.Turma turmaWS) {
-	Turma turma = new Turma();
-	turma.setAno(turmaWS.getAno());
-	turma.setCodigo(turmaWS.getCodigo());
-	turma.setSemestre(turmaWS.getSemestre());
+    private static br.furb.guniver.modelo.Disciplina cast(Disciplina disciplina) {
+	if(disciplina == null)
+	    return null;
+	
+	br.furb.guniver.modelo.Disciplina disc = 
+		new br.furb.guniver.modelo.Disciplina(
+			disciplina.getCodigo(),
+			disciplina.getNome(),
+			Conversor.cast(disciplina.getCurso()));
+	
+	return disc;
+    }
 
-	turma.setDisciplina(Conversor.cast(turmaWS.getDisciplina()));
-	return turma;
+    private static Curso cast(br.furb.guniver.central_do_aluno.stubs.Curso curso) {
+	if(curso == null)
+	    return null;
+	return new Curso(curso.getCodigo(), curso.getDescricao());
     }
 }

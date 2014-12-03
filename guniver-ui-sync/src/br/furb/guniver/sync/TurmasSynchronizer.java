@@ -2,9 +2,7 @@ package br.furb.guniver.sync;
 
 import java.net.URL;
 import java.rmi.Naming;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -34,18 +32,15 @@ public class TurmasSynchronizer extends EntitiesSynchronizer<Turma> {
 
     @Override
     protected void doDownload(Turma entityAccessor) {
-	entityAccessor.setAno(2012);
-	entityAccessor.setSemestre(1);
+	throw new UnsupportedOperationException("Método não implementado");
+	//entityAccessor.setAno(2012);
+	//entityAccessor.setSemestre(1);
     }
 
     @Override
     protected Collection<Turma> doDownloadAll() {
 	try {
-	    List<Turma> turmas = new ArrayList<Turma>();
-	    for (br.furb.guniver.modelo.Turma turmaWS : turmaRemote.getTurmas()) {
-		turmas.add(Conversor.cast(turmaWS));
-	    }
-
+	    List<Turma> turmas = centralAluno.getTurmas();
 	    return turmas;
 	} catch (Exception ex) {
 	    throw new RuntimeException(ex);
@@ -54,23 +49,23 @@ public class TurmasSynchronizer extends EntitiesSynchronizer<Turma> {
 
     @Override
     protected void doUpload(Turma entity) {
-	// TODO Auto-generated method stub
-	throw new UnsupportedOperationException("Método não implementado");
+	try {
+	    turmaRemote.cadastrarTurma(Conversor.cast(entity));
+	} catch (Exception ex) {
+	    throw new RuntimeException(ex);
+	}
     }
 
     @Override
     protected void doUploadAll(Collection<Turma> entities) {
-	// TODO Auto-generated method stub
-	throw new UnsupportedOperationException("Método não implementado");
+	for (Turma turma : entities) {
+	    doUpload(turma);
+	}
     }
 
     protected Collection<Turma> doDownloadAllByAluno(Aluno aluno) {
 	try {
-	    List<Turma> turmas = new ArrayList<Turma>();
-	    for (br.furb.guniver.modelo.Turma turmaWS : turmaRemote.getTurmasAluno(aluno.getCodigo())) {
-		turmas.add(Conversor.cast(turmaWS));
-	    }
-
+	    List<Turma> turmas = centralAluno.getTurmasAluno(aluno.getCodigo());
 	    return turmas;
 	} catch (Exception ex) {
 	    throw new RuntimeException(ex);
