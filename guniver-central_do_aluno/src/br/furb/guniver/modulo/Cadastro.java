@@ -54,10 +54,14 @@ public class Cadastro {
 	return cursoRemote.buscarCurso(codigoCurso);
     }
 
-    public List<Disciplina> getDisciplinas(int codigoCurso) throws RemoteException {
-	return disciplinaRemote.getDisciplinas(codigoCurso);
+    public List<Disciplina> getDisciplinasCurso(int codigoCurso) throws RemoteException {
+	return disciplinaRemote.getDisciplinasCurso(codigoCurso);
     }
-
+    
+    public List<Disciplina> getDisciplinas() throws RemoteException {
+	return disciplinaRemote.getDisciplinas();
+    }
+    
     public List<Turma> getTurmas(int codigoAluno) throws RemoteException {
 	return turmaRemote.getTurmas(codigoAluno);
     }

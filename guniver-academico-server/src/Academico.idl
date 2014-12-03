@@ -1,31 +1,14 @@
 module academico {
 
-	struct Aluno {
-		long codigo;
-		string nome;
-	};
-
-	struct Disciplina{
-		long codigo;
-		string nome;
-	};
-
-	struct Turma {
-		long codigo;
-		short ano;
-		short semestre;
-		Disciplina disciplina;
-	};
-
 	struct Matricula {
-		Aluno aluno;
-		Turma turma;
+		long codigoAluno;
+		long codigoTurma;
 	};
 
 	struct Prova {
 		string descricao;
-		Aluno aluno;
-		Turma turma;
+		long codigoAluno;
+		long codigoTurma;
 		float nota;
 	};
 
@@ -46,7 +29,6 @@ module academico {
   interface IAcademico {
 	  provas getProvasAluno(in long codigoAluno, in long codigoTurma);
 	  provas getProvas();
-	  Matricula getMatricula(in long codigoAluno, in long codigoDisciplina);
 	  matriculas getMatriculasAluno(in long codigoAluno);
 	  matriculas getMatriculasTurma(in long codigoTurma);
 	  //matriculas getMatriculasSemestre(in long codigoAluno, in short ano, in short semestre);

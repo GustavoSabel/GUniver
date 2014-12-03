@@ -1,9 +1,7 @@
 package br.furb.guniver.sync;
 
 import java.net.URL;
-import java.rmi.Naming;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.omg.CORBA.ORB;
 import org.omg.CORBA.StringHolder;
@@ -12,12 +10,12 @@ import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.InvalidName;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
+import br.furb.guniver.central_do_aluno.stubs.Aluno;
 import br.furb.guniver.central_do_aluno.stubs.CentralAluno;
 import br.furb.guniver.central_do_aluno.stubs.CentralAlunoService;
 import br.furb.guniver.central_do_aluno.stubs.Prova;
 import br.furb.guniver.modelo.academico.IAcademico;
 import br.furb.guniver.modelo.academico.IAcademicoHelper;
-import br.furb.guniver.rmi.AlunoRemote;
 import br.furb.guniver.utils.ConversorAcademico;
 
 public class ProvasSynchronizer extends EntitiesSynchronizer<Prova> {
@@ -61,7 +59,14 @@ public class ProvasSynchronizer extends EntitiesSynchronizer<Prova> {
     @Override
     protected Collection<Prova> doDownloadAll() {
 	try {
-	    return centralAluno.getProvas();
+
+	    Collection<Prova> provas = centralAluno.getProvas();
+	    for (Prova prova : provas) {
+		Aluno aluno = centralAluno.getAluno(prova.getAluno().getCodigo());
+		prova.setAluno(aluno);
+	    }
+
+	    return provas;
 	} catch (Exception ex) {
 	    throw new RuntimeException(ex);
 	}

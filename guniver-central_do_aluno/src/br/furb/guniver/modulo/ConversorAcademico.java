@@ -42,25 +42,11 @@ public class ConversorAcademico {
     }
 
     public static Prova cast(br.furb.guniver.modelo.academico.Prova prova) {
-	return new Prova(prova.descricao, ConversorAcademico.cast(prova.aluno), ConversorAcademico.cast(prova.turma),
-		prova.nota);
-    }
-
-    private static Turma cast(br.furb.guniver.modelo.academico.Turma turma) {
-	return new Turma(turma.codigo, ConversorAcademico.cast(turma.disciplina), turma.ano, turma.semestre);
-    }
-
-    private static Disciplina cast(br.furb.guniver.modelo.academico.Disciplina disciplina) {
-	return new Disciplina(disciplina.codigo, disciplina.nome, null);
-	//TODO: Verifica onde pegar a Turma
-    }
-
-    private static Aluno cast(br.furb.guniver.modelo.academico.Aluno aluno) {
-	return new Aluno(aluno.codigo, aluno.nome);
+	return new Prova(prova.descricao, new Aluno(prova.codigoAluno), new Turma(prova.codigoTurma), prova.nota);
     }
 
     private static Matricula cast(br.furb.guniver.modelo.academico.Matricula matricula) {
-	return new Matricula(ConversorAcademico.cast(matricula.aluno), ConversorAcademico.cast(matricula.turma));
+	return new Matricula(new Aluno(matricula.codigoAluno), new Turma(matricula.codigoTurma));
     }
 
     private static Horario cast(br.furb.guniver.modelo.academico.Horario horario) {

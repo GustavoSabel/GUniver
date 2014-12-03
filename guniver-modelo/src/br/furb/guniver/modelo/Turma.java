@@ -16,6 +16,10 @@ public class Turma  implements Serializable{
 	this.semestre = semestre;
     }
 
+    public Turma(int codigo) {
+	this.codigo = codigo;
+    }
+
     public int getCodigo() {
 	return codigo;
     }

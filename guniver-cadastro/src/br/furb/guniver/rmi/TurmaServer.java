@@ -72,8 +72,8 @@ public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
 	    System.out.println("Número de matriculas: " + matriculasAcademico.length);
 
 	    for (Matricula matricula : matriculasAcademico) {
-		System.out.println("matricula.aluno.codigo: " + matricula.aluno.codigo);
-		Aluno aluno = BancoDados.getIntancia().getAluno(matricula.aluno.codigo);
+		System.out.println("matricula.aluno.codigo: " + matricula.codigoAluno);
+		Aluno aluno = BancoDados.getIntancia().getAluno(matricula.codigoAluno);
 		if (aluno != null) {
 		    alunos.add(aluno);
 		}
@@ -94,7 +94,7 @@ public class TurmaServer extends UnicastRemoteObject implements TurmaRemote {
 		    .buscarMatriculas(new Aluno(codAluno, ""));
 
 	    for (Matricula matricula : matriculasAcademico) {
-		Turma turma = BancoDados.getIntancia().getTurma(matricula.turma.codigo);
+		Turma turma = BancoDados.getIntancia().getTurma(matricula.codigoTurma);
 		if (turma != null) {
 		    turmas.add(turma);
 		}

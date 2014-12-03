@@ -97,6 +97,21 @@ public interface CentralAluno {
      * 
      * @param arg0
      * @return
+     *     returns java.util.List<br.furb.guniver.cliente.stubs.Disciplina>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getDisciplinasCurso", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.GetDisciplinasCurso")
+    @ResponseWrapper(localName = "getDisciplinasCursoResponse", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.GetDisciplinasCursoResponse")
+    @Action(input = "http://webservice.guniver.furb.br/CentralAluno/getDisciplinasCursoRequest", output = "http://webservice.guniver.furb.br/CentralAluno/getDisciplinasCursoResponse")
+    public List<Disciplina> getDisciplinasCurso(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
      *     returns java.util.List<br.furb.guniver.cliente.stubs.Mensalidade>
      */
     @WebMethod

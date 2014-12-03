@@ -36,10 +36,12 @@ public class ObjectFactory {
     private final static QName _RemoverCompromisso_QNAME = new QName("http://webservice.guniver.furb.br/", "removerCompromisso");
     private final static QName _GetCompromissosAluno_QNAME = new QName("http://webservice.guniver.furb.br/", "getCompromissosAluno");
     private final static QName _GetProvasAluno_QNAME = new QName("http://webservice.guniver.furb.br/", "getProvasAluno");
+    private final static QName _GetDisciplinasCursoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getDisciplinasCursoResponse");
     private final static QName _GetMatriculasTurma_QNAME = new QName("http://webservice.guniver.furb.br/", "getMatriculasTurma");
     private final static QName _GetCompromissosResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getCompromissosResponse");
     private final static QName _GetMatriculasAluno_QNAME = new QName("http://webservice.guniver.furb.br/", "getMatriculasAluno");
     private final static QName _GetAlunosTurma_QNAME = new QName("http://webservice.guniver.furb.br/", "getAlunosTurma");
+    private final static QName _GetDisciplinasCurso_QNAME = new QName("http://webservice.guniver.furb.br/", "getDisciplinasCurso");
     private final static QName _CriarCompromissoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "criarCompromissoResponse");
     private final static QName _GetProvasAlunoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getProvasAlunoResponse");
     private final static QName _GetCompromissos_QNAME = new QName("http://webservice.guniver.furb.br/", "getCompromissos");
@@ -150,6 +152,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetDisciplinasCurso }
+     * 
+     */
+    public GetDisciplinasCurso createGetDisciplinasCurso() {
+        return new GetDisciplinasCurso();
+    }
+
+    /**
      * Create an instance of {@link GetAlunosTurma }
      * 
      */
@@ -179,6 +189,14 @@ public class ObjectFactory {
      */
     public GetMatriculasTurma createGetMatriculasTurma() {
         return new GetMatriculasTurma();
+    }
+
+    /**
+     * Create an instance of {@link GetDisciplinasCursoResponse }
+     * 
+     */
+    public GetDisciplinasCursoResponse createGetDisciplinasCursoResponse() {
+        return new GetDisciplinasCursoResponse();
     }
 
     /**
@@ -366,38 +384,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Disciplina }
-     * 
-     */
-    public Disciplina createDisciplina() {
-        return new Disciplina();
-    }
-
-    /**
-     * Create an instance of {@link Aluno }
-     * 
-     */
-    public Aluno createAluno() {
-        return new Aluno();
-    }
-
-    /**
-     * Create an instance of {@link Compromisso }
-     * 
-     */
-    public Compromisso createCompromisso() {
-        return new Compromisso();
-    }
-
-    /**
-     * Create an instance of {@link Horario }
-     * 
-     */
-    public Horario createHorario() {
-        return new Horario();
-    }
-
-    /**
      * Create an instance of {@link Mensalidade }
      * 
      */
@@ -414,19 +400,51 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Matricula }
-     * 
-     */
-    public Matricula createMatricula() {
-        return new Matricula();
-    }
-
-    /**
      * Create an instance of {@link Turma }
      * 
      */
     public Turma createTurma() {
         return new Turma();
+    }
+
+    /**
+     * Create an instance of {@link Disciplina }
+     * 
+     */
+    public Disciplina createDisciplina() {
+        return new Disciplina();
+    }
+
+    /**
+     * Create an instance of {@link Compromisso }
+     * 
+     */
+    public Compromisso createCompromisso() {
+        return new Compromisso();
+    }
+
+    /**
+     * Create an instance of {@link Aluno }
+     * 
+     */
+    public Aluno createAluno() {
+        return new Aluno();
+    }
+
+    /**
+     * Create an instance of {@link Horario }
+     * 
+     */
+    public Horario createHorario() {
+        return new Horario();
+    }
+
+    /**
+     * Create an instance of {@link Matricula }
+     * 
+     */
+    public Matricula createMatricula() {
+        return new Matricula();
     }
 
     /**
@@ -546,6 +564,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDisciplinasCursoResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getDisciplinasCursoResponse")
+    public JAXBElement<GetDisciplinasCursoResponse> createGetDisciplinasCursoResponse(GetDisciplinasCursoResponse value) {
+        return new JAXBElement<GetDisciplinasCursoResponse>(_GetDisciplinasCursoResponse_QNAME, GetDisciplinasCursoResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetMatriculasTurma }{@code >}}
      * 
      */
@@ -579,6 +606,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getAlunosTurma")
     public JAXBElement<GetAlunosTurma> createGetAlunosTurma(GetAlunosTurma value) {
         return new JAXBElement<GetAlunosTurma>(_GetAlunosTurma_QNAME, GetAlunosTurma.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDisciplinasCurso }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getDisciplinasCurso")
+    public JAXBElement<GetDisciplinasCurso> createGetDisciplinasCurso(GetDisciplinasCurso value) {
+        return new JAXBElement<GetDisciplinasCurso>(_GetDisciplinasCurso_QNAME, GetDisciplinasCurso.class, null, value);
     }
 
     /**

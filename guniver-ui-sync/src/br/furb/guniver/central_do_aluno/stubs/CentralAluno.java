@@ -97,6 +97,21 @@ public interface CentralAluno {
      * 
      * @param arg0
      * @return
+     *     returns java.util.List<br.furb.guniver.central_do_aluno.stubs.Disciplina>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getDisciplinasCurso", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.central_do_aluno.stubs.GetDisciplinasCurso")
+    @ResponseWrapper(localName = "getDisciplinasCursoResponse", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.central_do_aluno.stubs.GetDisciplinasCursoResponse")
+    @Action(input = "http://webservice.guniver.furb.br/CentralAluno/getDisciplinasCursoRequest", output = "http://webservice.guniver.furb.br/CentralAluno/getDisciplinasCursoResponse")
+    public List<Disciplina> getDisciplinasCurso(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
      *     returns java.util.List<br.furb.guniver.central_do_aluno.stubs.Mensalidade>
      */
     @WebMethod
@@ -254,7 +269,6 @@ public interface CentralAluno {
 
     /**
      * 
-     * @param arg0
      * @return
      *     returns java.util.List<br.furb.guniver.central_do_aluno.stubs.Disciplina>
      */
@@ -263,9 +277,7 @@ public interface CentralAluno {
     @RequestWrapper(localName = "getDisciplinas", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.central_do_aluno.stubs.GetDisciplinas")
     @ResponseWrapper(localName = "getDisciplinasResponse", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.central_do_aluno.stubs.GetDisciplinasResponse")
     @Action(input = "http://webservice.guniver.furb.br/CentralAluno/getDisciplinasRequest", output = "http://webservice.guniver.furb.br/CentralAluno/getDisciplinasResponse")
-    public List<Disciplina> getDisciplinas(
-        @WebParam(name = "arg0", targetNamespace = "")
-        int arg0);
+    public List<Disciplina> getDisciplinas();
 
     /**
      * 

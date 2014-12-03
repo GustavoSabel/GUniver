@@ -77,7 +77,7 @@ public class Client {
 		disc = new Disciplina(20, "Banco de Dados", curso);
 		disciplinaRemote.cadastrarDisciplina(disc);
 		System.out.println("Consultar disciplinas");
-		for (Disciplina d : disciplinaRemote.getDisciplinas(1)) {
+		for (Disciplina d : disciplinaRemote.getDisciplinasCurso(1)) {
 			System.out.println(" - Disciplina = " + d.getCodigo() + " - "
 					+ d.getNome());
 		}

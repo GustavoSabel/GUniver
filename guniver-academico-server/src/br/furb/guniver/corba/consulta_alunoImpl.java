@@ -3,13 +3,10 @@ package br.furb.guniver.corba;
 import java.util.ArrayList;
 import java.util.List;
 import org.omg.CORBA.StringHolder;
-import br.furb.guniver.modelo.academico.Aluno;
-import br.furb.guniver.modelo.academico.Disciplina;
 import br.furb.guniver.modelo.academico.Horario;
 import br.furb.guniver.modelo.academico.IAcademicoPOA;
 import br.furb.guniver.modelo.academico.Matricula;
 import br.furb.guniver.modelo.academico.Prova;
-import br.furb.guniver.modelo.academico.Turma;
 
 class consulta_alunoImpl extends IAcademicoPOA {
 
@@ -20,8 +17,8 @@ class consulta_alunoImpl extends IAcademicoPOA {
 
 	List<Prova> provasAluno = new ArrayList<>();
 	for (Prova prova : BancoDados.getInstance().provas) {
-	    if (prova.aluno.codigo == codigoAluno) {
-		if (prova.turma.codigo == codigoTurma) {
+	    if (prova.codigoAluno == codigoAluno) {
+		if (prova.codigoTurma == codigoTurma) {
 		    provasAluno.add(prova);
 		}
 	    }
@@ -45,33 +42,12 @@ class consulta_alunoImpl extends IAcademicoPOA {
     }
 
     @Override
-    public Matricula getMatricula(int codigoAluno, int codigoDisciplina) {
-
-	System.out.println("consulta_alunoImpl.getMatricula()");
-
-	// Não pode retorna NULL se não encontrar a matricula
-	Matricula matriculaDisci = new Matricula(new Aluno(0, ""), new Turma(0, (short) 0, (short) 0, new Disciplina(0,
-		"")));
-
-	for (Matricula matricula : BancoDados.getInstance().matriculas) {
-	    if (matricula.aluno.codigo == codigoAluno) {
-		if (matricula.turma.disciplina.codigo == codigoDisciplina) {
-		    matriculaDisci = matricula;
-		    break;
-		}
-	    }
-	}
-
-	return matriculaDisci;
-    }
-
-    @Override
     public Matricula[] getMatriculasAluno(int codigoAluno) {
 	System.out.println("consulta_alunoImpl.getMatriculasAluno()");
 
 	List<Matricula> matriculasAluno = new ArrayList<Matricula>();
 	for (Matricula matricula : BancoDados.getInstance().matriculas) {
-	    if (matricula.aluno.codigo == codigoAluno) {
+	    if (matricula.codigoAluno == codigoAluno) {
 		matriculasAluno.add(matricula);
 	    }
 	}
@@ -81,14 +57,14 @@ class consulta_alunoImpl extends IAcademicoPOA {
 
 	return mats;
     }
-
+    
     @Override
     public Matricula[] getMatriculasTurma(int codigoTurma) {
 	System.out.println("getMatriculasTurma(Turma turma)");
 
 	List<Matricula> matriculasAluno = new ArrayList<Matricula>();
 	for (Matricula matricula : BancoDados.getInstance().matriculas) {
-	    if (matricula.turma.codigo == codigoTurma) {
+	    if (matricula.codigoTurma == codigoTurma) {
 		matriculasAluno.add(matricula);
 	    }
 	}
@@ -99,33 +75,17 @@ class consulta_alunoImpl extends IAcademicoPOA {
 	return mats;
     }
 
-    /* @Override
-     public Matricula[] getMatriculasSemestre(int codigoAluno, short ano, short semestre) {
-    System.out.println("getMatriculasSemestre(Aluno aluno, short ano, short semestre)");
-    
-    List<Matricula> matriculasSemestre = new ArrayList<>();
-    for (Matricula matricula : BancoDados.getInstance().matriculas) {
-        if (matricula.turma.ano == ano && matricula.turma.semestre == semestre) {
-    	matriculasSemestre.add(matricula);
-        }
-    }
-    Matricula[] mats = new Matricula[matriculasSemestre.size()];
-    mats = matriculasSemestre.toArray(mats);
-    return mats;
-     }
-    */
     @Override
     public boolean cadastrarMatricula(int codigoAluno, int codigoTurma, StringHolder mensagemErro) {
 	System.out.println("matricular(Aluno aluno, Turma turma, StringHolder mensagemErro)");
 
 	for (Matricula matricula : BancoDados.getInstance().matriculas) {
-	    if (matricula.turma.codigo == codigoTurma && matricula.aluno.codigo == codigoAluno) {
+	    if (matricula.codigoTurma == codigoTurma && matricula.codigoAluno == codigoAluno) {
 		mensagemErro.value = "Aluno já foi matriculado para esta turma.";
 		return false;
 	    }
 	}
-	BancoDados.getInstance().matriculas.add(new Matricula(new Aluno(codigoAluno, ""), new Turma(codigoTurma,
-		(short) 0, (short) 0, new Disciplina(0, ""))));
+	BancoDados.getInstance().matriculas.add(new Matricula(codigoAluno, codigoTurma));
 	mensagemErro.value = "";
 	return true;
     }
@@ -138,10 +98,6 @@ class consulta_alunoImpl extends IAcademicoPOA {
 	return horarios;
     }
 
-    private static void alert(String msg) {
-	System.out.println(msg);
-    }
-
     @Override
     public boolean cadastrarProva(Prova prova, StringHolder mensagemErro) {
 	System.out.println("cadastrarProva(Prova prova, StringHolder mensagemErro)");
@@ -149,57 +105,5 @@ class consulta_alunoImpl extends IAcademicoPOA {
 	mensagemErro.value = "";
 	return true;
     }
-
-    /*
-    	@Override
-    	public boolean cadastrarTurma(Turma turma, StringHolder mensagemErro) {
-
-    		for (Turma turmaCadastrada : BancoDados.getInstance().turmas) {
-    			if (turmaCadastrada.ano == turma.ano
-    					&& turmaCadastrada.semestre == turma.semestre
-    					&& turmaCadastrada.codigo == turma.codigo) {
-    				mensagemErro.value = "Turma já cadastrada";
-    				return false;
-    			}
-    		}
-    		BancoDados.getInstance().turmas.add(turma);
-    		mensagemErro.value = "";
-    		return true;
-    	}
-
-    	@Override
-    	public boolean cadastrarDisciplina(Disciplina disciplina,
-    			StringHolder mensagemErro) {
-    		for (Disciplina disci : BancoDados.getInstance().disciplinas) {
-    			if (disci.codigo == disciplina.codigo) {
-    				mensagemErro.value = "Disciplina já cadastrada com o código "
-    						+ disciplina.codigo;
-    				return false;
-    			}
-    		}
-    		BancoDados.getInstance().disciplinas.add(disciplina);
-    		mensagemErro.value = "";
-    		return true;
-    	}
-
-    	@Override
-    	public boolean getDisciplina(int codigo, DisciplinaHolder disciplina) {
-    		for (Disciplina disc : BancoDados.getInstance().disciplinas) {
-    			if (disc.codigo == codigo) {
-    				disciplina.value = disc;
-    				return true;
-    			}
-    		}
-    		disciplina.value = new Disciplina(0, "");
-    		return false;
-    	}
-
-    	@Override
-    	public Disciplina[] getDisciplinas() {
-    		Disciplina[] disciplinas = new Disciplina[BancoDados.getInstance().disciplinas
-    				.size()];
-    		disciplinas = BancoDados.getInstance().disciplinas.toArray(disciplinas);
-    		return disciplinas;
-    	}
-    */
+ 
 }

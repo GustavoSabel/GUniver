@@ -9,7 +9,6 @@ import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.InvalidName;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
-import br.furb.guniver.modelo.academico.Aluno;
 import br.furb.guniver.modelo.academico.Horario;
 import br.furb.guniver.modelo.academico.IAcademico;
 import br.furb.guniver.modelo.academico.IAcademicoHelper;
@@ -42,7 +41,7 @@ public class Academico {
 
     public void cadastrarMatricula(Matricula matricula) throws Exception {
 	StringHolder mensagemErro = new StringHolder();
-	getAcademico().cadastrarMatricula(matricula.aluno.codigo, matricula.turma.codigo, mensagemErro);
+	getAcademico().cadastrarMatricula(matricula.codigoAluno, matricula.codigoTurma, mensagemErro);
     }
 
     public Collection<Prova> getProvas(int codigoAluno, int codigoTurma) throws Exception {

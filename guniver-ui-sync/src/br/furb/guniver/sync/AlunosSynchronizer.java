@@ -22,7 +22,7 @@ public class AlunosSynchronizer extends EntitiesSynchronizer<Aluno> {
 	try {
 	    URL url = new URL("http://" + moduleUrl + ":8080/centralAluno");
 	    alunoRemote = (AlunoRemote) Naming.lookup("//" + moduleUrl + "/AlunoRemote");
-
+	    
 	    centralAluno = new CentralAlunoService(url).getCentralAlunoPort();
 	} catch (Exception ex) {
 	    throw new RuntimeException("Erro ao conectar com " + moduleUrl, ex);

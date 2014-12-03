@@ -12,9 +12,13 @@ public class Aluno implements Serializable {
     public Aluno() {
     }
 
-    public Aluno(int codigo, String nomeUsuario) {
+    public Aluno(int codigo) {
 	this();
 	this.codigo = codigo;
+    }
+    
+    public Aluno(int codigo, String nomeUsuario) {
+	this(codigo);
 	this.nomeUsuario = nomeUsuario;
     }
 
