@@ -95,7 +95,7 @@ public abstract class EntitiesSynchronizer<EntityType> {
 		return submit(uploadAllTask);
 	}
 
-	private Future<?> submit(SynchronizerTask<?> task) {
+	protected Future<?> submit(SynchronizerTask<?> task) {
 		Future<?> future;
 		synchronized (futures) {
 			future = executor.submit(task);
@@ -183,7 +183,7 @@ public abstract class EntitiesSynchronizer<EntityType> {
 	 * @param <ParameterType>
 	 *            tipo do parâmetro necessário para executar a operação.
 	 */
-	private abstract class SynchronizerTask<ParameterType> implements Runnable {
+	protected abstract class SynchronizerTask<ParameterType> implements Runnable {
 
 		protected Future<?> future;
 		private final ParameterType parameter;
