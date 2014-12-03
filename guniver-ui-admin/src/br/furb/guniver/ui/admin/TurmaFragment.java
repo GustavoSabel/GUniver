@@ -28,7 +28,6 @@ import br.furb.guniver.central_do_aluno.stubs.Disciplina;
 import br.furb.guniver.central_do_aluno.stubs.Turma;
 import br.furb.guniver.ui.Fragment;
 
-
 @SuppressWarnings("serial")
 public class TurmaFragment extends Fragment {
 
@@ -39,6 +38,7 @@ public class TurmaFragment extends Fragment {
 	private boolean fChangingData;
 	private Turma selectedTurma;
 	private JPanel panelManageTurmas;
+	private boolean isPicking;
 
 	public TurmaFragment(Controller controller) {
 		this.controller = controller;
@@ -68,7 +68,7 @@ public class TurmaFragment extends Fragment {
 
 			@Override
 			public boolean isCellEditable(int row, int column) {
-				return column != 3;
+				return !isPicking && column != 3;
 			}
 		};
 
@@ -205,6 +205,7 @@ public class TurmaFragment extends Fragment {
 	}
 
 	public void setPickUpMode(boolean isPicking) {
+		this.isPicking = isPicking;
 		if (isPicking) {
 			remove(panelManageTurmas);
 		} else {

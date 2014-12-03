@@ -32,6 +32,7 @@ public class DisciplinaFragment extends Fragment {
 	private List<Disciplina> disciplinas = new ArrayList<>();
 	private JButton btnRemover;
 	private Disciplina selectedDisciplina;
+	private boolean isPicking;
 
 	public DisciplinaFragment(Controller controller) {
 		this.controller = controller;
@@ -52,13 +53,18 @@ public class DisciplinaFragment extends Fragment {
 		add(scrollPaneTable, gbc_scrollPaneTable);
 
 		tableDisciplinas = new JTable();
-		dataModel = new DefaultTableModel(new Object[][] { { null, null }, },
-				new String[] { "C\u00F3digo", "Nome" }) {
+		dataModel = new DefaultTableModel(new Object[][] { { null, null }, }, new String[] { "C\u00F3digo", "Nome" }) {
 			Class[] columnTypes = new Class[] { Long.class, String.class };
 
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return !isPicking;
+			}
+
 		};
 
 		dataModel.addTableModelListener(new TableModelListener() {
@@ -97,8 +103,7 @@ public class DisciplinaFragment extends Fragment {
 							disciplinas.add(disciplina);
 							reloadTable();
 						}
-						DisciplinaFragment.this.controller
-								.uploadDisciplina(disciplina);
+						DisciplinaFragment.this.controller.uploadDisciplina(disciplina);
 					}
 				}
 			}
@@ -163,8 +168,9 @@ public class DisciplinaFragment extends Fragment {
 		fChangingData = false;
 	}
 
-	public void setPickUpMode(boolean picking) {
-		if (picking) {
+	public void setPickUpMode(boolean isPicking) {
+		this.isPicking = isPicking;
+		if (isPicking) {
 			remove(btnRemover);
 		} else {
 			GridBagConstraints gbc_btnRemover = new GridBagConstraints();

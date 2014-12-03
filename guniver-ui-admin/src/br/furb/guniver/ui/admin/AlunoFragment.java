@@ -38,6 +38,7 @@ public class AlunoFragment extends Fragment {
 	private boolean fChangingData;
 	private Aluno selectedAluno;
 	private JButton btnRemover;
+	private boolean pickingUp;
 
 	public AlunoFragment(Controller controller) {
 		this.controller = controller;
@@ -65,6 +66,12 @@ public class AlunoFragment extends Fragment {
 			public Class<?> getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return !pickingUp;
+			}
+
 		};
 
 		dataModel.addTableModelListener(new TableModelListener() {
@@ -192,6 +199,7 @@ public class AlunoFragment extends Fragment {
 	}
 
 	public void setPickUpMode(boolean pickingUp) {
+		this.pickingUp = pickingUp;
 		if (pickingUp) {
 			remove(btnRemover);
 		} else {
