@@ -9,7 +9,7 @@ import br.furb.guniver.modelo.academico.IAcademicoHelper;
 import br.furb.guniver.modelo.academico.Matricula;
 import br.furb.guniver.modelo.academico.Prova;
 
-public class cliente {
+public class Cliente {
 
     public static void main(String args[]) {
 	try {

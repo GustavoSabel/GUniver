@@ -14,7 +14,7 @@ REM ACADEMICO
 cd %caminhoAcademico%
 set classpath=.
 start "ORBD" %jdk%\orbd
-start "Servidor - Academico" %jdk%\java %caminhoPadrao%.corba.servidor
+start "Servidor - Academico" %jdk%\java %caminhoPadrao%.corba.Servidor
 
 
 REM CENTRAL DO ALUNO

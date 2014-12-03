@@ -7,7 +7,13 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
+import javax.swing.DefaultListModel;
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,21 +25,38 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import br.furb.guniver.central_do_aluno.stubs.Aluno;
+import br.furb.guniver.central_do_aluno.stubs.Curso;
+import br.furb.guniver.central_do_aluno.stubs.Disciplina;
+import br.furb.guniver.central_do_aluno.stubs.Horario;
+import br.furb.guniver.central_do_aluno.stubs.Prova;
+import br.furb.guniver.central_do_aluno.stubs.Turma;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 
+	private static final String CODIGO_PATTERN = "(%d)";
+	private static final String CURSO_PATTERN = "%s (%d)";
 	private JPanel contentPane;
 	private JTextField txtCodigo;
 	private JTextField txtUsuario;
 	private JTextField txtNome;
 	private JTable tableProvas;
 	private JTable tableHorario;
+
 	private PortalController portalController;
 	private Aluno aluno;
+	private List<Turma> turmas = new LinkedList<>();
+	private Turma selectedTurma;
+	private DefaultListModel<Integer> turmasListModel;
+	private JLabel lblNomeDisciplina;
+	private JLabel lblCodigoDisciplina;
+	private JLabel lblDetalhesCurso;
+	private DefaultTableModel provasModel;
 
 	/**
 	 * Create the frame.
@@ -182,7 +205,18 @@ public class MainWindow extends JFrame {
 		JScrollPane scrollPaneListaTurmas = new JScrollPane();
 		panelTurmas.add(scrollPaneListaTurmas);
 
-		JList listTurmas = new JList();
+		turmasListModel = new DefaultListModel<>();
+		JList<Integer> listTurmas = new JList<>(turmasListModel);
+		DefaultListSelectionModel selectionModel = new DefaultListSelectionModel();
+		selectionModel.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				int index = e.getFirstIndex();
+				setSelectedTurma(index < 0 ? null : turmas.get(index));
+			}
+		});
+		listTurmas.setSelectionModel(selectionModel);
 		listTurmas.setBackground(new Color(245, 245, 245));
 		scrollPaneListaTurmas.setViewportView(listTurmas);
 
@@ -226,17 +260,14 @@ public class MainWindow extends JFrame {
 		panelDetalheTurma.add(panelTurmaDetailDisciplina, gbc_panelTurmaDetailDisciplina);
 		panelTurmaDetailDisciplina.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 0));
 
-		JLabel lblNomeDisciplina = new JLabel("Nome Disciplina");
+		lblNomeDisciplina = new JLabel("Nome Disciplina");
 		lblNomeDisciplina.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
 		panelTurmaDetailDisciplina.add(lblNomeDisciplina);
 
-		JLabel labelSepDisciplina = new JLabel("-");
-		panelTurmaDetailDisciplina.add(labelSepDisciplina);
-
-		JLabel lblCodigoDisciplina = new JLabel("(Codigo)");
+		lblCodigoDisciplina = new JLabel("(Codigo)");
 		panelTurmaDetailDisciplina.add(lblCodigoDisciplina);
 
-		JLabel lblDetalhesCurso = new JLabel("Nome Curso - (Codigo)");
+		lblDetalhesCurso = new JLabel("Nome Curso (Codigo)");
 		GridBagConstraints gbc_lblDetalhesCurso = new GridBagConstraints();
 		gbc_lblDetalhesCurso.insets = new Insets(0, 10, 0, 0);
 		gbc_lblDetalhesCurso.anchor = GridBagConstraints.NORTHWEST;
@@ -258,13 +289,14 @@ public class MainWindow extends JFrame {
 		panelProvas.add(scrollPaneProvas);
 
 		tableProvas = new JTable();
-		tableProvas.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Descri\u00E7\u00E3o", "Nota" }) {
+		provasModel = new DefaultTableModel(new Object[][] {}, new String[] { "Descri\u00E7\u00E3o", "Nota" }) {
 			Class[] columnTypes = new Class[] { String.class, Double.class };
 
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-		});
+		};
+		tableProvas.setModel(provasModel);
 		tableProvas.setColumnSelectionAllowed(true);
 		tableProvas.setCellSelectionEnabled(true);
 		tableProvas.setFillsViewportHeight(true);
@@ -302,6 +334,50 @@ public class MainWindow extends JFrame {
 		txtCodigo.setText(String.valueOf(aluno.getCodigo()));
 		txtUsuario.setText(aluno.getNomeUsuario());
 		txtNome.setText(aluno.getNome());
+	}
+
+	public void setTurmas(Collection<Turma> turmas) {
+		this.turmas.clear();
+		this.turmas.addAll(turmas);
+
+		turmasListModel.clear();
+		for (Turma turma : turmas) {
+			turmasListModel.addElement(turma.getCodigo());
+		}
+	}
+
+	public void updateTurma(Turma downloadedEntity) {
+		setTurmas(new ArrayList<>(turmas));
+	}
+
+	private void setSelectedTurma(Turma turma) {
+		this.selectedTurma = turma;
+		boolean turmaIsNotNull = turma == null;
+		lblCodigoDisciplina.setVisible(turmaIsNotNull);
+		lblDetalhesCurso.setVisible(turmaIsNotNull);
+		lblNomeDisciplina.setVisible(turmaIsNotNull);
+		if (turmaIsNotNull) {
+			Disciplina disciplina = turma.getDisciplina();
+			lblCodigoDisciplina.setText(String.format(CODIGO_PATTERN, disciplina.getCodigo()));
+			Curso curso = disciplina.getCurso();
+			lblDetalhesCurso.setText(String.format(CURSO_PATTERN, curso.getDescricao(), curso.getCodigo()));
+
+			portalController.downloadProvas(turma, aluno);
+			portalController.downloadHorario(turma);
+		} else {
+			setProvas(null);
+			setHorarios(null);
+		}
+	}
+
+	private void setHorarios(Collection<Horario> horarios) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void setProvas(Collection<Prova> provas) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

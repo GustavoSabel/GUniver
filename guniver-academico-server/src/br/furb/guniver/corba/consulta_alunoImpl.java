@@ -121,12 +121,13 @@ class consulta_alunoImpl extends IAcademicoPOA {
     @Override
     public int cadastrarProva(Prova prova, StringHolder mensagemErro) {
 	System.out.println("cadastrarProva(Prova prova, StringHolder mensagemErro)");
-
+	System.out.println(" - Codigo: " + prova.codigo);
 	mensagemErro.value = "";
 	
 	if (prova.codigo <= 0) {
 	    prova.codigo = BancoDados.getInstance().ultimoIdProva++;
 	    BancoDados.getInstance().provas.add(prova);
+	    System.out.println(" - Prova Gravada com o codigo " + prova.codigo);
 	} else {
 	    boolean encontrou = false;
 	    for (Prova provaBanco : BancoDados.getInstance().provas) {
@@ -136,9 +137,12 @@ class consulta_alunoImpl extends IAcademicoPOA {
 		    provaBanco.descricao = prova.descricao;
 		    provaBanco.nota = prova.nota;
 		    encontrou = true;
+
+		    System.out.println(" - Prova Alterada");
 		}
 	    }
 	    if (!encontrou) {
+		System.out.println(" - Prova Não Encontrada");
 		mensagemErro.value = "Não foi possivel encontrar nenhuma prova com o código " + prova.codigo;
 		return 0;
 	    }

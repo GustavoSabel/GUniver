@@ -9,7 +9,7 @@ import org.omg.PortableServer.POAHelper;
 import br.furb.guniver.modelo.academico.IAcademico;
 import br.furb.guniver.modelo.academico.IAcademicoHelper;
 
-public class servidor {
+public class Servidor {
 
     public static void main(String args[]) {
 	try {
