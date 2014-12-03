@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="aluno" type="{http://webservice.guniver.furb.br/}aluno" minOccurs="0"/>
+ *         &lt;element name="codigo" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="descricao" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="nota" type="{http://www.w3.org/2001/XMLSchema}float"/>
  *         &lt;element name="turma" type="{http://webservice.guniver.furb.br/}turma" minOccurs="0"/>
@@ -31,6 +32,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "prova", propOrder = {
     "aluno",
+    "codigo",
     "descricao",
     "nota",
     "turma"
@@ -38,6 +40,7 @@ import javax.xml.bind.annotation.XmlType;
 public class Prova {
 
     protected Aluno aluno;
+    protected int codigo;
     protected String descricao;
     protected float nota;
     protected Turma turma;
@@ -64,6 +67,22 @@ public class Prova {
      */
     public void setAluno(Aluno value) {
         this.aluno = value;
+    }
+
+    /**
+     * Gets the value of the codigo property.
+     * 
+     */
+    public int getCodigo() {
+        return codigo;
+    }
+
+    /**
+     * Sets the value of the codigo property.
+     * 
+     */
+    public void setCodigo(int value) {
+        this.codigo = value;
     }
 
     /**

@@ -23,6 +23,11 @@ import br.furb.guniver.modulo.Financeiro;
 @WebService
 public class CentralAluno {
 
+    private Academico academico;
+    public CentralAluno() {
+	academico = new Academico(Endereco.academico.getEndereco());
+    }
+    
     @WebMethod
     public void removerCompromisso(long codigoCompromisso) {
 	System.out.println("removerCompromisso");
@@ -59,7 +64,7 @@ public class CentralAluno {
 	Academico academico = new Academico(Endereco.academico.getEndereco());
 	return ConversorAcademico.castProvas(academico.getProvas(codigoAluno, codigoTurma));
     }
-    
+
     @WebMethod
     public Collection<Prova> getProvas() throws Exception {
 	System.out.println("CentralAluno.getProvas()");
@@ -84,8 +89,7 @@ public class CentralAluno {
     @WebMethod
     public Collection<Horario> getHorarios(int codigoTurma) throws Exception {
 	System.out.println("getHorarios");
-	Academico academico = new Academico(Endereco.academico.getEndereco());
-	return ConversorAcademico.castHorarios(academico.getHorarios(codigoTurma));
+	return ConversorAcademico.castHorarios(this.academico.getHorarios(codigoTurma));
     }
 
     @WebMethod
@@ -93,7 +97,7 @@ public class CentralAluno {
 	System.out.println("getAlunos");
 	return Cadastro.getInstancia().getAlunos();
     }
-    
+
     @WebMethod
     public Aluno getAluno(int codigoAluno) throws RemoteException {
 	System.out.println("getAluno");
@@ -111,7 +115,7 @@ public class CentralAluno {
 	System.out.println("CentralAluno.getDisciplinas()");
 	return Cadastro.getInstancia().getDisciplinasCurso(codigoCurso);
     }
-    
+
     @WebMethod
     public List<Disciplina> getDisciplinas() throws RemoteException {
 	System.out.println("CentralAluno.getDisciplinas()");
@@ -145,5 +149,13 @@ public class CentralAluno {
 	} else {
 	    return null;
 	}
+    }
+
+    @WebMethod
+    public int cadastrarMatricula(Matricula matricula) throws RemoteException {
+	br.furb.guniver.modelo.academico.Matricula matAca = new br.furb.guniver.modelo.academico.Matricula();
+	matAca.codigoAluno = matricula.getAluno().getCodigo();
+	matAca.codigoTurma = matricula.getTurma().getCodigo();
+	return academico.cadastrarMatricula(matAca);
     }
 }

@@ -57,7 +57,7 @@ class consulta_alunoImpl extends IAcademicoPOA {
 
 	return mats;
     }
-    
+
     @Override
     public Matricula[] getMatriculasTurma(int codigoTurma) {
 	System.out.println("getMatriculasTurma(Turma turma)");
@@ -76,34 +76,75 @@ class consulta_alunoImpl extends IAcademicoPOA {
     }
 
     @Override
-    public boolean cadastrarMatricula(int codigoAluno, int codigoTurma, StringHolder mensagemErro) {
+    public int cadastrarMatricula(Matricula matricula, StringHolder mensagemErro) {
 	System.out.println("matricular(Aluno aluno, Turma turma, StringHolder mensagemErro)");
 
-	for (Matricula matricula : BancoDados.getInstance().matriculas) {
-	    if (matricula.codigoTurma == codigoTurma && matricula.codigoAluno == codigoAluno) {
-		mensagemErro.value = "Aluno já foi matriculado para esta turma.";
-		return false;
+	mensagemErro.value = "";
+	
+	if (matricula.codigo <= 0) {
+	    for (Matricula matriculaBanco : BancoDados.getInstance().matriculas) {
+		if (matriculaBanco.codigoTurma == matricula.codigoTurma
+			&& matriculaBanco.codigoAluno == matricula.codigoAluno) {
+		    mensagemErro.value = "Aluno já foi matriculado para esta turma.";
+		    return 0;
+		}
+	    }
+	    matricula.codigo = BancoDados.getInstance().ultimoIdMatricula++;
+	    BancoDados.getInstance().matriculas.add(matricula);
+	} else {
+	    boolean encontrou = false;
+	    for (Matricula matriculaBanco : BancoDados.getInstance().matriculas) {
+		if (matriculaBanco.codigo == matricula.codigo) {
+		    matriculaBanco.codigoAluno = matricula.codigoAluno;
+		    matriculaBanco.codigoTurma = matricula.codigoTurma;
+		    encontrou = true;
+		}
+	    }
+	    if (!encontrou) {
+		mensagemErro.value = "Não foi possivel encontrar nenhuma matricula com o código " + matricula.codigo;
+		return 0;
 	    }
 	}
-	BancoDados.getInstance().matriculas.add(new Matricula(codigoAluno, codigoTurma));
-	mensagemErro.value = "";
-	return true;
+
+	return matricula.codigo;
     }
 
     @Override
     public Horario[] getHorarios(int codigoTurma) {
 	System.out.println("getHorarios()");
 
-	Horario[] horarios = new Horario[] { new Horario("18:30-20:10", "S410"), new Horario("20:20-22:00", "S415"), };
+	Horario[] horarios = new Horario[] { new Horario(1, "18:30-20:10", "S410"),
+		new Horario(2, "20:20-22:00", "S415"), };
 	return horarios;
     }
 
     @Override
-    public boolean cadastrarProva(Prova prova, StringHolder mensagemErro) {
+    public int cadastrarProva(Prova prova, StringHolder mensagemErro) {
 	System.out.println("cadastrarProva(Prova prova, StringHolder mensagemErro)");
-	BancoDados.getInstance().provas.add(prova);
+
 	mensagemErro.value = "";
-	return true;
+	
+	if (prova.codigo <= 0) {
+	    prova.codigo = BancoDados.getInstance().ultimoIdProva++;
+	    BancoDados.getInstance().provas.add(prova);
+	} else {
+	    boolean encontrou = false;
+	    for (Prova provaBanco : BancoDados.getInstance().provas) {
+		if (provaBanco.codigo == prova.codigo) {
+		    provaBanco.codigoAluno = prova.codigoAluno;
+		    provaBanco.codigoTurma = prova.codigoTurma;
+		    provaBanco.descricao = prova.descricao;
+		    provaBanco.nota = prova.nota;
+		    encontrou = true;
+		}
+	    }
+	    if (!encontrou) {
+		mensagemErro.value = "Não foi possivel encontrar nenhuma prova com o código " + prova.codigo;
+		return 0;
+	    }
+	}
+
+	return prova.codigo;
     }
- 
+
 }

@@ -2,8 +2,9 @@ package br.furb.guniver.modelo;
 
 import java.io.Serializable;
 
-public final class Prova  implements Serializable{
+public final class Prova implements Serializable {
 
+    private int codigo;
     private String descricao;
     private Aluno aluno;
     private Turma turma;
@@ -49,6 +50,14 @@ public final class Prova  implements Serializable{
 
     public void setNota(float nota) {
 	this.nota = nota;
+    }
+
+    public int getCodigo() {
+	return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+	this.codigo = codigo;
     }
 
 }

@@ -127,6 +127,21 @@ public interface CentralAluno {
      * 
      * @param arg0
      * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "cadastrarMatricula", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.CadastrarMatricula")
+    @ResponseWrapper(localName = "cadastrarMatriculaResponse", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.CadastrarMatriculaResponse")
+    @Action(input = "http://webservice.guniver.furb.br/CentralAluno/cadastrarMatriculaRequest", output = "http://webservice.guniver.furb.br/CentralAluno/cadastrarMatriculaResponse")
+    public int cadastrarMatricula(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Matricula arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
      *     returns br.furb.guniver.cliente.stubs.Compromisso
      */
     @WebMethod

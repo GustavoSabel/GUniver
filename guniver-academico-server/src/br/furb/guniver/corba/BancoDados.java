@@ -10,8 +10,13 @@ public class BancoDados {
     //public List<Aluno> alunos;
     //public List<Disciplina> disciplinas;
     //public List<Turma> turmas;
+
     public List<Prova> provas;
     public List<Matricula> matriculas;
+
+    public int ultimoIdProva = 1;
+    public int ultimoIdMatricula = 1;
+
     private static BancoDados instancia;
 
     private BancoDados() {
@@ -29,12 +34,12 @@ public class BancoDados {
     }
 
     private void CargaInicial() {
-	matriculas.add(new Matricula(1, 1));
-	matriculas.add(new Matricula(1, 2));
-	provas.add(new Prova("Prova A", 1, 1, 7.5f));
-	provas.add(new Prova("Prova B", 1, 1, 9.25f));
-	provas.add(new Prova("Prova C", 1, 1, 5.0f));
-	provas.add(new Prova("Prova A", 1, 2, 6.0f));
-	provas.add(new Prova("Prova B", 2, 2, 8.0f));
+	matriculas.add(new Matricula(1, 1, 1));
+	matriculas.add(new Matricula(2, 1, 2));
+	provas.add(new Prova(1, "Prova A", 1, 1, 7.5f));
+	provas.add(new Prova(2, "Prova B", 1, 1, 9.25f));
+	provas.add(new Prova(3, "Prova C", 1, 1, 5.0f));
+	provas.add(new Prova(4, "Prova A", 1, 2, 6.0f));
+	provas.add(new Prova(5, "Prova B", 2, 2, 8.0f));
     }
 }

@@ -32,6 +32,7 @@ public class ObjectFactory {
     private final static QName _GetAlunos_QNAME = new QName("http://webservice.guniver.furb.br/", "getAlunos");
     private final static QName _GetProvas_QNAME = new QName("http://webservice.guniver.furb.br/", "getProvas");
     private final static QName _CriarCompromisso_QNAME = new QName("http://webservice.guniver.furb.br/", "criarCompromisso");
+    private final static QName _CadastrarMatricula_QNAME = new QName("http://webservice.guniver.furb.br/", "cadastrarMatricula");
     private final static QName _Exception_QNAME = new QName("http://webservice.guniver.furb.br/", "Exception");
     private final static QName _RemoverCompromisso_QNAME = new QName("http://webservice.guniver.furb.br/", "removerCompromisso");
     private final static QName _GetCompromissosAluno_QNAME = new QName("http://webservice.guniver.furb.br/", "getCompromissosAluno");
@@ -55,11 +56,12 @@ public class ObjectFactory {
     private final static QName _GetMensalidadesPendentes_QNAME = new QName("http://webservice.guniver.furb.br/", "getMensalidadesPendentes");
     private final static QName _GetProvasResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getProvasResponse");
     private final static QName _GetCompromissosAlunoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getCompromissosAlunoResponse");
+    private final static QName _CadastrarMatriculaResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "cadastrarMatriculaResponse");
     private final static QName _GetAluno_QNAME = new QName("http://webservice.guniver.furb.br/", "getAluno");
     private final static QName _GetDisciplinasResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getDisciplinasResponse");
     private final static QName _RemoverCompromissoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "removerCompromissoResponse");
-    private final static QName _GetMaterial_QNAME = new QName("http://webservice.guniver.furb.br/", "getMaterial");
     private final static QName _GetCursoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getCursoResponse");
+    private final static QName _GetMaterial_QNAME = new QName("http://webservice.guniver.furb.br/", "getMaterial");
     private final static QName _GetMatriculasTurmaResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getMatriculasTurmaResponse");
     private final static QName _AutenticaUsuarioResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "autenticaUsuarioResponse");
     private final static QName _GetAlunoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getAlunoResponse");
@@ -85,6 +87,14 @@ public class ObjectFactory {
      */
     public Exception createException() {
         return new Exception();
+    }
+
+    /**
+     * Create an instance of {@link CadastrarMatricula }
+     * 
+     */
+    public CadastrarMatricula createCadastrarMatricula() {
+        return new CadastrarMatricula();
     }
 
     /**
@@ -296,19 +306,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetCursoResponse }
-     * 
-     */
-    public GetCursoResponse createGetCursoResponse() {
-        return new GetCursoResponse();
-    }
-
-    /**
      * Create an instance of {@link GetMaterial }
      * 
      */
     public GetMaterial createGetMaterial() {
         return new GetMaterial();
+    }
+
+    /**
+     * Create an instance of {@link GetCursoResponse }
+     * 
+     */
+    public GetCursoResponse createGetCursoResponse() {
+        return new GetCursoResponse();
     }
 
     /**
@@ -333,6 +343,14 @@ public class ObjectFactory {
      */
     public GetAluno createGetAluno() {
         return new GetAluno();
+    }
+
+    /**
+     * Create an instance of {@link CadastrarMatriculaResponse }
+     * 
+     */
+    public CadastrarMatriculaResponse createCadastrarMatriculaResponse() {
+        return new CadastrarMatriculaResponse();
     }
 
     /**
@@ -525,6 +543,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "criarCompromisso")
     public JAXBElement<CriarCompromisso> createCriarCompromisso(CriarCompromisso value) {
         return new JAXBElement<CriarCompromisso>(_CriarCompromisso_QNAME, CriarCompromisso.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CadastrarMatricula }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "cadastrarMatricula")
+    public JAXBElement<CadastrarMatricula> createCadastrarMatricula(CadastrarMatricula value) {
+        return new JAXBElement<CadastrarMatricula>(_CadastrarMatricula_QNAME, CadastrarMatricula.class, null, value);
     }
 
     /**
@@ -735,6 +762,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CadastrarMatriculaResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "cadastrarMatriculaResponse")
+    public JAXBElement<CadastrarMatriculaResponse> createCadastrarMatriculaResponse(CadastrarMatriculaResponse value) {
+        return new JAXBElement<CadastrarMatriculaResponse>(_CadastrarMatriculaResponse_QNAME, CadastrarMatriculaResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetAluno }{@code >}}
      * 
      */
@@ -762,21 +798,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetMaterial }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getMaterial")
-    public JAXBElement<GetMaterial> createGetMaterial(GetMaterial value) {
-        return new JAXBElement<GetMaterial>(_GetMaterial_QNAME, GetMaterial.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetCursoResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getCursoResponse")
     public JAXBElement<GetCursoResponse> createGetCursoResponse(GetCursoResponse value) {
         return new JAXBElement<GetCursoResponse>(_GetCursoResponse_QNAME, GetCursoResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetMaterial }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getMaterial")
+    public JAXBElement<GetMaterial> createGetMaterial(GetMaterial value) {
+        return new JAXBElement<GetMaterial>(_GetMaterial_QNAME, GetMaterial.class, null, value);
     }
 
     /**

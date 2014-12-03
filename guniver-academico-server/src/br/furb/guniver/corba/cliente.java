@@ -6,6 +6,7 @@ import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
 import br.furb.guniver.modelo.academico.IAcademico;
 import br.furb.guniver.modelo.academico.IAcademicoHelper;
+import br.furb.guniver.modelo.academico.Matricula;
 import br.furb.guniver.modelo.academico.Prova;
 
 public class cliente {
@@ -21,11 +22,11 @@ public class cliente {
 
 	    StringHolder mensagemErro = new StringHolder();
 
-	    if (!academico.cadastrarMatricula(1, 1, mensagemErro)) {
+	    if (academico.cadastrarMatricula(new Matricula(0, 1, 1), mensagemErro) == 0) {
 		throw new Exception(mensagemErro.value);
 	    }
 
-	    if (!academico.cadastrarMatricula(1, 2, mensagemErro)) {
+	    if (academico.cadastrarMatricula(new Matricula(0, 1, 2), mensagemErro) == 0) {
 		throw new Exception(mensagemErro.value);
 	    }
 	   

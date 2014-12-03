@@ -23,7 +23,7 @@ public class Academico {
 	this.endereco = endereco;
     }
 
-    private IAcademico getAcademico() throws Exception {
+    private IAcademico getAcademico()  {
 	try {
 	    String[] args = new String[] { "-ORBInitialHost", this.endereco };
 	    ORB orb = ORB.init(args, null);
@@ -35,13 +35,13 @@ public class Academico {
 	    return academico;
 
 	} catch (InvalidName | NotFound | org.omg.CORBA.ORBPackage.InvalidName | CannotProceed e) {
-	    throw new Exception("Erro no módulo CADASTRO ao consultar o móduclo ACADEMICO", e);
+	    throw new RuntimeException("Erro no módulo CADASTRO ao consultar o móduclo ACADEMICO", e);
 	}
     }
 
-    public void cadastrarMatricula(Matricula matricula) throws Exception {
+    public int cadastrarMatricula(Matricula matricula) {
 	StringHolder mensagemErro = new StringHolder();
-	getAcademico().cadastrarMatricula(matricula.codigoAluno, matricula.codigoTurma, mensagemErro);
+	return getAcademico().cadastrarMatricula(matricula, mensagemErro);
     }
 
     public Collection<Prova> getProvas(int codigoAluno, int codigoTurma) throws Exception {

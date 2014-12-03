@@ -75,18 +75,19 @@ public class ProvasSynchronizer extends EntitiesSynchronizer<Prova> {
     @Override
     protected void doUpload(Prova entity) {
 	StringHolder mensagemErro = new StringHolder();
-	if (!getAcademico().cadastrarProva(ConversorAcademico.cast(entity), mensagemErro)) {
+	int codigo = getAcademico().cadastrarProva(ConversorAcademico.cast(entity), mensagemErro);
+
+	if (codigo == 0) {
 	    throw new RuntimeException(mensagemErro.value);
+	} else {
+	    entity.setCodigo(codigo);
 	}
     }
 
     @Override
     protected void doUploadAll(Collection<Prova> entities) {
-	StringHolder mensagemErro = new StringHolder();
 	for (Prova entity : entities) {
-	    if (!getAcademico().cadastrarProva(ConversorAcademico.cast(entity), mensagemErro)) {
-		throw new RuntimeException(mensagemErro.value);
-	    }
+	    doUpload(entity);
 	}
     }
 

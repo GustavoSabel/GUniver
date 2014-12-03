@@ -1,11 +1,13 @@
 module academico {
 
 	struct Matricula {
+		long codigo;
 		long codigoAluno;
 		long codigoTurma;
 	};
 
 	struct Prova {
+		long codigo;
 		string descricao;
 		long codigoAluno;
 		long codigoTurma;
@@ -13,6 +15,7 @@ module academico {
 	};
 
 	struct Horario {
+		long codigo;
 		string horario;
 		string sala;
 	};
@@ -32,11 +35,11 @@ module academico {
 	  matriculas getMatriculasAluno(in long codigoAluno);
 	  matriculas getMatriculasTurma(in long codigoTurma);
 	  //matriculas getMatriculasSemestre(in long codigoAluno, in short ano, in short semestre);
-	  boolean cadastrarMatricula(in long codigoAluno, in long codigoTurma, out string mensagemErro);
+	  long cadastrarMatricula(in Matricula matricula, out string mensagemErro);
 	  horarios getHorarios(in long codigoTurma);
 	  //boolean cadastrarTurma(in Turma turma, out string mensagemErro);
 	  //boolean cadastrarDisciplina(in Disciplina disciplina, out string mensagemErro);
-	  boolean cadastrarProva(in Prova prova, out string mensagemErro);
+	  long cadastrarProva(in Prova prova, out string mensagemErro);
 	  //boolean getDisciplina(in long codigo, out Disciplina disciplina);
 	  //disciplinas getDisciplinas();
   };
