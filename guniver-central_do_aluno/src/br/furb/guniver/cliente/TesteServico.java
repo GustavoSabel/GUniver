@@ -158,7 +158,7 @@ public class TesteServico {
 						+ matricula.getTurma().getDisciplina().getNome());
 			}
 
-			List<Prova> provas = port.getProvas(1,1);
+			List<Prova> provas = port.getProvas();
 			System.out.println("Todas as provas:");
 			for (Prova prova : provas) {
 				System.out.println(" - Nome Prova: " + prova.getDescricao()
