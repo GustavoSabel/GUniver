@@ -24,6 +24,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import br.furb.guniver.central_do_aluno.stubs.Aluno;
+import br.furb.guniver.ui.Fragment;
 import br.furb.guniver.ui.utils.UIUtils;
 
 @SuppressWarnings("serial")

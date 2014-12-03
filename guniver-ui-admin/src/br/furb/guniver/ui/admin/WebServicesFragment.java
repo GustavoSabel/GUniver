@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import br.furb.guniver.ui.Fragment;
 import br.furb.guniver.ui.utils.UIUtils;
 
 @SuppressWarnings("serial")

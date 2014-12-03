@@ -26,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 
 import br.furb.guniver.central_do_aluno.stubs.Disciplina;
 import br.furb.guniver.central_do_aluno.stubs.Turma;
+import br.furb.guniver.ui.Fragment;
 
 
 @SuppressWarnings("serial")

@@ -27,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import br.furb.guniver.central_do_aluno.stubs.Aluno;
 import br.furb.guniver.central_do_aluno.stubs.Prova;
 import br.furb.guniver.central_do_aluno.stubs.Turma;
+import br.furb.guniver.ui.Fragment;
 
 @SuppressWarnings("serial")
 public class ProvaFragment extends Fragment {

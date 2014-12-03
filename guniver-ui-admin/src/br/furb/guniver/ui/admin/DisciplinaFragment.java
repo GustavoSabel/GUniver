@@ -20,6 +20,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import br.furb.guniver.central_do_aluno.stubs.Disciplina;
+import br.furb.guniver.ui.Fragment;
 
 @SuppressWarnings("serial")
 public class DisciplinaFragment extends Fragment {

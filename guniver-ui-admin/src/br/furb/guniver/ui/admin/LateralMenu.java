@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
+import br.furb.guniver.ui.Fragment;
+
 @SuppressWarnings("serial")
 public class LateralMenu extends JPanel {
 

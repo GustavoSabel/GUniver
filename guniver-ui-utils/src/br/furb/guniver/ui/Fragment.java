@@ -1,4 +1,4 @@
-package br.furb.guniver.ui.admin;
+package br.furb.guniver.ui;
 
 import javax.swing.JPanel;
 

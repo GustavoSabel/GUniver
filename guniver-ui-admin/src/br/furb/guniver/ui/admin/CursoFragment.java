@@ -25,6 +25,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import br.furb.guniver.central_do_aluno.stubs.Curso;
+import br.furb.guniver.ui.Fragment;
 
 /**
  * @deprecated não será usado
