@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
@@ -57,6 +58,9 @@ public class MainWindow extends JFrame {
 	private JLabel lblCodigoDisciplina;
 	private JLabel lblDetalhesCurso;
 	private DefaultTableModel provasModel;
+	private List<Horario> horarios = new LinkedList<>();
+	private List<Prova> provas = new LinkedList<>();
+	private DefaultTableModel horariosModel;
 
 	/**
 	 * Create the frame.
@@ -206,14 +210,16 @@ public class MainWindow extends JFrame {
 		panelTurmas.add(scrollPaneListaTurmas);
 
 		turmasListModel = new DefaultListModel<>();
-		JList<Integer> listTurmas = new JList<>(turmasListModel);
+		final JList<Integer> listTurmas = new JList<>(turmasListModel);
 		DefaultListSelectionModel selectionModel = new DefaultListSelectionModel();
 		selectionModel.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				int index = e.getFirstIndex();
-				setSelectedTurma(index < 0 ? null : turmas.get(index));
+				if (!e.getValueIsAdjusting()) {
+					int index = listTurmas.getSelectedIndex();
+					setSelectedTurma(index < 0 ? null : turmas.get(index));
+				}
 			}
 		});
 		listTurmas.setSelectionModel(selectionModel);
@@ -290,10 +296,16 @@ public class MainWindow extends JFrame {
 
 		tableProvas = new JTable();
 		provasModel = new DefaultTableModel(new Object[][] {}, new String[] { "Descri\u00E7\u00E3o", "Nota" }) {
+
 			Class[] columnTypes = new Class[] { String.class, Double.class };
 
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
+			}
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
 			}
 		};
 		tableProvas.setModel(provasModel);
@@ -315,13 +327,21 @@ public class MainWindow extends JFrame {
 		panel.add(scrollPaneHorario, BorderLayout.CENTER);
 
 		tableHorario = new JTable();
-		tableHorario.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Hor\u00E1rio", "Sala" }) {
+		horariosModel = new DefaultTableModel(new Object[][] {}, new String[] { "Hor\u00E1rio", "Sala" }) {
+
 			Class[] columnTypes = new Class[] { String.class, String.class };
 
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-		});
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+
+		};
+		tableHorario.setModel(horariosModel);
 		tableHorario.setColumnSelectionAllowed(true);
 		tableHorario.setCellSelectionEnabled(true);
 		tableHorario.setShowVerticalLines(false);
@@ -351,14 +371,18 @@ public class MainWindow extends JFrame {
 	}
 
 	private void setSelectedTurma(Turma turma) {
+		if (this.selectedTurma == turma) {
+			return;
+		}
 		this.selectedTurma = turma;
-		boolean turmaIsNotNull = turma == null;
+		boolean turmaIsNotNull = turma != null;
 		lblCodigoDisciplina.setVisible(turmaIsNotNull);
 		lblDetalhesCurso.setVisible(turmaIsNotNull);
 		lblNomeDisciplina.setVisible(turmaIsNotNull);
 		if (turmaIsNotNull) {
 			Disciplina disciplina = turma.getDisciplina();
 			lblCodigoDisciplina.setText(String.format(CODIGO_PATTERN, disciplina.getCodigo()));
+			lblNomeDisciplina.setText(disciplina.getNome());
 			Curso curso = disciplina.getCurso();
 			lblDetalhesCurso.setText(String.format(CURSO_PATTERN, curso.getDescricao(), curso.getCodigo()));
 
@@ -370,14 +394,40 @@ public class MainWindow extends JFrame {
 		}
 	}
 
-	private void setHorarios(Collection<Horario> horarios) {
-		// TODO Auto-generated method stub
+	public void setHorarios(Collection<Horario> horarios) {
+		this.horarios.clear();
+		Vector<Vector<Object>> dataVector = horariosModel.getDataVector();
+		dataVector.clear();
+		if (horarios != null) {
+			this.horarios.addAll(horarios);
 
+			for (Horario horario : horarios) {
+				Vector<Object> row = new Vector<>();
+				row.add(horario.getHorario());
+				row.add(horario.getSala());
+				dataVector.add(row);
+			}
+		}
+
+		horariosModel.fireTableDataChanged();
 	}
 
-	private void setProvas(Collection<Prova> provas) {
-		// TODO Auto-generated method stub
+	public void setProvas(Collection<Prova> provas) {
+		this.provas.clear();
+		Vector<Vector<Object>> dataVector = provasModel.getDataVector();
+		dataVector.clear();
+		if (provas != null) {
+			this.provas.addAll(provas);
 
+			for (Prova prova : provas) {
+				Vector<Object> row = new Vector<>();
+				row.add(prova.getDescricao());
+				row.add(prova.getNota());
+				dataVector.add(row);
+			}
+		}
+
+		provasModel.fireTableDataChanged();
 	}
 
 }

@@ -1,5 +1,6 @@
 package br.furb.guniver.sync;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.Future;
@@ -22,10 +23,17 @@ public class DisciplinasSynchronizer extends EntitiesSynchronizer<Disciplina> {
 
 	@Override
 	protected Collection<Disciplina> doDownloadAll() {
-		/*return Arrays.asList(new Disciplina(123, "Primeira disciplina", null), //
-				new Disciplina(54322, "Disciplina Dois", null), //
-				new Disciplina(6785451, "Terceira", null));*/
-		return Collections.emptyList();
+		Disciplina d1 = new Disciplina();
+		d1.setCodigo(123);
+		d1.setNome("Primeira disciplina");
+		Disciplina d2 = new Disciplina();
+		d2.setCodigo(54322);
+		d2.setNome("Disciplina Dois");
+		Disciplina d3 = new Disciplina();
+		d3.setCodigo(6785451);
+		d3.setNome("Terceira");
+
+		return Arrays.asList(d1, d2, d3);
 	}
 
 	@Override

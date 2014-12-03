@@ -194,26 +194,20 @@ public class PortalController {
 
 		@Override
 		public void downloadAllComplete(Collection<Horario> entities) {
-			// TODO Auto-generated method stub
-
+			getMainWindow().setHorarios(entities);
 		}
 
 		@Override
 		public void downloadComplete(Horario downloadedEntity) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void uploadComplete(Horario uploadedEntity) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void syncFailed(Throwable reason) {
-			// TODO Auto-generated method stub
-
+			UIUtils.showError(getLoginWindow(), reason);
 		}
 
 	};
@@ -222,26 +216,20 @@ public class PortalController {
 
 		@Override
 		public void downloadAllComplete(Collection<Prova> entities) {
-			// TODO Auto-generated method stub
-
+			getMainWindow().setProvas(entities);
 		}
 
 		@Override
 		public void downloadComplete(Prova downloadedEntity) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void uploadComplete(Prova uploadedEntity) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void syncFailed(Throwable reason) {
-			// TODO Auto-generated method stub
-
+			UIUtils.showError(getLoginWindow(), reason);
 		}
 
 	};
