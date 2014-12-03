@@ -16,8 +16,10 @@ public class PublicaService {
 			e.printStackTrace();
 			hostAddress = "localhost";
 		}
-		Endpoint.publish("http://" + hostAddress + ":8080/centralAluno", service);
+		//Endpoint.publish("http://" + hostAddress + ":8080/centralAluno", service);
 
+		Endpoint.publish("http://192.168.0.13:8080/centralAluno", service);
+		
 		/*endpoint = Endpoint.publish("http://localhost:8080/removerCompromisso", service);
 		endpoint = Endpoint.publish("http://localhost:8080/getCompromissos", service);
 		endpoint = Endpoint.publish("http://localhost:8080/getCompromissosAluno", service);

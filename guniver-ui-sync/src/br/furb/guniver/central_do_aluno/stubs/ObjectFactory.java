@@ -32,6 +32,7 @@ public class ObjectFactory {
     private final static QName _GetAlunos_QNAME = new QName("http://webservice.guniver.furb.br/", "getAlunos");
     private final static QName _GetProvas_QNAME = new QName("http://webservice.guniver.furb.br/", "getProvas");
     private final static QName _CriarCompromisso_QNAME = new QName("http://webservice.guniver.furb.br/", "criarCompromisso");
+    private final static QName _GetDisciplina_QNAME = new QName("http://webservice.guniver.furb.br/", "getDisciplina");
     private final static QName _CadastrarMatricula_QNAME = new QName("http://webservice.guniver.furb.br/", "cadastrarMatricula");
     private final static QName _Exception_QNAME = new QName("http://webservice.guniver.furb.br/", "Exception");
     private final static QName _RemoverCompromisso_QNAME = new QName("http://webservice.guniver.furb.br/", "removerCompromisso");
@@ -60,6 +61,7 @@ public class ObjectFactory {
     private final static QName _CadastrarMatriculaResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "cadastrarMatriculaResponse");
     private final static QName _GetAluno_QNAME = new QName("http://webservice.guniver.furb.br/", "getAluno");
     private final static QName _GetDisciplinasResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getDisciplinasResponse");
+    private final static QName _GetDisciplinaResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getDisciplinaResponse");
     private final static QName _GetTurmasAlunoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getTurmasAlunoResponse");
     private final static QName _RemoverCompromissoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "removerCompromissoResponse");
     private final static QName _GetCursoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getCursoResponse");
@@ -97,6 +99,14 @@ public class ObjectFactory {
      */
     public CadastrarMatricula createCadastrarMatricula() {
         return new CadastrarMatricula();
+    }
+
+    /**
+     * Create an instance of {@link GetDisciplina }
+     * 
+     */
+    public GetDisciplina createGetDisciplina() {
+        return new GetDisciplina();
     }
 
     /**
@@ -340,6 +350,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetDisciplinaResponse }
+     * 
+     */
+    public GetDisciplinaResponse createGetDisciplinaResponse() {
+        return new GetDisciplinaResponse();
+    }
+
+    /**
      * Create an instance of {@link GetDisciplinasResponse }
      * 
      */
@@ -561,6 +579,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "criarCompromisso")
     public JAXBElement<CriarCompromisso> createCriarCompromisso(CriarCompromisso value) {
         return new JAXBElement<CriarCompromisso>(_CriarCompromisso_QNAME, CriarCompromisso.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDisciplina }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getDisciplina")
+    public JAXBElement<GetDisciplina> createGetDisciplina(GetDisciplina value) {
+        return new JAXBElement<GetDisciplina>(_GetDisciplina_QNAME, GetDisciplina.class, null, value);
     }
 
     /**
@@ -813,6 +840,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getDisciplinasResponse")
     public JAXBElement<GetDisciplinasResponse> createGetDisciplinasResponse(GetDisciplinasResponse value) {
         return new JAXBElement<GetDisciplinasResponse>(_GetDisciplinasResponse_QNAME, GetDisciplinasResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDisciplinaResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getDisciplinaResponse")
+    public JAXBElement<GetDisciplinaResponse> createGetDisciplinaResponse(GetDisciplinaResponse value) {
+        return new JAXBElement<GetDisciplinaResponse>(_GetDisciplinaResponse_QNAME, GetDisciplinaResponse.class, null, value);
     }
 
     /**

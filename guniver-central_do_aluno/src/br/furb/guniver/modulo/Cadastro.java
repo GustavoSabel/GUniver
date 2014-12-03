@@ -77,4 +77,12 @@ public class Cadastro {
     public Aluno getAlunoPorNomeUsuario(String nomeUsuario) throws RemoteException {
 	return alunoRemote.getAlunoPorNomeUsuario(nomeUsuario);
     }
+
+	public Disciplina getDisciplina(int codigoDisciplina) throws RemoteException {
+		return disciplinaRemote.getDisciplina(codigoDisciplina);
+	}
+ 
+	public List<Disciplina> getDisciplinasAll() throws RemoteException{
+		return disciplinaRemote.getDisciplinasAll();
+	}
 }

@@ -93,7 +93,7 @@ public class TesteServico {
 	    System.out.println("Consultou Curso");
 	    port.getDisciplinasCurso(1);
 	    System.out.println("Consultou Disciplinas");
-	    port.getTurmas(1);
+	    port.getTurmas();
 	    System.out.println("Consultou Turmas");
 	    br.furb.guniver.cliente.stubs.Aluno aluno = port.autenticaUsuario("Teste", "1234");
 	    if (aluno == null)

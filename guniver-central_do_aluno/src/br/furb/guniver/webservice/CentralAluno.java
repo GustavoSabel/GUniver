@@ -122,19 +122,14 @@ public class CentralAluno {
 	@WebMethod
 	public List<Disciplina> getDisciplinas() throws RemoteException {
 		System.out.println("CentralAluno.getDisciplinas()");
-		return Cadastro.getInstancia().getDisciplinas();
-	}
-	
-	@WebMethod
-	public List<Disciplina> getDisciplinasAll() throws RemoteException {
-		System.out.println("CentralAluno.getDisciplinasAll()");
 		return Cadastro.getInstancia().getDisciplinasAll();
+		//teste
 	}
 	
 	@WebMethod
-	public Disciplina getDisciplina(int codDisciplina) throws RemoteException {
-		System.out.println("CentralAluno.getDisciplina()");
-		return Cadastro.getInstancia().getDisciplina(codDisciplina);
+	public Disciplina getDisciplina(int codigoDisciplina) throws RemoteException {
+		System.out.println("CentralAluno.getDisciplinas()");
+		return Cadastro.getInstancia().getDisciplina(codigoDisciplina);
 	}
 	
 
