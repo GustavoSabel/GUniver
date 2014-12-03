@@ -1,7 +1,7 @@
 REM Gerar stubs para todos os projetos
 
-call ..\ConfigAmbiente.bat
-
+set path=%path%;"C:\Program Files\Java\jdk1.7.0_71\bin"
+set caminhoProjeto=C:\Users\Gustavo\git\GUniver
 set caminhoCadastro=%caminhoProjeto%\guniver-cadastro\bin
 set caminhoAcademico=%caminhoProjeto%\guniver-academico-server\src
 set caminhoCentraAluno=%caminhoProjeto%\guniver-central_do_aluno\src
@@ -11,32 +11,32 @@ set caminhoModelo=%caminhoProjeto%\guniver-modelo\bin
 REM ACADEMICO
 cd %caminhoAcademico%
 set classpath=.
-%jdk%\idlj -fall -pkgPrefix academico br.furb.guniver.modelo Academico.idl
+idlj -fall -pkgPrefix academico br.furb.guniver.modelo Academico.idl
 
 REM CENTRAL DO ALUNO
 cd %caminhoCentraAluno%
 set classpath=.;%caminhoModelo%
-%jdk%\apt br\furb\guniver\webservice\CentralAluno.java
+apt br\furb\guniver\webservice\CentralAluno.java
 
 cd..
 cd bin
-start "Servidor - Central do Aluno" %jdk%\java br.furb.guniver.webservice.PublicaService
+start java br.furb.guniver.webservice.PublicaService
 
 cd..
 cd src
-%jdk%\wsimport -keep -p br.furb.guniver.cliente.stubs http://localhost:8080/centralAluno?wsdl
+wsimport -keep -p br.furb.guniver.cliente.stubs http://localhost:8080/centralAluno?wsdl
 
 REM CADASTRO
 cd %caminhoCadastro%
 set classpath=.
-%jdk%\rmic br.furb.guniver.rmi.AlunoServer
-%jdk%\rmic br.furb.guniver.rmi.TurmaServer
-%jdk%\rmic br.furb.guniver.rmi.DisciplinaServer
-%jdk%\rmic br.furb.guniver.rmi.CursoServer
+rmic br.furb.guniver.rmi.AlunoServer
+rmic br.furb.guniver.rmi.TurmaServer
+rmic br.furb.guniver.rmi.DisciplinaServer
+rmic br.furb.guniver.rmi.CursoServer
 
 REM FINANCEIRO
 cd %caminhoFinanceiro%
 set classpath=.
-%jdk%\rmic rmi_guniver.FinanceiroServer
+rmic rmi_guniver.FinanceiroServer
 
 cmd

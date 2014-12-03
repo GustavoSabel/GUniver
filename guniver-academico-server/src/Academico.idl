@@ -44,12 +44,13 @@ module academico {
 	//enum SituacaoMatricula { pago, atrazado, a_pagar };
 
   interface IAcademico {
-	  provas getNotasAluno(in long codigoAluno, in long codigoTurma);
+	  provas getProvasAluno(in long codigoAluno, in long codigoTurma);
+	  provas getProvas();
 	  Matricula getMatricula(in long codigoAluno, in long codigoDisciplina);
 	  matriculas getMatriculasAluno(in long codigoAluno);
 	  matriculas getMatriculasTurma(in long codigoTurma);
 	  //matriculas getMatriculasSemestre(in long codigoAluno, in short ano, in short semestre);
-	  boolean matricular(in Aluno aluno, in Turma turma, out string mensagemErro);
+	  boolean cadastrarMatricula(in long codigoAluno, in long codigoTurma, out string mensagemErro);
 	  horarios getHorarios(in long codigoTurma);
 	  //boolean cadastrarTurma(in Turma turma, out string mensagemErro);
 	  //boolean cadastrarDisciplina(in Disciplina disciplina, out string mensagemErro);

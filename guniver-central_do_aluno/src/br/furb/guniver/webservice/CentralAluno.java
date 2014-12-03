@@ -54,10 +54,17 @@ public class CentralAluno {
     }
 
     @WebMethod
-    public Collection<Prova> getProvas(int codigoAluno, int codigoTurma) throws Exception {
+    public Collection<Prova> getProvasAluno(int codigoAluno, int codigoTurma) throws Exception {
 	System.out.println("getProvas");
 	Academico academico = new Academico(Endereco.academico.getEndereco());
 	return ConversorAcademico.castProvas(academico.getProvas(codigoAluno, codigoTurma));
+    }
+    
+    @WebMethod
+    public Collection<Prova> getProvas() throws Exception {
+	System.out.println("CentralAluno.getProvas()");
+	Academico academico = new Academico(Endereco.academico.getEndereco());
+	return ConversorAcademico.castProvas(academico.getProvas());
     }
 
     @WebMethod

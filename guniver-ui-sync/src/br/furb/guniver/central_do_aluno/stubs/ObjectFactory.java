@@ -35,11 +35,13 @@ public class ObjectFactory {
     private final static QName _Exception_QNAME = new QName("http://webservice.guniver.furb.br/", "Exception");
     private final static QName _RemoverCompromisso_QNAME = new QName("http://webservice.guniver.furb.br/", "removerCompromisso");
     private final static QName _GetCompromissosAluno_QNAME = new QName("http://webservice.guniver.furb.br/", "getCompromissosAluno");
+    private final static QName _GetProvasAluno_QNAME = new QName("http://webservice.guniver.furb.br/", "getProvasAluno");
     private final static QName _GetMatriculasTurma_QNAME = new QName("http://webservice.guniver.furb.br/", "getMatriculasTurma");
     private final static QName _GetCompromissosResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getCompromissosResponse");
     private final static QName _GetMatriculasAluno_QNAME = new QName("http://webservice.guniver.furb.br/", "getMatriculasAluno");
     private final static QName _GetAlunosTurma_QNAME = new QName("http://webservice.guniver.furb.br/", "getAlunosTurma");
     private final static QName _CriarCompromissoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "criarCompromissoResponse");
+    private final static QName _GetProvasAlunoResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getProvasAlunoResponse");
     private final static QName _GetCompromissos_QNAME = new QName("http://webservice.guniver.furb.br/", "getCompromissos");
     private final static QName _GetHorariosResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getHorariosResponse");
     private final static QName _GetAlunosResponse_QNAME = new QName("http://webservice.guniver.furb.br/", "getAlunosResponse");
@@ -180,6 +182,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetProvasAluno }
+     * 
+     */
+    public GetProvasAluno createGetProvasAluno() {
+        return new GetProvasAluno();
+    }
+
+    /**
      * Create an instance of {@link GetCompromissosAluno }
      * 
      */
@@ -225,6 +235,14 @@ public class ObjectFactory {
      */
     public GetCompromissos createGetCompromissos() {
         return new GetCompromissos();
+    }
+
+    /**
+     * Create an instance of {@link GetProvasAlunoResponse }
+     * 
+     */
+    public GetProvasAlunoResponse createGetProvasAlunoResponse() {
+        return new GetProvasAlunoResponse();
     }
 
     /**
@@ -519,6 +537,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProvasAluno }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getProvasAluno")
+    public JAXBElement<GetProvasAluno> createGetProvasAluno(GetProvasAluno value) {
+        return new JAXBElement<GetProvasAluno>(_GetProvasAluno_QNAME, GetProvasAluno.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetMatriculasTurma }{@code >}}
      * 
      */
@@ -561,6 +588,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "criarCompromissoResponse")
     public JAXBElement<CriarCompromissoResponse> createCriarCompromissoResponse(CriarCompromissoResponse value) {
         return new JAXBElement<CriarCompromissoResponse>(_CriarCompromissoResponse_QNAME, CriarCompromissoResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProvasAlunoResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.guniver.furb.br/", name = "getProvasAlunoResponse")
+    public JAXBElement<GetProvasAlunoResponse> createGetProvasAlunoResponse(GetProvasAlunoResponse value) {
+        return new JAXBElement<GetProvasAlunoResponse>(_GetProvasAlunoResponse_QNAME, GetProvasAlunoResponse.class, null, value);
     }
 
     /**

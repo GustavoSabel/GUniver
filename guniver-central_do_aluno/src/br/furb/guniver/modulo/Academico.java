@@ -3,16 +3,19 @@ package br.furb.guniver.modulo;
 import java.util.Arrays;
 import java.util.Collection;
 import org.omg.CORBA.ORB;
+import org.omg.CORBA.StringHolder;
 import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.InvalidName;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
+import br.furb.guniver.modelo.academico.Aluno;
 import br.furb.guniver.modelo.academico.Horario;
 import br.furb.guniver.modelo.academico.IAcademico;
 import br.furb.guniver.modelo.academico.IAcademicoHelper;
 import br.furb.guniver.modelo.academico.Matricula;
 import br.furb.guniver.modelo.academico.Prova;
+
 public class Academico {
 
     private String endereco;
@@ -37,8 +40,17 @@ public class Academico {
 	}
     }
 
+    public void cadastrarMatricula(Matricula matricula) throws Exception {
+	StringHolder mensagemErro = new StringHolder();
+	getAcademico().cadastrarMatricula(matricula.aluno.codigo, matricula.turma.codigo, mensagemErro);
+    }
+
     public Collection<Prova> getProvas(int codigoAluno, int codigoTurma) throws Exception {
-	return Arrays.asList(getAcademico().getNotasAluno(codigoAluno, codigoTurma));
+	return Arrays.asList(getAcademico().getProvasAluno(codigoAluno, codigoTurma));
+    }
+
+    public Collection<Prova> getProvas() throws Exception {
+	return Arrays.asList(getAcademico().getProvas());
     }
 
     public Collection<Matricula> getMatriculasAluno(int codigoAluno) throws Exception {

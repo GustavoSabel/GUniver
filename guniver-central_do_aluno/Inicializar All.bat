@@ -1,7 +1,7 @@
 REM Inicializa todos os serviços
 
-call ..\ConfigAmbiente.bat
-
+set path=%path%;"C:\Program Files\Java\jdk1.7.0_71\bin"
+set caminhoProjeto=C:\Users\Gustavo\git\GUniver
 set caminhoCadastro=%caminhoProjeto%\guniver-cadastro\bin
 set caminhoAcademico=%caminhoProjeto%\guniver-academico-server\bin
 set caminhoCentraAluno=%caminhoProjeto%\guniver-central_do_aluno\bin
@@ -13,26 +13,26 @@ set caminhoPadrao=br.furb.guniver
 REM ACADEMICO
 cd %caminhoAcademico%
 set classpath=.
-start "ORBD" %jdk%\orbd
-start "Servidor - Academico" %jdk%\java %caminhoPadrao%.corba.servidor
+start orbd
+start java %caminhoPadrao%.corba.servidor
 
 
 REM CENTRAL DO ALUNO
 cd %caminhoCentraAluno%
 set classpath=.;%caminhoModelo%;%caminhoCadastro%;%caminhoFinanceiro%;%caminhoProjeto%;%caminhoAcademico%
-start "Servidor - Central do Aluno" %jdk%\java %caminhoPadrao%.webservice.PublicaService
+start java %caminhoPadrao%.webservice.PublicaService
 
 
 set classpath=%caminhoCadastro%;%caminhoFinanceiro%;%caminhoModelo%;%caminhoProjeto%;%caminhoAcademico%
-start "rmiregistry" %jdk%\rmiregistry
+start rmiregistry
 
 REM CADASTRO
 cd %caminhoCadastro%
 set classpath=.;%caminhoModelo%;%caminhoProjeto%;%caminhoAcademico%
-start "Servidor - Cadastro" %jdk%\java %caminhoPadrao%.rmi.InicializadorServicos
+start java %caminhoPadrao%.rmi.InicializadorServicos
 
 
 REM FINANCEIRO
 cd %caminhoFinanceiro%
 set classpath=.;%caminhoModelo%
-start "Servidor - Financeiro" %jdk%\java %caminhoPadrao%.rmi.FinanceiroServer
+start java %caminhoPadrao%.rmi.FinanceiroServer

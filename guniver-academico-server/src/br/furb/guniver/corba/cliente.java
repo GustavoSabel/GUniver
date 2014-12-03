@@ -1,4 +1,5 @@
 package br.furb.guniver.corba;
+
 import org.omg.CORBA.ORB;
 import org.omg.CORBA.StringHolder;
 import org.omg.CosNaming.NamingContextExt;
@@ -45,11 +46,11 @@ public class cliente {
 	    				throw new Exception(mensagemErro.value);
 	    			}
 	    */
-	    if (!academico.matricular(aluno, turmaSD, mensagemErro)) {
+	    if (!academico.cadastrarMatricula(aluno.codigo, turmaSD.codigo, mensagemErro)) {
 		throw new Exception(mensagemErro.value);
 	    }
 
-	    if (!academico.matricular(aluno, turmaPD, mensagemErro)) {
+	    if (!academico.cadastrarMatricula(aluno.codigo, turmaPD.codigo, mensagemErro)) {
 		throw new Exception(mensagemErro.value);
 	    }
 	    /*			
@@ -78,17 +79,23 @@ public class cliente {
 	    				throw new Exception(mensagemErro.value);
 	    			}
 	    */
-	    Prova[] notas = academico.getNotasAluno(aluno.codigo, turmaPD.codigo);
+	    Prova[] notas = academico.getProvasAluno(aluno.codigo, turmaPD.codigo);
 	    System.out.println("Notas do(a) aluno(a) " + aluno.nome);
 	    for (int i = 0; i < notas.length; i++) {
 		System.out.println(" - " + notas[i].nota);
 	    }
 
+	    notas = academico.getProvas();
+	    System.out.println("Todas as provas");
+	    for (int i = 0; i < notas.length; i++) {
+		System.out.println(" - " + notas[i].nota);
+	    }
+	    
 	    /*Matricula[] matriculas = academico.getMatriculasSemestre(aluno.codigo, (short) 2014, (short) 1);
 	    System.out.println("O Aluno" + aluno.nome
-		    + " está matriculado nas seguintes disciplinas para o semestre 2014/1");
+	        + " está matriculado nas seguintes disciplinas para o semestre 2014/1");
 	    for (int i = 0; i < matriculas.length; i++) {
-		System.out.println(" - " + matriculas[i].turma.disciplina.nome);
+	    System.out.println(" - " + matriculas[i].turma.disciplina.nome);
 	    }*/
 
 	} catch (Exception e) {

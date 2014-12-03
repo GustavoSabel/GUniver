@@ -160,16 +160,33 @@ public interface CentralAluno {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getProvasAluno", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.central_do_aluno.stubs.GetProvasAluno")
+    @ResponseWrapper(localName = "getProvasAlunoResponse", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.central_do_aluno.stubs.GetProvasAlunoResponse")
+    @Action(input = "http://webservice.guniver.furb.br/CentralAluno/getProvasAlunoRequest", output = "http://webservice.guniver.furb.br/CentralAluno/getProvasAlunoResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://webservice.guniver.furb.br/CentralAluno/getProvasAluno/Fault/Exception")
+    })
+    public List<Prova> getProvasAluno(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        int arg1)
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<br.furb.guniver.central_do_aluno.stubs.Prova>
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getProvas", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.central_do_aluno.stubs.GetProvas")
     @ResponseWrapper(localName = "getProvasResponse", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.central_do_aluno.stubs.GetProvasResponse")
     @Action(input = "http://webservice.guniver.furb.br/CentralAluno/getProvasRequest", output = "http://webservice.guniver.furb.br/CentralAluno/getProvasResponse", fault = {
         @FaultAction(className = Exception_Exception.class, value = "http://webservice.guniver.furb.br/CentralAluno/getProvas/Fault/Exception")
     })
-    public List<Prova> getProvas(
-        @WebParam(name = "arg0", targetNamespace = "")
-        int arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        int arg1)
+    public List<Prova> getProvas()
         throws Exception_Exception
     ;
 

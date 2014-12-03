@@ -160,16 +160,33 @@ public interface CentralAluno {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getProvasAluno", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.GetProvasAluno")
+    @ResponseWrapper(localName = "getProvasAlunoResponse", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.GetProvasAlunoResponse")
+    @Action(input = "http://webservice.guniver.furb.br/CentralAluno/getProvasAlunoRequest", output = "http://webservice.guniver.furb.br/CentralAluno/getProvasAlunoResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://webservice.guniver.furb.br/CentralAluno/getProvasAluno/Fault/Exception")
+    })
+    public List<Prova> getProvasAluno(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        int arg1)
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<br.furb.guniver.cliente.stubs.Prova>
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getProvas", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.GetProvas")
     @ResponseWrapper(localName = "getProvasResponse", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.GetProvasResponse")
     @Action(input = "http://webservice.guniver.furb.br/CentralAluno/getProvasRequest", output = "http://webservice.guniver.furb.br/CentralAluno/getProvasResponse", fault = {
         @FaultAction(className = Exception_Exception.class, value = "http://webservice.guniver.furb.br/CentralAluno/getProvas/Fault/Exception")
     })
-    public List<Prova> getProvas(
-        @WebParam(name = "arg0", targetNamespace = "")
-        int arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        int arg1)
+    public List<Prova> getProvas()
         throws Exception_Exception
     ;
 
@@ -204,6 +221,21 @@ public interface CentralAluno {
     @ResponseWrapper(localName = "getAlunosResponse", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.GetAlunosResponse")
     @Action(input = "http://webservice.guniver.furb.br/CentralAluno/getAlunosRequest", output = "http://webservice.guniver.furb.br/CentralAluno/getAlunosResponse")
     public List<Aluno> getAlunos();
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns br.furb.guniver.cliente.stubs.Aluno
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAluno", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.GetAluno")
+    @ResponseWrapper(localName = "getAlunoResponse", targetNamespace = "http://webservice.guniver.furb.br/", className = "br.furb.guniver.cliente.stubs.GetAlunoResponse")
+    @Action(input = "http://webservice.guniver.furb.br/CentralAluno/getAlunoRequest", output = "http://webservice.guniver.furb.br/CentralAluno/getAlunoResponse")
+    public Aluno getAluno(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0);
 
     /**
      * 

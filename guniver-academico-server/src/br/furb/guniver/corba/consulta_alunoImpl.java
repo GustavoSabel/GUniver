@@ -14,10 +14,10 @@ import br.furb.guniver.modelo.academico.Turma;
 class consulta_alunoImpl extends IAcademicoPOA {
 
     @Override
-    public Prova[] getNotasAluno(int codigoAluno, int codigoTurma) {
+    public Prova[] getProvasAluno(int codigoAluno, int codigoTurma) {
 
-	System.out.println("Executado getNotasAluno(Aluno aluno, Turma turma)");
-	
+	System.out.println("consulta_alunoImpl.getProvasAluno()");
+
 	List<Prova> provasAluno = new ArrayList<>();
 	for (Prova prova : BancoDados.getInstance().provas) {
 	    if (prova.aluno.codigo == codigoAluno) {
@@ -34,13 +34,24 @@ class consulta_alunoImpl extends IAcademicoPOA {
     }
 
     @Override
+    public Prova[] getProvas() {
+
+	System.out.println("consulta_alunoImpl.getProvas()");
+
+	Prova[] provas = new Prova[BancoDados.getInstance().provas.size()];
+	provas = BancoDados.getInstance().provas.toArray(provas);
+
+	return provas;
+    }
+
+    @Override
     public Matricula getMatricula(int codigoAluno, int codigoDisciplina) {
 
-	System.out.println("Executado Matricula getMatricula(int codigoAluno, int codigoDisciplina)");
-	
+	System.out.println("consulta_alunoImpl.getMatricula()");
+
 	// Não pode retorna NULL se não encontrar a matricula
-	Matricula matriculaDisci = new Matricula(new Aluno(0, ""), new Turma(0, (short) 0, (short) 0,
-		new Disciplina(0, "")));
+	Matricula matriculaDisci = new Matricula(new Aluno(0, ""), new Turma(0, (short) 0, (short) 0, new Disciplina(0,
+		"")));
 
 	for (Matricula matricula : BancoDados.getInstance().matriculas) {
 	    if (matricula.aluno.codigo == codigoAluno) {
@@ -56,8 +67,8 @@ class consulta_alunoImpl extends IAcademicoPOA {
 
     @Override
     public Matricula[] getMatriculasAluno(int codigoAluno) {
-	System.out.println("getMatriculasAluno(Aluno aluno)");
-	
+	System.out.println("consulta_alunoImpl.getMatriculasAluno()");
+
 	List<Matricula> matriculasAluno = new ArrayList<Matricula>();
 	for (Matricula matricula : BancoDados.getInstance().matriculas) {
 	    if (matricula.aluno.codigo == codigoAluno) {
@@ -74,7 +85,7 @@ class consulta_alunoImpl extends IAcademicoPOA {
     @Override
     public Matricula[] getMatriculasTurma(int codigoTurma) {
 	System.out.println("getMatriculasTurma(Turma turma)");
-	
+
 	List<Matricula> matriculasAluno = new ArrayList<Matricula>();
 	for (Matricula matricula : BancoDados.getInstance().matriculas) {
 	    if (matricula.turma.codigo == codigoTurma) {
@@ -88,32 +99,33 @@ class consulta_alunoImpl extends IAcademicoPOA {
 	return mats;
     }
 
-   /* @Override
-    public Matricula[] getMatriculasSemestre(int codigoAluno, short ano, short semestre) {
-	System.out.println("getMatriculasSemestre(Aluno aluno, short ano, short semestre)");
-	
-	List<Matricula> matriculasSemestre = new ArrayList<>();
-	for (Matricula matricula : BancoDados.getInstance().matriculas) {
-	    if (matricula.turma.ano == ano && matricula.turma.semestre == semestre) {
-		matriculasSemestre.add(matricula);
-	    }
-	}
-	Matricula[] mats = new Matricula[matriculasSemestre.size()];
-	mats = matriculasSemestre.toArray(mats);
-	return mats;
+    /* @Override
+     public Matricula[] getMatriculasSemestre(int codigoAluno, short ano, short semestre) {
+    System.out.println("getMatriculasSemestre(Aluno aluno, short ano, short semestre)");
+    
+    List<Matricula> matriculasSemestre = new ArrayList<>();
+    for (Matricula matricula : BancoDados.getInstance().matriculas) {
+        if (matricula.turma.ano == ano && matricula.turma.semestre == semestre) {
+    	matriculasSemestre.add(matricula);
+        }
     }
-*/
+    Matricula[] mats = new Matricula[matriculasSemestre.size()];
+    mats = matriculasSemestre.toArray(mats);
+    return mats;
+     }
+    */
     @Override
-    public boolean matricular(Aluno aluno, Turma turma, StringHolder mensagemErro) {
+    public boolean cadastrarMatricula(int codigoAluno, int codigoTurma, StringHolder mensagemErro) {
 	System.out.println("matricular(Aluno aluno, Turma turma, StringHolder mensagemErro)");
-	
+
 	for (Matricula matricula : BancoDados.getInstance().matriculas) {
-	    if (matricula.turma.codigo == turma.codigo && matricula.aluno.codigo == aluno.codigo) {
+	    if (matricula.turma.codigo == codigoTurma && matricula.aluno.codigo == codigoAluno) {
 		mensagemErro.value = "Aluno já foi matriculado para esta turma.";
 		return false;
 	    }
 	}
-	BancoDados.getInstance().matriculas.add(new Matricula(aluno, turma));
+	BancoDados.getInstance().matriculas.add(new Matricula(new Aluno(codigoAluno, ""), new Turma(codigoTurma,
+		(short) 0, (short) 0, new Disciplina(0, ""))));
 	mensagemErro.value = "";
 	return true;
     }
@@ -121,7 +133,7 @@ class consulta_alunoImpl extends IAcademicoPOA {
     @Override
     public Horario[] getHorarios(int codigoTurma) {
 	System.out.println("getHorarios()");
-	
+
 	Horario[] horarios = new Horario[] { new Horario("18:30-20:10", "S410"), new Horario("20:20-22:00", "S415"), };
 	return horarios;
     }

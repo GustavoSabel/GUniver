@@ -158,12 +158,15 @@ public class TesteServico {
 						+ matricula.getTurma().getDisciplina().getNome());
 			}
 
-			List<Prova> provas = port.getProvas(1, 1);
-			System.out.println("Provas do aluno 1 da turma 1:");
+			List<Prova> provas = port.getProvas(1,1);
+			System.out.println("Todas as provas:");
 			for (Prova prova : provas) {
 				System.out.println(" - Nome Prova: " + prova.getDescricao()
-						+ " - Nota:" + prova.getNota());
+						+ " - Nota:" + prova.getNota()
+						+ " - Aluno:" + prova.getAluno().getNome());
 			}
+			
+			
 
 		} catch (Exception ex) {
 			System.out.println("Erro: " + ex.getMessage());
