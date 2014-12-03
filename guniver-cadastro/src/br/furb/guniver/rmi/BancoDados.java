@@ -31,12 +31,10 @@ public class BancoDados {
 
 	private void cargaInicial() {
 		Curso curso = new Curso(1, "Ciencia da Computacao");
-		Disciplina disc = new Disciplina(1, "Banco de Dados", curso);
-		Aluno alunoGustavo = new Aluno(1, "Gustavo Sabel");
-		alunos.add(alunoGustavo);
-		alunos.add(new Aluno(2, "asdsdsa"));
-		alunos.add(new Aluno(3, "11111"));
-		alunos.add(new Aluno(4, "aaaaaaaaaaaaaaaaa"));
+		Disciplina disc = new Disciplina(1, "Sistemas Distribuidos", curso);
+		alunos.add(new Aluno(1, "gsabel", "senha1", "Gustavo Sabel"));
+		alunos.add(new Aluno(2, "wilean", "senha2", "William Seefeld"));
+		alunos.add(new Aluno(3, "vipanz", "senha3", "Vivian Panzenhagen"));
 		Turma turmaTeste = new Turma(1, disc, 2014, 2);
 		turmas.add(turmaTeste);
 	}
